@@ -130,7 +130,7 @@ module.exports = options => ({
   resolve: {
     alias: {
       '@styles': path.resolve(__dirname, '../../app/styles/'),
-      '@images': path.resolve(__dirname, '../../static/images'),
+      '@images': path.resolve(__dirname, '../../app/static/images'),
     },
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.scss', '.css', '.react.js'],
