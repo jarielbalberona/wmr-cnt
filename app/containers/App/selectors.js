@@ -9,28 +9,34 @@ const selectGlobal = state => state.global || initialState;
 
 const selectRouter = state => state.router;
 
-const makeSelectCurrentUser = () =>
+const makeSelectApp = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.currentUser,
+    globalState => globalState,
+  );
+
+const makeSelectAppNotifyError = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.notification.error,
+  );
+
+const makeSelectAppNotifyInfo = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.notification.info,
+  );
+
+const makeSelectAppNotifySuccess = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.notification.success,
   );
 
 const makeSelectLoading = () =>
   createSelector(
     selectGlobal,
     globalState => globalState.loading,
-  );
-
-const makeSelectError = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.error,
-  );
-
-const makeSelectRepos = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.userData.repositories,
   );
 
 const makeSelectLocation = () =>
@@ -41,9 +47,10 @@ const makeSelectLocation = () =>
 
 export {
   selectGlobal,
-  makeSelectCurrentUser,
+  makeSelectApp,
+  makeSelectAppNotifyError,
+  makeSelectAppNotifyInfo,
+  makeSelectAppNotifySuccess,
   makeSelectLoading,
-  makeSelectError,
-  makeSelectRepos,
   makeSelectLocation,
 };

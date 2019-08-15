@@ -1,0 +1,74 @@
+export const ACCESS_401 = 'ACCESS_401';
+export const ACCESS_403 = 'ACCESS_403';
+
+export const ACTIVATE_REQUEST = 'ACTIVATE_REQUEST';
+export const ACTIVATE_REQUEST_ERR = 'ACTIVATE_REQUEST_ERR';
+export const ACTIVATE_REQUEST_OK = 'ACTIVATE_REQUEST_OK';
+export const ACTIVATE_REQUEST_END = 'ACTIVATE_REQUEST_END';
+
+export const CHANGE_USER_DATA_ACTION = 'rx/CHANGE_USER_DATA_ACTION';
+
+// Forgot password
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const FORGOT_PASSWORD_END = 'FORGOT_PASSWORD_END';
+export const FORGOT_PASSWORD_ERR = 'FORGOT_PASSWORD_ERR';
+export const FORGOT_PASSWORD_OK = 'FORGOT_PASSWORD_OK';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_REQUEST_ERR = 'LOGIN_REQUEST_ERR';
+export const LOGIN_REQUEST_OK = 'LOGIN_REQUEST_OK';
+export const LOGIN_REQUEST_END = 'LOGIN_REQUEST_END';
+
+export const LOG_OUT_ACTION = 'rx/LOG_OUT_ACTION';
+export const LOG_OUT_END = 'rx/LOG_OUT_END';
+export const LOG_OUT_ERROR = 'rx/LOG_OUT_ERROR';
+export const LOG_OUT_OK = 'rx/LOG_OUT_OK';
+
+export const OTP_REQUEST = 'OTP_REQUEST';
+export const OTP_REQUEST_OK = 'OTP_REQUEST_OK';
+export const OTP_REQUEST_ERR = 'OTP_REQUEST_ERR';
+export const OTP_REQUEST_END = 'OTP_REQUEST_END';
+
+export const RESET_AUTH_TYPE_FORM = 'RESET_AUTH_TYPE_FORM';
+
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const RESET_PASSWORD_OK = 'RESET_PASSWORD_OK';
+export const RESET_PASSWORD_ERR = 'RESET_PASSWORD_ERR';
+export const RESET_PASSWORD_END = 'RESET_PASSWORD_END';
+
+export const ROLE_TYPE_SUPER_ADMIN = 1;
+export const ROLE_TYPE_ADMIN = 2;
+
+export const SESSION_TIMEOUT_ERR = 'SESSION_TIMEOUT_ERR';
+
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
+export const SIGNUP_REQUEST_OK = 'SIGNUP_REQUEST_OK';
+export const SIGNUP_REQUEST_ERR = 'SIGNUP_REQUEST_ERR';
+export const SIGNUP_REQUEST_END = 'SIGNUP_REQUEST_END';
+
+export const TOKEN_KEY = 'auth_token';
+
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+export const UPDATE_PASSWORD_OK = 'UPDATE_PASSWORD_OK';
+export const UPDATE_PASSWORD_ERR = 'UPDATE_PASSWORD_ERR';
+export const UPDATE_PASSWORD_END = 'UPDATE_PASSWORD_END';
+
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const UPDATE_PROFILE_OK = 'UPDATE_PROFILE_OK';
+export const UPDATE_PROFILE_ERR = 'UPDATE_PROFILE_ERR';
+export const UPDATE_PROFILE_END = 'UPDATE_PROFILE_END';
+
+export const USER_TYPE_ADMIN = 1;
+export const USER_TYPE_STAFF = 2;
+
+export const USER_TYPE_JOBSEEKER = 'jobseeker';
+export const USER_TYPE_EMPLOYER = 'employer';
+export const USER_TYPE_STAFF_SALES = 3;
+export const USER_TYPE_STAFF_MGMT = 4;
+export const USER_TYPE_STAFF_LOGISTICS = 5;
+export const USER_TYPE_STAFF_COACH = 6;
+
+export const USER_ADMIN_URI = 'admin';
+export const USER_STAFF_URI = 'staff';
+
+export const TOGGLE_USER_MENU = 'TOGGLE_USER_MENU';
