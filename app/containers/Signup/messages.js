@@ -1,5 +1,5 @@
 /*
- * Homepage Messages
+ * Signup Messages
  *
  * This contains all the text for the HomePage component.
  */

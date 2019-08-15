@@ -1,5 +1,5 @@
 /*
- * Homepage Actions
+ * Signup Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,
@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_INPUT, LOGIN, LOGIN_ERROR } from './constants';
+import { CHANGE_INPUT, SIGNUP, SIGNUP_ERROR } from './constants';
 
 /**
  * Changes the input fields
@@ -34,18 +34,22 @@ export function changeInput(name, value) {
 }
 
 /**
- * Login
+ * Signup
  *
  */
-export function login() {
+export function signUp() {
   return {
-    type: LOGIN,
+    type: SIGNUP,
   };
 }
 
-export function loginError(errors) {
+/**
+ * Signup Error
+ *
+ */
+export function signupError(errors) {
   return {
-    type: LOGIN_ERROR,
+    type: SIGNUP_ERROR,
     errors,
   };
 }

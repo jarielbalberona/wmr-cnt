@@ -1,5 +1,5 @@
 /**
- * Asynchronously loads the component for Homepage
+ * Asynchronously loads the component for Signup
  */
 
 import React from 'react';

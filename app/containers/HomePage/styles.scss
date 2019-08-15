@@ -2,11 +2,44 @@
 
 #Homepage {
   .container {
-    figure {
-      margin: 0 auto;
+    &.branding {
+      margin: 0;
+      height: 100vh;
     }
-    figcaption {
-      margin-top: 1rem;
+    .columns {
+      height: 100%;
+      margin: 0;
+      @include mobile {
+        flex-direction: column-reverse;
+        display: flex;
+      }
+      .column {
+        figure {
+          height: 100%;
+          margin-top: -3rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          @include mobile {
+            margin-top: 0;
+            padding: 2rem;
+          }
+          figcaption {
+            margin-top: 1rem;
+            p {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+      .signin {
+        display: flex;
+        align-items: center;
+        .container {
+          margin: 1rem;
+        }
+      }
     }
   }
 }

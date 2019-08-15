@@ -23,9 +23,14 @@ module.exports = {
     },
   },
   rules: {
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,
+    "camelcase": 0,
     'import/imports-first': 0,
     'import/newline-after-import': 0,
     'import/no-dynamic-require': 0,
@@ -41,8 +46,11 @@ module.exports = {
         SwitchCase: 1,
       },
     ],
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
     'jsx-a11y/aria-props': 2,
+    "jsx-a11y/click-events-have-key-events": 0,
     'jsx-a11y/heading-has-content': 0,
+    "jsx-a11y/href-no-hash": "off",
     'jsx-a11y/label-has-associated-control': [
       2,
       {
@@ -62,6 +70,7 @@ module.exports = {
     'no-console': 1,
     'no-unused-vars': 2,
     'no-use-before-define': 0,
+    "no-underscore-dangle": 0,
     'prefer-template': 2,
     'react/destructuring-assignment': 0,
     'react-hooks/rules-of-hooks': 'error',

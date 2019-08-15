@@ -1,5 +1,5 @@
 /*
- * AppConstants
+ * SignupConstants
  * Each action has a corresponding type, which the reducer knows and picks up on.
  * To avoid weird typos between the reducer and the actions, we save them as
  * constants here. We prefix them with 'yourproject/YourComponent' so we avoid
@@ -9,4 +9,6 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const APP_NOTIFY = 'wmr-cnt/App/APP_NOTIFY';
+export const CHANGE_INPUT = 'wmr-cnt/Signup/CHANGE_INPUT';
+export const SIGNUP = 'wmr-cnt/Signup/SIGNUP';
+export const SIGNUP_ERROR = 'wmr-cnt/Signup/SIGNUP_ERROR';
