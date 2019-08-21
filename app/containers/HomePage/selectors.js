@@ -13,6 +13,12 @@ const makeSelectHome = () =>
     homeState => homeState,
   );
 
+const makeSelectLoginAuthenticated = () =>
+  createSelector(
+    selectHome,
+    homeState => homeState.is_authenticated,
+  );
+
 const makeSelectLoginForm = () =>
   createSelector(
     selectHome,
@@ -28,6 +34,7 @@ const makeSelectLoginFormErrors = () =>
 export {
   selectHome,
   makeSelectHome,
+  makeSelectLoginAuthenticated,
   makeSelectLoginForm,
   makeSelectLoginFormErrors,
 };

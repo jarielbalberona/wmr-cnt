@@ -1,0 +1,24 @@
+@import '@styles';
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+  transform: translate3d(0, 0px, 0px) !important;
+  width: 100px !important;
+  transition: all 0.5s ease 0s;
+  &.expanded {
+    width: 250px !important;
+    transform: none !important;
+  }
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: $primary;
+  font-size: 1.15em;
+  padding: 1.5rem .5rem;
+}

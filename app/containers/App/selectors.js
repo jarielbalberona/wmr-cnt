@@ -15,6 +15,12 @@ const makeSelectApp = () =>
     globalState => globalState,
   );
 
+const makeSelectAppToken = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.token,
+  );
+
 const makeSelectAppNotifyError = () =>
   createSelector(
     selectGlobal,
@@ -48,6 +54,7 @@ const makeSelectLocation = () =>
 export {
   selectGlobal,
   makeSelectApp,
+  makeSelectAppToken,
   makeSelectAppNotifyError,
   makeSelectAppNotifyInfo,
   makeSelectAppNotifySuccess,

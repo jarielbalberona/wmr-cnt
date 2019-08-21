@@ -15,16 +15,14 @@
  *    }
  */
 
-import { CHANGE_INPUT, LOGIN, LOGIN_ERROR } from './constants';
+import {
+  CHANGE_INPUT,
+  CHECK_AUTH,
+  CHECK_AUTH_ERROR,
+  LOGIN,
+  LOGIN_ERROR,
+} from './constants';
 
-/**
- * Changes the input fields
- *
- * @param  {string} name name of the input field
- * @param  {string} value value of the input field
- *
- * @return {object} An action object with a type of CHANGE_INPUT
- */
 export function changeInput(name, value) {
   return {
     type: CHANGE_INPUT,
@@ -33,10 +31,12 @@ export function changeInput(name, value) {
   };
 }
 
-/**
- * Login
- *
- */
+export function checkAuth() {
+  return {
+    type: CHECK_AUTH,
+  };
+}
+
 export function login() {
   return {
     type: LOGIN,
@@ -47,5 +47,11 @@ export function loginError(errors) {
   return {
     type: LOGIN_ERROR,
     errors,
+  };
+}
+
+export function checkAuthError() {
+  return {
+    type: CHECK_AUTH_ERROR,
   };
 }

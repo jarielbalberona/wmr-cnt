@@ -10,6 +10,10 @@
  */
 
 export const CHANGE_INPUT = 'wmr-cnt/Home/CHANGE_INPUT';
+
+export const CHECK_AUTH = 'wmr-cnt/Home/CHECK_AUTH';
+export const CHECK_AUTH_ERROR = 'wmr-cnt/Home/CHECK_AUTH_ERROR';
+
 export const LOGIN = 'wmr-cnt/Home/LOGIN';
 export const LOGIN_ERROR = 'wmr-cnt/Home/LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'wmr-cnt/Home/LOGIN_SUCCESS';

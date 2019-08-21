@@ -1,0 +1,9 @@
+@import '@styles';
+
+#Admin-content {
+    margin-left: 120px;
+    width: 100% !important;
+    &.expanded {
+        margin-left: 270px;
+    }
+}

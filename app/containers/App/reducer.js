@@ -8,7 +8,12 @@
  */
 
 import produce from 'immer';
-import { APP_NOTIFY } from './constants';
+import {
+  APP_AUTH_ERROR,
+  APP_NOTIFY,
+  LOAD_USER_SESSION,
+  LOG_OUT,
+} from './constants';
 
 // The initial state of the App
 export const initialState = {
@@ -26,6 +31,15 @@ const appReducer = produce((draft, action) => {
   switch (action.type) {
     case APP_NOTIFY:
       draft.notification[action.notify] = action.message;
+      break;
+    case LOAD_USER_SESSION:
+      draft.token = action.token;
+      break;
+    case LOG_OUT:
+      draft.token = null;
+      break;
+    case APP_AUTH_ERROR:
+      draft.token = null;
       break;
   }
 }, initialState);
