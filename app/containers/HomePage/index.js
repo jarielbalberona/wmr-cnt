@@ -9,7 +9,9 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { withCookies } from 'react-cookie';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -17,10 +19,12 @@ import FloatingLabel from 'floating-label-react';
 
 import brandLogo from '@images/wmr-cnt-logo.png';
 
+import { makeSelectAppToken } from 'containers/App/selectors';
+
 import { makeSelectHome, makeSelectLoginFormErrors } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { changeInput, login } from './actions';
+import { changeInput, checkAuth, login } from './actions';
 import './styles';
 
 const key = 'home';
@@ -28,9 +32,11 @@ const key = 'home';
 const stateSelector = createStructuredSelector({
   home: makeSelectHome(),
   errors: makeSelectLoginFormErrors(),
+  token: makeSelectAppToken(),
 });
 
-export default function HomePage() {
+// eslint-disable-next-line react/prop-types
+function HomePage() {
   const dispatch = useDispatch();
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -38,11 +44,12 @@ export default function HomePage() {
   const onChangeInput = evt =>
     dispatch(changeInput(evt.target.name, evt.target.value));
   const onLogin = () => dispatch(login());
+  const onCheckAuth = () => dispatch(checkAuth());
 
-  const { home, errors } = useSelector(stateSelector);
+  const { home, errors, token } = useSelector(stateSelector);
   const { email, password } = home.form;
   useEffect(() => {
-    // When initial state username is not null, submit the form to load repos
+    onCheckAuth();
   }, []);
 
   return (
@@ -55,16 +62,27 @@ export default function HomePage() {
       <section id="Homepage" className="hero is-fullheight">
         <div className="container branding is-fluid">
           <div className="columns reverse-row-order">
-            <div className="column is-two-thirds has-background-danger">
+            <div
+              className={`${
+                token ? 'is-fluid' : 'is-two-thirds'
+              } column has-background-danger`}
+            >
               <figure className="image is-64x64">
                 <img src={brandLogo} alt="wmr-cnt logo" />
                 <figcaption className="has-text-centered">
                   <p className="title is-1">WMR-CNT</p>
                   <p className="subtitle is-3">Profiling System</p>
+                  <div className={token ? '' : 'is-hidden'}>
+                    <Link to="/admin">
+                      <button type="button" className="button is-white">
+                        <p className="has-text-primary">Go to dashboard</p>
+                      </button>
+                    </Link>
+                  </div>
                 </figcaption>
               </figure>
             </div>
-            <div className="column signin">
+            <div className={`${token ? 'is-hidden' : 'column signin'}`}>
               <div className="container">
                 <div className="inputs">
                   <div className="container">
@@ -115,3 +133,8 @@ export default function HomePage() {
     </article>
   );
 }
+
+export default compose(
+  withRouter,
+  withCookies,
+)(HomePage);

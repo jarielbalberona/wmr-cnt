@@ -3,7 +3,6 @@ import { ACCESS_401, ACCESS_403 } from '../constants/auth';
 const headers = {
   'Content-Type': 'application/json',
   'Cache-Control': 'no-cache',
-  'max-age': 0,
 };
 
 class API {
@@ -29,16 +28,11 @@ class API {
     this.send = this.send.bind(this);
     this.url = this._fullURL();
     this.xhr = new XMLHttpRequest();
-    this.token = token;
-    this.token_type = 'X-Token';
+    this.token = `Bearer ${token}`;
+    this.token_type = 'Authorization';
     if (token) {
-      if (typeof token === 'string' && token.indexOf('Bearer') >= 0) {
-        this.token_type = 'Authorization';
-        this.headers.Authorization = token;
-      } else {
-        delete this.headers.Authorization;
-        this.headers['X-Token'] = token;
-      }
+      // eslint-disable-next-line prefer-template
+      this.headers.Authorization = this.token;
     }
   }
 

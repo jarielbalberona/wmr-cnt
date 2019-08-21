@@ -1,20 +1,30 @@
-/**
- * Gets the repositories of the user from Github
- */
-
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 
 import Auth from 'services/auth';
-import { appNotify } from 'containers/App/actions';
+import {
+  appAuthError,
+  appNotify,
+  loadUserSession,
+} from 'containers/App/actions';
+import { makeSelectAppToken } from 'containers/App/selectors';
 import { makeSelectLoginForm } from 'containers/HomePage/selectors';
-import { LOGIN } from './constants';
-import { loginError } from './actions';
+import { CHECK_AUTH, LOGIN } from './constants';
+import { loginError, checkAuthError } from './actions';
 
-/**
- * Github repos request/response handler
- */
+export function* checkAuth() {
+  const token = yield select(makeSelectAppToken());
+  try {
+    const auth = yield call(Auth.checkAuth, token);
+    if (auth.status >= 400) {
+      throw auth;
+    }
+  } catch (err) {
+    yield put(checkAuthError());
+    yield put(appNotify('error', err.message));
+    yield put(appAuthError());
+  }
+}
 export function* login() {
-  // Select username from store
   const credentials = yield select(makeSelectLoginForm());
   try {
     const auth = yield call(Auth.login, credentials);
@@ -22,7 +32,7 @@ export function* login() {
       throw auth;
     }
     // to do, store token to cookie
-    // yield put(loadUserSession(auth));
+    yield put(loadUserSession(auth.token));
     yield put(appNotify('success', auth.message));
   } catch (err) {
     yield put(loginError(err.errors));
@@ -34,5 +44,5 @@ export function* login() {
  * Root saga manages watcher lifecycle
  */
 export default function*() {
-  yield all([takeLatest(LOGIN, login)]);
+  yield all([takeLatest(LOGIN, login), takeLatest(CHECK_AUTH, checkAuth)]);
 }

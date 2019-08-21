@@ -16,15 +16,19 @@
  */
 
 import { toast } from 'react-toastify';
-import { APP_NOTIFY } from './constants';
+import {
+  APP_AUTH_ERROR,
+  APP_NOTIFY,
+  LOAD_USER_SESSION,
+  LOG_OUT,
+} from './constants';
 
-/**
- * Dispatched on action error
- *
- * @param  string message The error
- *
- * @return {object} An action object with a type of APP_ERROR passing the message
- */
+export function appAuthError() {
+  return {
+    type: APP_AUTH_ERROR,
+  };
+}
+
 export function appNotify(type, message) {
   toast(message, {
     type: toast.TYPE[type.toUpperCase()],
@@ -38,5 +42,18 @@ export function appNotify(type, message) {
     type: APP_NOTIFY,
     notify: type,
     message,
+  };
+}
+
+export function loadUserSession(token) {
+  return {
+    type: LOAD_USER_SESSION,
+    token,
+  };
+}
+
+export function logOut() {
+  return {
+    type: LOG_OUT,
   };
 }

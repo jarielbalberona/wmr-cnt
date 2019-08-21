@@ -21,9 +21,13 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          width: 100%;
           @include mobile {
             margin-top: 0;
             padding: 2rem;
+          }
+          img {
+            width: 15rem;
           }
           figcaption {
             margin-top: 1rem;
