@@ -17,6 +17,7 @@ import makeSelectPersonAdd from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import './styles';
 
 const stateSelector = createStructuredSelector({
   personAdd: makeSelectPersonAdd(),
