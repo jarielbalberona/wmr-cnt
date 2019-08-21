@@ -9,6 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
+export const APP_AUTH_ERROR = 'wmr-cnt/App/APP_AUTH_ERROR';
+export const APP_NOTIFY = 'wmr-cnt/App/APP_NOTIFY';
+export const LOAD_USER_SESSION = 'wmr-cnt/App/LOAD_USER_SESSION';
+export const LOG_OUT = 'wmr-cnt/App/LOG_OUT';

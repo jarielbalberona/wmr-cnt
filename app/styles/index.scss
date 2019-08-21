@@ -1,10 +1,24 @@
 $danger: #ff342e;
 
+
+$red: #FF342E;
+
+$primary: $red;
+
 @import '~bulma/sass/utilities/_all.sass';
 @import '~bulma/sass/base/_all.sass';
 @import '~bulma/sass/form/_all.sass';
 @import '~bulma/sass/elements/container';
+@import '~bulma/sass/elements/button';
 @import '~bulma/sass/elements/content';
+@import '~bulma/sass/elements/icon';
+@import '~bulma/sass/elements/image';
+@import '~bulma/sass/elements/title';
+@import '~bulma/sass/grid/columns';
 @import '~bulma/sass/layout/footer';
 @import '~bulma/sass/layout/hero';
 @import '~bulma/sass/components/modal';
+@import '~floating-label-react/styles.css';
+@import '~react-toastify/dist/ReactToastify.css';
+
+@import './global.scss';

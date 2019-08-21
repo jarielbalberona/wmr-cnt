@@ -1,38 +1,48 @@
-/**
- * Gets the repositories of the user from Github
- */
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import Auth from 'services/auth';
+import {
+  appAuthError,
+  appNotify,
+  loadUserSession,
+} from 'containers/App/actions';
+import { makeSelectAppToken } from 'containers/App/selectors';
+import { makeSelectLoginForm } from 'containers/HomePage/selectors';
+import { CHECK_AUTH, LOGIN } from './constants';
+import { loginError, checkAuthError } from './actions';
 
-import request from 'utils/request';
-import { makeSelectUsername } from 'containers/HomePage/selectors';
-
-/**
- * Github repos request/response handler
- */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(makeSelectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-
+export function* checkAuth() {
+  const token = yield select(makeSelectAppToken());
   try {
-    // Call our request helper (see 'utils/request')
-    const repos = yield call(request, requestURL);
-    yield put(reposLoaded(repos, username));
+    const auth = yield call(Auth.checkAuth, token);
+    if (auth.status >= 400) {
+      throw auth;
+    }
   } catch (err) {
-    yield put(repoLoadingError(err));
+    yield put(checkAuthError());
+    yield put(appNotify('error', err.message));
+    yield put(appAuthError());
+  }
+}
+export function* login() {
+  const credentials = yield select(makeSelectLoginForm());
+  try {
+    const auth = yield call(Auth.login, credentials);
+    if (auth.status === 400) {
+      throw auth;
+    }
+    // to do, store token to cookie
+    yield put(loadUserSession(auth.token));
+    yield put(appNotify('success', auth.message));
+  } catch (err) {
+    yield put(loginError(err.errors));
+    yield put(appNotify('error', err.message));
   }
 }
 
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* githubData() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-  // By using `takeLatest` only the result of the latest API call is applied.
-  // It returns task descriptor (just like fork) so we can continue execution
-  // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_REPOS, getRepos);
+export default function*() {
+  yield all([takeLatest(LOGIN, login), takeLatest(CHECK_AUTH, checkAuth)]);
 }

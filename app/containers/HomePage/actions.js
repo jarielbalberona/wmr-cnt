@@ -1,5 +1,5 @@
 /*
- * Home Actions
+ * Homepage Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,
@@ -15,18 +15,43 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import {
+  CHANGE_INPUT,
+  CHECK_AUTH,
+  CHECK_AUTH_ERROR,
+  LOGIN,
+  LOGIN_ERROR,
+} from './constants';
 
-/**
- * Changes the input field of the form
- *
- * @param  {string} username The new text of the input field
- *
- * @return {object} An action object with a type of CHANGE_USERNAME
- */
-export function changeUsername(username) {
+export function changeInput(name, value) {
   return {
-    type: CHANGE_USERNAME,
-    username,
+    type: CHANGE_INPUT,
+    name,
+    value,
+  };
+}
+
+export function checkAuth() {
+  return {
+    type: CHECK_AUTH,
+  };
+}
+
+export function login() {
+  return {
+    type: LOGIN,
+  };
+}
+
+export function loginError(errors) {
+  return {
+    type: LOGIN_ERROR,
+    errors,
+  };
+}
+
+export function checkAuthError() {
+  return {
+    type: CHECK_AUTH_ERROR,
   };
 }
