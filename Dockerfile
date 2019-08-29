@@ -4,16 +4,13 @@ FROM node:latest as builder
 RUN mkdir -p /frontend/internals
 WORKDIR /frontend
 
-COPY ./package-lock.json .
-COPY ./package.json .
-
-RUN npm install
-
 COPY ./.eslintignore .
 COPY ./.eslintrc.js .
 COPY ./.gitattributes .
 COPY ./.gitignore .
 COPY ./babel.config.js .
+COPY ./package-lock.json .
+COPY ./package.json .
 
 ADD ./internals/mocks ./internals/mocks
 ADD ./internals/scripts ./internals/scripts
@@ -23,7 +20,7 @@ RUN ls -all ./internals
 
 ADD ./app ./app
 ADD ./server ./server
-
+RUN npm install
 RUN npm run build
 
 
