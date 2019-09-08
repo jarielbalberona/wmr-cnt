@@ -1,2 +1,17 @@
 @import '@styles';
 @import '@styles/sidebar';
+
+#PersonAdd {
+  margin-top: 2rem;
+  > .container {
+    margin-right: 4rem;
+  }
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      min-width: 6rem;
+    }
+  }
+}
