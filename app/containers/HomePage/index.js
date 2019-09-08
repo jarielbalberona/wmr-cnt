@@ -48,6 +48,7 @@ function HomePage() {
 
   const { home, errors, token } = useSelector(stateSelector);
   const { email, password } = home.form;
+
   useEffect(() => {
     onCheckAuth();
   }, []);

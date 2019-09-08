@@ -1,7 +1,6 @@
 $danger: #ff342e;
 
-
-$red: #FF342E;
+$red: #ff342e;
 
 $primary: $red;
 
@@ -21,4 +20,6 @@ $primary: $red;
 @import '~floating-label-react/styles.css';
 @import '~react-toastify/dist/ReactToastify.css';
 
+@import './form-page.scss';
+@import './react-tabs.scss';
 @import './global.scss';

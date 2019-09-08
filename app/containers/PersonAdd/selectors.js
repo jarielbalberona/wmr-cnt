@@ -18,8 +18,31 @@ const selectPersonAddDomain = state => state.personAdd || initialState;
 const makeSelectPersonAdd = () =>
   createSelector(
     selectPersonAddDomain,
-    substate => substate,
+    personAddState => personAddState,
   );
 
-export default makeSelectPersonAdd;
-export { selectPersonAddDomain };
+const makeSelectCivilStatus = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.civil_status,
+  );
+
+const makeSelectFormTabs = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form_tabs,
+  );
+
+const makeSelectForm = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form,
+  );
+
+export {
+  selectPersonAddDomain,
+  makeSelectPersonAdd,
+  makeSelectCivilStatus,
+  makeSelectFormTabs,
+  makeSelectForm,
+};
