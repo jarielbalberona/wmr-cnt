@@ -9,46 +9,118 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import FloatingLabel from 'floating-label-react';
 import _string from 'lodash/string';
+import _array from 'lodash/array';
 import './styles';
 
 function BioPersonal({
+  errors,
+  dialects,
   group_type,
   group,
   alias_nickname,
   civil_status,
+  educational_attainment,
+  ethnic_tribes,
+  rebel_groups,
+  religions,
   personal,
   onChangeInput,
   onChangeData,
+  onCreateNewOption,
+  onpersonalChangeSelect,
 }) {
-  const group_type_option = [
-    { value: 'red', label: 'Red' },
-    { value: 'white', label: 'White' },
-  ];
-  const group_category_by_type = [
-    { value: 'red group 1', label: 'Red Group 1', type: 'red' },
-    { value: 'red group 2', label: 'Red Group 2', type: 'red' },
-    { value: 'white group 1', label: 'White Group 1', type: 'white' },
-    { value: 'white group 2', label: 'White Group 2', type: 'white' },
-  ];
-  const dialect = [
-    { value: 'bisaya', label: 'Bisaya' },
-    { value: 'tagalog', label: 'Tagalog' },
-  ];
-  const religion = [
-    { value: 'catholic', label: 'catholic' },
-    { value: 'muslim', label: 'muslim' },
-  ];
-  let group_default = null;
-  let type_default = null;
+  const dialect_options = [];
+  const rebel_group_options = [];
+  let rebel_group_distinct_type = [];
+  const rebel_group_type_options = [];
+
+  if (rebel_groups) {
+    rebel_group_distinct_type = _array.uniqBy(rebel_groups, 'type');
+
+    rebel_groups.forEach(item => {
+      if (group_type) {
+        if (group_type !== item.type) return;
+      }
+      rebel_group_options.push({
+        value: item._id,
+        label: item.name,
+        type: item.type,
+      });
+    });
+
+    rebel_group_distinct_type.forEach(item => {
+      rebel_group_type_options.push({
+        value: item.type,
+        label: item.type,
+      });
+    });
+  }
+
+  if (dialects) {
+    dialects.forEach(item => {
+      dialect_options.push({
+        value: item.name,
+        label: item.name,
+      });
+    });
+  }
+
+  let group_value = null;
+  let type_value = null;
+  let civil_status_value = null;
+  let religion_value = null;
+  let ethnic_tribe_value = null;
+  let educational_attainment_value = null;
+  const dialects_value = [];
 
   if (group_type) {
-    type_default = { value: group_type, label: _string.upperFirst(group_type) };
+    type_value = { value: group_type, label: _string.upperFirst(group_type) };
   }
+
   if (group.value) {
-    group_default = {
+    group_value = {
       value: group.value,
       label: _string.upperFirst(group.value),
     };
+  }
+
+  if (personal.civil_status) {
+    civil_status_value = {
+      value: personal.civil_status,
+      label: personal.civil_status,
+    };
+  }
+
+  if (personal.religion) {
+    religion_value = {
+      value: personal.religion,
+      label: personal.civil_status,
+    };
+  }
+
+  if (personal.ethnic_tribe) {
+    ethnic_tribe_value = {
+      value: personal.ethnic_tribe,
+      label: personal.ethnic_tribe,
+    };
+  }
+
+  if (personal.educational_attainment) {
+    educational_attainment_value = {
+      value: personal.educational_attainment,
+      label: personal.educational_attainment,
+    };
+  }
+
+  if (personal.dialects) {
+    const dialect_selected = personal.dialects;
+    dialect_selected.forEach(item => {
+      dialects_value.push({
+        value: item,
+        label: item,
+        key: item,
+      });
+    });
   }
 
   return (
@@ -62,19 +134,25 @@ function BioPersonal({
               placeholder="Group type"
               className="cx-create-select"
               classNamePrefix="cx"
-              value={type_default}
-              options={group_type_option}
+              value={type_value}
+              options={rebel_group_type_options}
               onChange={selected => onChangeData('group_type', selected)}
             />
           </div>
           <div className="column">
             <Select
               isClearable
-              placeholder="Group"
-              className="cx-create-select"
+              className={`cx-create-select ${
+                errors.rebel_group && errors.rebel_group.message
+                  ? 'has-form-error'
+                  : ''
+              }`}
+              placeholder={
+                (errors.rebel_group && errors.rebel_group.message) || 'Group'
+              }
               classNamePrefix="cx"
-              value={group_default}
-              options={group_category_by_type}
+              value={group_value}
+              options={rebel_group_options}
               onChange={selected => onChangeData('group', selected)}
             />
           </div>
@@ -83,8 +161,15 @@ function BioPersonal({
               <FloatingLabel
                 id="alias_nickname"
                 name="alias_nickname"
-                placeholder="Alias / Nickname"
-                className=""
+                className={`${
+                  errors.alias_nickname && errors.alias_nickname.message
+                    ? 'has-form-error'
+                    : ''
+                }`}
+                placeholder={
+                  (errors.alias_nickname && errors.alias_nickname.message) ||
+                  'Alias / Nickname'
+                }
                 type="text"
                 value={alias_nickname}
                 onChange={evt =>
@@ -158,39 +243,12 @@ function BioPersonal({
                 name="age"
                 placeholder="Age"
                 className=""
-                type="text"
+                type="number"
                 value={personal.age}
                 onChange={onChangeInput}
               />
             </div>
           </div>
-          <div className="column">
-            <div className="inputs">
-              <CreatableSelect
-                isClearable
-                placeholder="Civil status"
-                className="cx-create-select"
-                classNamePrefix="cx"
-                options={civil_status}
-                onChange={() => console.log('x')}
-              />
-            </div>
-          </div>
-          <div className="column">
-            <div className="inputs">
-              <CreatableSelect
-                isClearable
-                placeholder="Religion"
-                className="cx-create-select"
-                classNamePrefix="cx"
-                options={religion}
-                onChange={() => console.log('x')}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="columns">
           <div className="column">
             <div className="inputs">
               <FloatingLabel
@@ -204,6 +262,39 @@ function BioPersonal({
               />
             </div>
           </div>
+        </div>
+
+        <div className="columns">
+          <div className="column">
+            <div className="inputs">
+              <Select
+                isClearable
+                placeholder="Civil Status"
+                className="cx-create-select"
+                classNamePrefix="cx"
+                value={civil_status_value}
+                options={civil_status}
+                onChange={selected =>
+                  onpersonalChangeSelect('civil_status', selected)
+                }
+              />
+            </div>
+          </div>
+          <div className="column">
+            <div className="inputs">
+              <Select
+                isClearable
+                placeholder="Religion"
+                className="cx-create-select"
+                classNamePrefix="cx"
+                value={religion_value}
+                options={religions}
+                onChange={selected =>
+                  onpersonalChangeSelect('religion', selected)
+                }
+              />
+            </div>
+          </div>
           <div className="column">
             <div className="inputs">
               <CreatableSelect
@@ -212,21 +303,27 @@ function BioPersonal({
                 placeholder="Dialect/s spoken"
                 className="cx-create-select"
                 classNamePrefix="cx"
-                options={dialect}
-                onChange={() => console.log('x')}
+                value={dialects_value}
+                options={dialect_options}
+                onChange={selected =>
+                  onpersonalChangeSelect('dialects', selected)
+                }
+                onCreateOption={value => onCreateNewOption('dialect', value)}
               />
             </div>
           </div>
           <div className="column">
             <div className="inputs">
-              <FloatingLabel
-                id="ethnic_tribe"
-                name="ethnic_tribe"
+              <Select
+                isClearable
                 placeholder="Ethnic Tribe"
-                className=""
-                type="text"
-                value={personal.ethnic_tribe}
-                onChange={onChangeInput}
+                className="cx-create-select"
+                classNamePrefix="cx"
+                value={ethnic_tribe_value}
+                options={ethnic_tribes}
+                onChange={selected =>
+                  onpersonalChangeSelect('ethnic_tribe', selected)
+                }
               />
             </div>
           </div>
@@ -234,14 +331,16 @@ function BioPersonal({
         <div className="columns">
           <div className="column">
             <div className="inputs">
-              <FloatingLabel
-                id="educational_attainment"
-                name="educational_attainment"
+              <Select
+                isClearable
                 placeholder="Educational Attainment"
-                className=""
-                type="text"
-                value={personal.educational_attainment}
-                onChange={onChangeInput}
+                className="cx-create-select"
+                classNamePrefix="cx"
+                value={educational_attainment_value}
+                options={educational_attainment}
+                onChange={selected =>
+                  onpersonalChangeSelect('educational_attainment', selected)
+                }
               />
             </div>
           </div>

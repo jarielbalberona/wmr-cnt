@@ -30,7 +30,6 @@ import Sidebar from 'components/Sidebar';
 
 import { ADMIN } from 'constants/path';
 import { logOut } from 'containers/App/actions';
-import { toggleSidebar } from './actions';
 import { makeSelectAdmin, makeSelectAdminSideMenu } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -59,6 +58,13 @@ const routes = [
     desc: 'Add person page description.',
     main: PersonAdd,
   },
+  {
+    path: '/person-edit',
+    exact: false,
+    title: 'Edit Person - Work on progress.',
+    desc: 'Edit person page description.',
+    main: PersonAdd,
+  },
 ];
 
 const stateSelector = createStructuredSelector({
@@ -73,7 +79,6 @@ function Admin(props) {
 
   const { side_expanded } = useSelector(stateSelector);
   const dispatch = useDispatch();
-  const onToggleSidebar = () => dispatch(toggleSidebar());
   const onLogout = () => {
     dispatch(logOut());
     cookies.remove('token', { path: '/' });
@@ -106,12 +111,7 @@ function Admin(props) {
               path={route.path}
               exact={route.exact}
               component={() => (
-                <PageTitle
-                  expanded={side_expanded}
-                  toggleSideBar={onToggleSidebar}
-                  name={route.title}
-                  desc={route.desc}
-                />
+                <PageTitle name={route.title} desc={route.desc} />
               )}
             />
           ))}
