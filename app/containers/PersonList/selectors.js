@@ -18,8 +18,24 @@ const selectPersonListDomain = state => state.personList || initialState;
 const makeSelectPersonList = () =>
   createSelector(
     selectPersonListDomain,
-    substate => substate,
+    personListState => personListState,
   );
 
-export default makeSelectPersonList;
-export { selectPersonListDomain };
+const makeSelectList = () =>
+  createSelector(
+    selectPersonListDomain,
+    personListState => personListState.person_list,
+  );
+
+const makeSelectPersonLoading = () =>
+  createSelector(
+    selectPersonListDomain,
+    personListState => personListState.loading,
+  );
+
+export {
+  selectPersonListDomain,
+  makeSelectPersonList,
+  makeSelectList,
+  makeSelectPersonLoading,
+};

@@ -1,0 +1,9 @@
+@import '@styles';
+
+#BioPersonal {
+    .has-form-error {
+        .cx__placeholder, span {
+            color: $primary;
+        }
+    }
+}

@@ -1,9 +1,9 @@
 $danger: #ff342e;
 
-
-$red: #FF342E;
+$red: #ff342e;
 
 $primary: $red;
+$button-border-width: 0;
 
 @import '~bulma/sass/utilities/_all.sass';
 @import '~bulma/sass/base/_all.sass';
@@ -14,11 +14,16 @@ $primary: $red;
 @import '~bulma/sass/elements/icon';
 @import '~bulma/sass/elements/image';
 @import '~bulma/sass/elements/title';
+@import '~bulma/sass/elements/table';
 @import '~bulma/sass/grid/columns';
 @import '~bulma/sass/layout/footer';
 @import '~bulma/sass/layout/hero';
 @import '~bulma/sass/components/modal';
+@import '~bulma/sass/components/dropdown';
+@import '~bulma/sass/components/pagination';
 @import '~floating-label-react/styles.css';
 @import '~react-toastify/dist/ReactToastify.css';
 
+@import './form-page.scss';
+@import './react-tabs.scss';
 @import './global.scss';

@@ -1,0 +1,15 @@
+@import '@styles';
+
+#PageTitle {
+    display: flex;
+    align-items: center;
+    .action {
+        margin-left: -2rem;
+        margin-top: -1rem;
+        background-color: $primary;
+        padding: .5rem;
+    }
+    .deets {
+        padding: 1rem;
+    }
+}
