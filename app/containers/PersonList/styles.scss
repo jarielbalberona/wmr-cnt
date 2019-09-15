@@ -1,2 +1,73 @@
 @import '@styles';
 @import '@styles/sidebar';
+
+#PersonList {
+  > .container {
+    margin-right: 4rem;
+    > div {
+      padding: 2rem;
+      border: 1px solid #eee;
+      box-shadow: 0 0 2rem rgba(238, 238, 238, 0.5);
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .table {
+      width: 100%;
+      thead {
+        tr {
+          th {
+            border-width: 0;
+          }
+        }
+        tr:last-child {
+          th {
+            padding-bottom: 1rem;
+          }
+          box-shadow: 0px 11px 5px -9px rgba(0, 0, 0, 0.2);
+        }
+      }
+      .inputs {
+        label {
+          span {
+            color: rgba(0, 0, 0, 0.3);
+            font-weight: 400;
+          }
+        }
+      }
+      .select {
+        margin-top: 0.6rem;
+        select {
+          min-width: 7rem;
+        }
+      }
+      .table-actions {
+        .button {
+          min-width: 2.5rem;
+          border: 1px solid #eee;
+          box-shadow: 0 0 2rem rgba(238, 238, 238, 0.5);
+        }
+      }
+    }
+    .pagination {
+      .pagination-list {
+        justify-content: space-between;
+        margin-right: 3rem;
+        .is-flex {
+          align-items: center;
+          input {
+            width: 4rem;
+          }
+        }
+      }
+    }
+  }
+  select,
+  input {
+    border-width: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: none;
+  }
+}

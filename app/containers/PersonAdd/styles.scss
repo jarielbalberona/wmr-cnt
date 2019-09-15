@@ -2,9 +2,13 @@
 @import '@styles/sidebar';
 
 #PersonAdd {
-  margin-top: 2rem;
   > .container {
     margin-right: 4rem;
+    > div {
+      padding: 2rem;
+      border: 1px solid #eee;
+      box-shadow: 0 0 2rem rgba(238, 238, 238, 0.5);
+    }
   }
   .form-actions {
     display: flex;
