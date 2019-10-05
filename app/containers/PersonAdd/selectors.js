@@ -75,6 +75,106 @@ const makeSelectForm = () =>
     personAddState => personAddState.form,
   );
 
+const makeSelectFormAlias = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.alias_nickname,
+  );
+
+const makeSelectFormGroupType = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.group_type,
+  );
+
+const makeSelectFormGroup = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.group,
+  );
+
+const makeSelectFormPersonalData = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState =>
+      personAddState.form.personal_history_statement.personal_data,
+  );
+
+const makeSelectFormPersonalDescription = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState =>
+      personAddState.form.personal_history_statement.physical_description,
+  );
+
+const makeSelectFormPersonalFamily = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState =>
+      personAddState.form.personal_history_statement.family_background,
+  );
+
+const makeSelectFormPersonalEducation = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.personal_history_statement.education,
+  );
+
+const makeSelectFormPersonalRelatives = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.personal_history_statement.relatives,
+  );
+
+const makeSelectFormPersonalEmployment = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState =>
+      personAddState.form.personal_history_statement.employment_before_ugm,
+  );
+
+const makeSelectFormNeutralization = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.neutralization,
+  );
+
+const makeSelectFormUGMEntryBackground = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.ugm_entry_background,
+  );
+
+const makeSelectFormUGMEntryInvolvement = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.ugm_involvement,
+  );
+
+const makeSelectFormBattleFactors = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.battle_factors,
+  );
+
+const makeSelectFormComments = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.comments,
+  );
+
+const makeSelectFormRecommendations = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.recommendations,
+  );
+
+const makeSelectFormIntroductions = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.form.introductions,
+  );
+
 export {
   selectPersonAddDomain,
   makeSelectPersonAdd,
@@ -85,6 +185,22 @@ export {
   makeSelectDialects,
   makeSelectFormTabs,
   makeSelectForm,
+  makeSelectFormAlias,
+  makeSelectFormGroupType,
+  makeSelectFormGroup,
+  makeSelectFormPersonalData,
+  makeSelectFormPersonalDescription,
+  makeSelectFormPersonalFamily,
+  makeSelectFormPersonalEducation,
+  makeSelectFormPersonalRelatives,
+  makeSelectFormPersonalEmployment,
+  makeSelectFormNeutralization,
+  makeSelectFormUGMEntryBackground,
+  makeSelectFormUGMEntryInvolvement,
+  makeSelectFormBattleFactors,
+  makeSelectFormComments,
+  makeSelectFormRecommendations,
+  makeSelectFormIntroductions,
   makeSelectRebelGroups,
   makeSelectReligions,
 };

@@ -23,7 +23,28 @@ export const civil_status = [
 
 export const form_tabs = [
   {
-    title: 'Bio',
+    title: 'I. Personal History',
+  },
+  {
+    title: 'II. Neutralization',
+  },
+  {
+    title: 'III. UGM Entry Background',
+  },
+  {
+    title: 'IV. UGM Involvement',
+  },
+  {
+    title: 'V. Battle Factors',
+  },
+  {
+    title: 'VI. Comments',
+  },
+  {
+    title: 'VII. Recommendations',
+  },
+  {
+    title: 'VIII. Introduction',
   },
 ];
 
