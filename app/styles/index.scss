@@ -1,3 +1,4 @@
+
 $danger: #ff342e;
 $red: #ff342e;
 $primary: $red;
@@ -13,6 +14,7 @@ $button-border-width: 0;
 @import '~bulma/sass/elements/image';
 @import '~bulma/sass/elements/title';
 @import '~bulma/sass/elements/table';
+@import '~bulma/sass/elements/box';
 @import '~bulma/sass/grid/columns';
 @import '~bulma/sass/layout/footer';
 @import '~bulma/sass/layout/hero';
@@ -22,6 +24,8 @@ $button-border-width: 0;
 
 // bulma extensions
 @import '~bulma-switch';
+@import '~bulma-checkradio';
+
 
 // other libs
 @import '~floating-label-react/styles.css';

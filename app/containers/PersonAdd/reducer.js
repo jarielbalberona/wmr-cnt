@@ -24,6 +24,18 @@ import {
   PERSON_DATA_SAVE_END,
   PERSON_DATA_SAVE_ERROR,
   PERSON_DATA_SAVE_SUCCESS,
+  CHANGE_TEXTAREA,
+  FAMILY_CHANGE_INPUT,
+  FAMILY_SIBLING_CHANGE_INPUT,
+  GET_REBEL_SUCCESS,
+  ADD_SIBLING,
+  ADD_RELATIVE_GS,
+  ADD_RELATIVE_LCM,
+  RELATIVE_GS_CHANGE_INPUT,
+  RELATIVE_LCM_CHANGE_INPUT,
+  BATTLE_DIS_MIS_CHANGE_INPIUT,
+  ADD_BATTLE_DIS_MIS,
+  LOAD_ADD_PERSON,
 } from './constants';
 
 const data = {
@@ -85,8 +97,8 @@ const data = {
       ],
     },
     education: {
-      attainment: 'College',
-      school: 'Bukidnon State',
+      attainment: "Bachelor's degree",
+      description: 'Bukidnon State',
     },
     relatives: {
       government_working: [
@@ -117,7 +129,7 @@ const data = {
   group_type: 'Red',
   group: 'Cancers',
   neutralization: {
-    classification: 'Surrender',
+    classification: 'Surrendered',
     details:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     surrender_reason:
@@ -140,7 +152,15 @@ const data = {
   },
   battle_factors: {
     composition: 'This is the org chart',
-    disposition: [
+    dispositions: [
+      {
+        municipality: 'Oslob',
+        barangay: 'Napo',
+        posting_area: 'Bakahan',
+        identified_contact: 'Ang Baka',
+        supply_flow: 'Kuha og dahon sa sagbot',
+        caa_contacts: 'None',
+      },
       {
         municipality: 'Oslob',
         barangay: 'Napo',
@@ -178,75 +198,97 @@ const data = {
 };
 
 const form_initial = {
+  personal_history_statement: {
+    personal_data: {
+      dialects: [],
+      first_name: '',
+      last_name: '',
+      middle_name: '',
+      birth_date: '',
+      age: '',
+      birth_place: '',
+      gender: '',
+      marital_status: '',
+      address_home: '',
+      address_former: '',
+      tribe: '',
+      religion: '',
+    },
+    physical_description: {
+      height: '',
+      weight: '',
+      complexion: '',
+      identifying_marks: '',
+      eyes: '',
+      hair: '',
+      build: '',
+    },
+    family_background: {
+      father: {
+        alive: true,
+        full_name: '',
+        age: '',
+        birth_date: '',
+        birth_place: '',
+        present_address: '',
+        occupation: '',
+      },
+      mother: {
+        alive: true,
+        full_name: '',
+        age: '',
+        birth_date: '',
+        birth_place: '',
+        present_address: '',
+        occupation: '',
+      },
+      siblings: [],
+    },
+    education: {
+      attainment: '',
+      description: '',
+    },
+    relatives: {
+      government_working: [],
+      lcm_org: [],
+    },
+    employment_before_ugm: '',
+  },
   alias_nickname: '',
+  rebel_group: '',
   group_type: '',
   group: '',
-  rebel_group: '',
-  personal_data: {
-    first_name: '',
-    last_name: '',
-    middle_name: '',
-    birth_date: '',
-    age: '',
-    birth_place: '',
-    civil_status: '',
-    religion: '',
-    dialects: null,
-    ethnic_tribe: '',
-    educational_attainment: '',
-    school_name: '',
+  neutralization: {
+    classification: '',
+    details: '',
+    surrender_reason: '',
   },
-  description: {
-    gender: '',
-    hair: 'white',
-    eyes: 'black',
-    height: '',
-    weight: '',
-    complexion: '',
-    identifying_marks: 'gwapo',
+  ugm_entry_background: {
+    propaganda: '',
+    personal_motivation: '',
   },
-  family: {
-    father: {
-      full_name: 'Jariel Balberona',
-      occupation: '',
-      age: '',
-    },
-    mother: {
-      full_name: '',
-      occupation: '',
-      age: '',
-    },
-    sibling: [
-      {
-        full_name: 'test jawr',
-        age: '',
-        address: '',
-        gender: '',
-      },
-    ],
+  ugm_involvement: {
+    promotion: '',
+    demotion: '',
+    violent_activities: '',
+    nonviolent_activities: '',
   },
-  family_affiliation: {
-    relatives: {
-      government_service: [
-        {
-          full_name: 'test jawr',
-          occupation: '',
-          address: '',
-          gender: '',
-        },
-      ],
-      lcm_organization: [
-        {
-          full_name: 'test jawr',
-          occupation: '',
-          address: '',
-          gender: '',
-        },
-      ],
-    },
+  battle_factors: {
+    composition: '',
+    dispositions: [],
+    strengths: '',
+    tactics: '',
+    trainings: '',
+    logistics: '',
+    effectiveness: '',
+    plans: '',
+    miscellaneous: [],
   },
-  education: [{}],
+  comments: '',
+  recommendations: '',
+  introductions: '',
 };
+
 const errors_initial = {
   alias_nickname: '',
   rebel_group: '',
@@ -263,7 +305,7 @@ export const initialState = {
   },
   form_tabs,
   loading: data,
-  form: data,
+  form: form_initial,
   errors: errors_initial,
   sample_profile: data,
 };
@@ -271,6 +313,12 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign, no-case-declarations */
 const personAddReducer = produce((draft, action) => {
   switch (action.type) {
+    case LOAD_ADD_PERSON:
+      draft.form = form_initial;
+      break;
+    case GET_REBEL_SUCCESS:
+      draft.form = action.data;
+      break;
     case CREATE_DIALECT_SUCCESS:
       const { option } = action;
       const new_options = draft.options.dialects;
@@ -284,10 +332,63 @@ const personAddReducer = produce((draft, action) => {
       draft.options.dialects = action.data;
       break;
     case PERSONAL_CHANGE_INPUT:
-      draft.form.personal_data[action.name] = action.value;
+      draft.form.personal_history_statement[action.parent][action.name] =
+        action.value;
+      break;
+    case CHANGE_TEXTAREA:
+      draft.form[action.parent][action.name] = action.value;
       break;
     case PERSONAL_CHANGE_SELECT:
-      draft.form.personal_data[action.property] = action.value;
+      draft.form.personal_history_statement.personal_data[action.property] =
+        action.value;
+      break;
+    case FAMILY_CHANGE_INPUT:
+      draft.form.personal_history_statement.family_background[action.parent][
+        action.name
+      ] = action.value;
+      break;
+    case FAMILY_SIBLING_CHANGE_INPUT:
+      draft.form.personal_history_statement.family_background.siblings[
+        action.key
+      ][action.name] = action.value;
+      break;
+    case ADD_SIBLING:
+      draft.form.personal_history_statement.family_background.siblings = [
+        ...draft.form.personal_history_statement.family_background.siblings,
+        {},
+      ];
+      break;
+    case ADD_RELATIVE_GS:
+      draft.form.personal_history_statement.relatives.government_working = [
+        ...draft.form.personal_history_statement.relatives.government_working,
+        {},
+      ];
+      break;
+    case ADD_RELATIVE_LCM:
+      draft.form.personal_history_statement.relatives.lcm_org = [
+        ...draft.form.personal_history_statement.relatives.lcm_org,
+        {},
+      ];
+      break;
+    case ADD_BATTLE_DIS_MIS:
+      draft.form.battle_factors[action.obj] = [
+        ...draft.form.battle_factors[action.obj],
+        {},
+      ];
+      break;
+    case RELATIVE_GS_CHANGE_INPUT:
+      draft.form.personal_history_statement.relatives.government_working[
+        action.key
+      ][action.name] = action.value;
+      break;
+    case RELATIVE_LCM_CHANGE_INPUT:
+      draft.form.personal_history_statement.relatives.lcm_org[action.key][
+        action.name
+      ] = action.value;
+      break;
+    case BATTLE_DIS_MIS_CHANGE_INPIUT:
+      draft.form.battle_factors[action.obj][action.key][action.name] =
+        action.value;
       break;
     case PERSON_DATA_CHANGE:
       draft.form[action.property] = action.value;

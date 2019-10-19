@@ -16,7 +16,16 @@ function ParentsForm({
   is_deceased,
   setCalendarOpen,
   setIsDeceased,
+  onChange,
 }) {
+  const aliveChange = e => {
+    setIsDeceased({
+      ...is_deceased,
+      [e.currentTarget.id]: e.currentTarget.checked,
+    });
+    onChange(parent, e);
+  };
+
   return (
     <div>
       <div className="columns">
@@ -26,14 +35,9 @@ function ParentsForm({
               <input
                 id={parent}
                 type="checkbox"
-                name={parent}
+                name="alive"
                 className="switch is-primary"
-                onChange={e =>
-                  setIsDeceased({
-                    ...is_deceased,
-                    [e.currentTarget.name]: e.currentTarget.checked,
-                  })
-                }
+                onChange={e => aliveChange(e)}
               />
               <label htmlFor={parent}>Deceased</label>
             </div>
@@ -48,7 +52,7 @@ function ParentsForm({
               className=""
               type="text"
               value={data[parent].full_name}
-              onChange={() => {}}
+              onChange={e => onChange(parent, e)}
               disabled={is_deceased[parent]}
             />
           </div>
@@ -62,7 +66,7 @@ function ParentsForm({
               className=""
               type="number"
               value={data[parent].age}
-              onChange={() => {}}
+              onChange={e => onChange(parent, e)}
               disabled={is_deceased[parent]}
             />
           </div>
@@ -70,13 +74,24 @@ function ParentsForm({
         <div className="column">
           <div className="inputs date-input">
             <div className="date-actions">
-              <button type="button" className="button" onClick={() => {}}>
+              <button
+                type="button"
+                className="button"
+                onClick={() => onChange(parent, 'birth_date', '')}
+                disabled={is_deceased[parent]}
+              >
                 <i className="fas fa-times" />
               </button>
               <button
                 type="button"
                 className="button"
-                onClick={() => setCalendarOpen(!is_calendar_open)}
+                onClick={() =>
+                  setCalendarOpen({
+                    ...is_calendar_open,
+                    [parent]: !is_calendar_open[parent],
+                  })
+                }
+                disabled={is_deceased[parent]}
               >
                 <i className="fas fa-calendar-alt" />
               </button>
@@ -87,20 +102,27 @@ function ParentsForm({
               placeholder="Birth date"
               className=""
               type="text"
-              value=""
-              onFocus={() => setCalendarOpen(true)}
+              value={data[parent].birth_date}
+              onFocus={() =>
+                setCalendarOpen({
+                  ...is_calendar_open,
+                  [parent]: true,
+                })
+              }
               onChange={() => {}}
+              disabled={is_deceased[parent]}
             />
             <Calendar
               name="birth_date"
-              className={is_calendar_open ? '' : 'is-hidden'}
-              onChange={() => {}}
-              // onChange={value =>
-              //   onChangeInput(
-              //     'birth_date',
-              //     moment(value).format('MM/DD/YYYY'),
-              //   )
-              // }
+              className={is_calendar_open[parent] ? '' : 'is-hidden'}
+              onChange={e => onChange(parent, e)}
+              disabled={is_deceased[parent]}
+              onClickDay={() =>
+                setCalendarOpen({
+                  ...is_calendar_open,
+                  [parent]: !is_calendar_open[parent],
+                })
+              }
             />
           </div>
         </div>
@@ -115,7 +137,7 @@ function ParentsForm({
               className=""
               type="text"
               value={data[parent].birth_place}
-              onChange={() => {}}
+              onChange={e => onChange(parent, e)}
               disabled={is_deceased[parent]}
             />
           </div>
@@ -129,7 +151,7 @@ function ParentsForm({
               className=""
               type="text"
               value={data[parent].present_address}
-              onChange={() => {}}
+              onChange={e => onChange(parent, e)}
               disabled={is_deceased[parent]}
             />
           </div>
@@ -143,7 +165,7 @@ function ParentsForm({
               className=""
               type="text"
               value={data[parent].occupation}
-              onChange={() => {}}
+              onChange={e => onChange(parent, e)}
               disabled={is_deceased[parent]}
             />
           </div>
@@ -152,9 +174,11 @@ function ParentsForm({
     </div>
   );
 }
-function SiblingForm({ sibling }) {
-  return (
-    <div className="columns">
+
+function SiblingForm({ siblings, onAddSibling, onFamilySiblingChangeInput }) {
+  const Siblings = siblings.map((sibling, key) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <div key={key} className="columns">
       <div className="column">
         <div className="inputs">
           <FloatingLabel
@@ -164,7 +188,7 @@ function SiblingForm({ sibling }) {
             className=""
             type="text"
             value={sibling.full_name}
-            onChange={() => {}}
+            onChange={e => onFamilySiblingChangeInput(key, e)}
           />
         </div>
       </div>
@@ -175,9 +199,9 @@ function SiblingForm({ sibling }) {
             name="age"
             placeholder="Age"
             className=""
-            type="text"
+            type="number"
             value={sibling.age}
-            onChange={() => {}}
+            onChange={e => onFamilySiblingChangeInput(key, e)}
           />
         </div>
       </div>
@@ -190,30 +214,40 @@ function SiblingForm({ sibling }) {
             className=""
             type="text"
             value={sibling.address}
-            onChange={() => {}}
+            onChange={e => onFamilySiblingChangeInput(key, e)}
           />
         </div>
       </div>
-      <div className="column gender-radio">
-        <div className="">
-          <p>Gender</p>
-        </div>
+    </div>
+  ));
+  return (
+    <div>
+      <div className="field sibling-btn">
         <div className="control">
-          <label className="radio">
-            <input type="radio" name="answer" />
-            Male
-          </label>
-          <label className="radio">
-            <input type="radio" name="answer" />
-            Female
-          </label>
+          <button
+            type="button"
+            className="button is-primary"
+            onClick={onAddSibling}
+          >
+            + Sibling
+          </button>
         </div>
       </div>
+      {Siblings}
     </div>
   );
 }
-function BioFamily({ family }) {
-  const [is_calendar_open, setCalendarOpen] = useState(false);
+
+function BioFamily({
+  family,
+  onChange,
+  onAddSibling,
+  onFamilySiblingChangeInput,
+}) {
+  const [is_calendar_open, setCalendarOpen] = useState({
+    mother: false,
+    father: false,
+  });
   const [is_deceased, setIsDeceased] = useState({
     mother: false,
     father: false,
@@ -230,6 +264,7 @@ function BioFamily({ family }) {
           is_calendar_open={is_calendar_open}
           setCalendarOpen={setCalendarOpen}
           setIsDeceased={setIsDeceased}
+          onChange={onChange}
         />
         <div className="title is-size-6 input-title">Mother</div>
         <ParentsForm
@@ -239,9 +274,14 @@ function BioFamily({ family }) {
           is_calendar_open={is_calendar_open}
           setCalendarOpen={setCalendarOpen}
           setIsDeceased={setIsDeceased}
+          onChange={onChange}
         />
         <div className="title is-size-6 input-title">Sibling/s</div>
-        <SiblingForm sibling={family.siblings[0]} />
+        <SiblingForm
+          onAddSibling={onAddSibling}
+          siblings={family.siblings}
+          onFamilySiblingChangeInput={onFamilySiblingChangeInput}
+        />
       </div>
     </section>
   );

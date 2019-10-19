@@ -16,13 +16,31 @@ import {
   savePersonEnd,
   savePersonError,
   savePersonSuccess,
+  getRebelSuccess,
+  getRebelEnd,
 } from './actions';
 import {
   CREATE_DIALECT,
   GET_DIALECTS,
   GET_REBEL_GROUPS,
   PERSON_DATA_SAVE,
+  GET_REBEL,
 } from './constants';
+
+export function* getRebel({ id }) {
+  try {
+    const token = yield select(makeSelectAppToken());
+    const rebel = yield call(Rebel.getById, id, token);
+    if (rebel.status >= 400) {
+      throw rebel;
+    }
+    yield put(getRebelSuccess(rebel.data));
+  } catch (err) {
+    yield put(appNotify('error', err.message));
+  } finally {
+    yield put(getRebelEnd());
+  }
+}
 
 export function* savePerson() {
   try {
@@ -94,6 +112,7 @@ export function* createDialect({ value }) {
 export default function*() {
   yield all([
     takeLatest(PERSON_DATA_SAVE, savePerson),
+    takeLatest(GET_REBEL, getRebel),
     takeLatest(GET_REBEL_GROUPS, getRebelGroups),
     takeLatest(GET_DIALECTS, getDialects),
     takeLatest(CREATE_DIALECT, createDialect),

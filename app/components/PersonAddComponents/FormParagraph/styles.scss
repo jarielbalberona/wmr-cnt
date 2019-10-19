@@ -1,4 +1,8 @@
 @import '@styles';
 
-#NeutralizationBackground {
+#FormParagraph {
+    .columns {
+        display: flex;
+        flex-direction: column;
+    }
 }

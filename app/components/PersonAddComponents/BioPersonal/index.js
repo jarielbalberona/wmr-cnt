@@ -9,7 +9,6 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import FloatingLabel from 'floating-label-react';
 import Calendar from 'react-calendar';
-import moment from 'moment';
 import _string from 'lodash/string';
 import _array from 'lodash/array';
 import './styles';
@@ -21,7 +20,6 @@ function BioPersonal({
   group,
   alias_nickname,
   civil_status,
-  educational_attainment,
   ethnic_tribes,
   rebel_groups,
   religions,
@@ -71,10 +69,10 @@ function BioPersonal({
 
   let group_value = null;
   let type_value = null;
-  let civil_status_value = null;
+  let marital_status_value = null;
   let religion_value = null;
   let ethnic_tribe_value = null;
-  let educational_attainment_value = null;
+
   const dialects_value = [];
 
   if (group_type) {
@@ -88,31 +86,24 @@ function BioPersonal({
     };
   }
 
-  if (personal.civil_status) {
-    civil_status_value = {
-      value: personal.civil_status,
-      label: personal.civil_status,
+  if (personal.marital_status) {
+    marital_status_value = {
+      value: personal.marital_status,
+      label: personal.marital_status,
     };
   }
 
   if (personal.religion) {
     religion_value = {
       value: personal.religion,
-      label: personal.civil_status,
+      label: personal.religion,
     };
   }
 
-  if (personal.ethnic_tribe) {
+  if (personal.tribe) {
     ethnic_tribe_value = {
-      value: personal.ethnic_tribe,
-      label: personal.ethnic_tribe,
-    };
-  }
-
-  if (personal.educational_attainment) {
-    educational_attainment_value = {
-      value: personal.educational_attainment,
-      label: personal.educational_attainment,
+      value: personal.tribe,
+      label: personal.tribe,
     };
   }
 
@@ -258,13 +249,8 @@ function BioPersonal({
               <Calendar
                 name="birth_date"
                 className={isCalendarOpen ? '' : 'is-hidden'}
-                onFocus={() => setCalendarOpen(true)}
-                onChange={value =>
-                  onChangeInput(
-                    'birth_date',
-                    moment(value).format('MM/DD/YYYY'),
-                  )
-                }
+                onChange={onChangeInput}
+                onClickDay={() => setCalendarOpen(!isCalendarOpen)}
               />
             </div>
           </div>
@@ -301,15 +287,27 @@ function BioPersonal({
             <div className="">
               <p>Gender</p>
             </div>
-            <div className="control">
-              <label className="radio">
-                <input type="radio" name="answer" />
-                Male
-              </label>
-              <label className="radio">
-                <input type="radio" name="answer" />
-                Female
-              </label>
+            <div className="inputs">
+              <div className="field">
+                <input
+                  className="is-checkradio is-primary"
+                  id="Male"
+                  type="radio"
+                  name="Male"
+                  checked={personal.gender === 'Male'}
+                  onChange={onChangeInput}
+                />
+                <label htmlFor="Male">Male</label>
+                <input
+                  className="is-checkradio is-primary"
+                  id="Female"
+                  type="radio"
+                  name="Female"
+                  checked={personal.gender === 'Female'}
+                  onChange={onChangeInput}
+                />
+                <label htmlFor="Female">Female</label>
+              </div>
             </div>
           </div>
           <div className="column">
@@ -350,10 +348,10 @@ function BioPersonal({
                 placeholder="Civil Status"
                 className="cx-create-select"
                 classNamePrefix="cx"
-                value={civil_status_value}
+                value={marital_status_value}
                 options={civil_status}
                 onChange={selected =>
-                  onpersonalChangeSelect('civil_status', selected)
+                  onpersonalChangeSelect('marital_status', selected)
                 }
               />
             </div>
@@ -399,9 +397,7 @@ function BioPersonal({
                 classNamePrefix="cx"
                 value={ethnic_tribe_value}
                 options={ethnic_tribes}
-                onChange={selected =>
-                  onpersonalChangeSelect('ethnic_tribe', selected)
-                }
+                onChange={selected => onpersonalChangeSelect('tribe', selected)}
               />
             </div>
           </div>

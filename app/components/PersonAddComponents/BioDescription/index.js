@@ -8,7 +8,7 @@ import React, { memo } from 'react';
 import FloatingLabel from 'floating-label-react';
 import './styles';
 
-function BioPersonal({ description }) {
+function BioDescription({ description, onChangeInput }) {
   return (
     <section id="BioPersonal" className="form-page">
       <div className="container">
@@ -23,7 +23,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="text"
                 value={description.hair}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -36,7 +36,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="text"
                 value={description.eyes}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -49,7 +49,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="number"
                 value={description.height}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -64,7 +64,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="number"
                 value={description.weight}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -77,7 +77,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="text"
                 value={description.complexion}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -90,7 +90,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="text"
                 value={description.identifying_marks}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -103,7 +103,7 @@ function BioPersonal({ description }) {
                 className=""
                 type="text"
                 value={description.build}
-                onChange={() => {}}
+                onChange={onChangeInput}
               />
             </div>
           </div>
@@ -113,6 +113,6 @@ function BioPersonal({ description }) {
   );
 }
 
-BioPersonal.propTypes = {};
+BioDescription.propTypes = {};
 
-export default memo(BioPersonal);
+export default memo(BioDescription);
