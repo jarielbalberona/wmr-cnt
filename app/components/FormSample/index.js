@@ -8,12 +8,16 @@ import React, { memo } from 'react';
 
 import './styles';
 
-function FormSample({ title }) {
+function FormSample() {
   return (
-    <div id="PageTFitle">
-      <h1>{title}</h1>
-      <h2>Hello Form</h2>
-    </div>
+    <section id="BioDescription" className="form-page">
+      <div className="container">
+        <div className="title is-size-4">Description</div>
+        <div className="columns">
+          <div className="column"></div>
+        </div>
+      </div>
+    </section>
   );
 }
 

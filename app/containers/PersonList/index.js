@@ -164,7 +164,6 @@ function Table({ columns, data }) {
             </tr>
           ))}
         </thead>
-        <br />
         <tbody>
           {page.map(
             row =>
@@ -178,7 +177,6 @@ function Table({ columns, data }) {
           )}
         </tbody>
       </table>
-      <br />
       <nav className="pagination " role="navigation" aria-label="pagination">
         <button
           type="button"
@@ -355,7 +353,7 @@ function PersonList() {
     ],
     [],
   );
-  console.log(list);
+
   return (
     <article>
       <Helmet>

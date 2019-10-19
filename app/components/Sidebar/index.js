@@ -25,12 +25,6 @@ export default function Sidebar(props) {
           <div className={`nav-links ${props.open ? '' : 'center-icons'}`}>
             <Link className="menu-item has-text-white" to="/">
               <span className="icon is-medium">
-                <i className="fas fa-home fa-lg"></i>
-              </span>
-              <p className={`${props.open ? '' : 'is-hidden'}`}>Dashboard</p>
-            </Link>
-            <Link className="menu-item has-text-white" to="/person-list">
-              <span className="icon is-medium">
                 <i className="fas fa-list fa-lg"></i>
               </span>
               <p className={`${props.open ? '' : 'is-hidden'}`}>List</p>

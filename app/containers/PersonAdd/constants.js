@@ -33,3 +33,26 @@ export const PERSON_DATA_SAVE_ERROR =
   'wmr-cnt/PersonAdd/PERSON_DATA_SAVE_ERROR';
 export const PERSON_DATA_SAVE_SUCCESS =
   'wmr-cnt/PersonAdd/PERSON_DATA_SAVE_SUCCESS';
+
+export const FAMILY_CHANGE_INPUT = 'wmr-cnt/PersonAdd/FAMILY_CHANGE_INPUT';
+
+export const CHANGE_TEXTAREA = 'wmr-cnt/PersonAdd/CHANGE_TEXTAREA';
+export const FAMILY_SIBLING_CHANGE_INPUT =
+  'wmr-cnt/PersonAdd/FAMILY_SIBLING_CHANGE_INPUT';
+
+export const GET_REBEL = 'wmr-cnt/PersonAdd/GET_REBEL';
+export const GET_REBEL_SUCCESS = 'wmr-cnt/PersonAdd/GET_REBEL_SUCCESS';
+export const GET_REBEL_END = 'wmr-cnt/PersonAdd/GET_REBEL_END';
+export const GET_REBEL_ERROR = 'wmr-cnt/PersonAdd/GET_REBEL_ERROR';
+
+export const ADD_SIBLING = 'wmr-cnt/PersonAdd/ADD_SIBLING';
+export const ADD_RELATIVE_GS = 'wmr-cnt/PersonAdd/ADD_RELATIVE_GS';
+export const ADD_RELATIVE_LCM = 'wmr-cnt/PersonAdd/ADD_RELATIVE_LCM';
+export const RELATIVE_GS_CHANGE_INPUT =
+  'wmr-cnt/PersonAdd/RELATIVE_GS_CHANGE_INPUT';
+export const RELATIVE_LCM_CHANGE_INPUT =
+  'wmr-cnt/PersonAdd/RELATIVE_LCM_CHANGE_INPUT';
+export const BATTLE_DIS_MIS_CHANGE_INPIUT =
+  'wmr-cnt/PersonAdd/BATTLE_DIS_MIS_CHANGE_INPIUT';
+export const ADD_BATTLE_DIS_MIS = 'wmr-cnt/PersonAdd/ADD_BATTLE_DIS_MIS';
+export const LOAD_ADD_PERSON = 'wmr-cnt/PersonAdd/LOAD_ADD_PERSON';

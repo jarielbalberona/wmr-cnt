@@ -1,7 +1,6 @@
+
 $danger: #ff342e;
-
 $red: #ff342e;
-
 $primary: $red;
 $button-border-width: 0;
 
@@ -15,15 +14,25 @@ $button-border-width: 0;
 @import '~bulma/sass/elements/image';
 @import '~bulma/sass/elements/title';
 @import '~bulma/sass/elements/table';
+@import '~bulma/sass/elements/box';
 @import '~bulma/sass/grid/columns';
 @import '~bulma/sass/layout/footer';
 @import '~bulma/sass/layout/hero';
 @import '~bulma/sass/components/modal';
 @import '~bulma/sass/components/dropdown';
 @import '~bulma/sass/components/pagination';
+
+// bulma extensions
+@import '~bulma-switch';
+@import '~bulma-checkradio';
+
+
+// other libs
 @import '~floating-label-react/styles.css';
 @import '~react-toastify/dist/ReactToastify.css';
 
-@import './form-page.scss';
-@import './react-tabs.scss';
-@import './global.scss';
+@import './calendar';
+@import './sidebar';
+@import './form-page';
+@import './react-tabs';
+@import './global';

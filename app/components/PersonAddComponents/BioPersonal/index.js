@@ -4,10 +4,11 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import FloatingLabel from 'floating-label-react';
+import Calendar from 'react-calendar';
 import _string from 'lodash/string';
 import _array from 'lodash/array';
 import './styles';
@@ -19,7 +20,6 @@ function BioPersonal({
   group,
   alias_nickname,
   civil_status,
-  educational_attainment,
   ethnic_tribes,
   rebel_groups,
   religions,
@@ -29,6 +29,8 @@ function BioPersonal({
   onCreateNewOption,
   onpersonalChangeSelect,
 }) {
+  const [isCalendarOpen, setCalendarOpen] = useState(false);
+
   const dialect_options = [];
   const rebel_group_options = [];
   let rebel_group_distinct_type = [];
@@ -67,10 +69,10 @@ function BioPersonal({
 
   let group_value = null;
   let type_value = null;
-  let civil_status_value = null;
+  let marital_status_value = null;
   let religion_value = null;
   let ethnic_tribe_value = null;
-  let educational_attainment_value = null;
+
   const dialects_value = [];
 
   if (group_type) {
@@ -84,31 +86,24 @@ function BioPersonal({
     };
   }
 
-  if (personal.civil_status) {
-    civil_status_value = {
-      value: personal.civil_status,
-      label: personal.civil_status,
+  if (personal.marital_status) {
+    marital_status_value = {
+      value: personal.marital_status,
+      label: personal.marital_status,
     };
   }
 
   if (personal.religion) {
     religion_value = {
       value: personal.religion,
-      label: personal.civil_status,
+      label: personal.religion,
     };
   }
 
-  if (personal.ethnic_tribe) {
+  if (personal.tribe) {
     ethnic_tribe_value = {
-      value: personal.ethnic_tribe,
-      label: personal.ethnic_tribe,
-    };
-  }
-
-  if (personal.educational_attainment) {
-    educational_attainment_value = {
-      value: personal.educational_attainment,
-      label: personal.educational_attainment,
+      value: personal.tribe,
+      label: personal.tribe,
     };
   }
 
@@ -126,7 +121,7 @@ function BioPersonal({
   return (
     <section id="BioPersonal" className="form-page">
       <div className="container">
-        <div className="title">Personal Data</div>
+        <div className="title is-size-4">Personal Data</div>
         <div className="columns">
           <div className="column">
             <Select
@@ -224,15 +219,38 @@ function BioPersonal({
 
         <div className="columns">
           <div className="column">
-            <div className="inputs">
+            <div className="inputs date-input">
+              <div className="date-actions">
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => onChangeInput('birth_date', '')}
+                >
+                  <i className="fas fa-times"></i>
+                </button>
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => setCalendarOpen(!isCalendarOpen)}
+                >
+                  <i className="fas fa-calendar-alt"></i>
+                </button>
+              </div>
               <FloatingLabel
                 id="birth_date"
                 name="birth_date"
                 placeholder="Birth date"
                 className=""
                 type="text"
+                onFocus={() => setCalendarOpen(true)}
                 value={personal.birth_date}
+                onChange={() => {}}
+              />
+              <Calendar
+                name="birth_date"
+                className={isCalendarOpen ? '' : 'is-hidden'}
                 onChange={onChangeInput}
+                onClickDay={() => setCalendarOpen(!isCalendarOpen)}
               />
             </div>
           </div>
@@ -265,6 +283,64 @@ function BioPersonal({
         </div>
 
         <div className="columns">
+          <div className="column gender-radio">
+            <div className="">
+              <p>Gender</p>
+            </div>
+            <div className="inputs">
+              <div className="field">
+                <input
+                  className="is-checkradio is-primary"
+                  id="Male"
+                  type="radio"
+                  name="Male"
+                  checked={personal.gender === 'Male'}
+                  onChange={onChangeInput}
+                />
+                <label htmlFor="Male">Male</label>
+                <input
+                  className="is-checkradio is-primary"
+                  id="Female"
+                  type="radio"
+                  name="Female"
+                  checked={personal.gender === 'Female'}
+                  onChange={onChangeInput}
+                />
+                <label htmlFor="Female">Female</label>
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="inputs">
+              <div className="inputs">
+                <FloatingLabel
+                  id="address_home"
+                  name="address_home"
+                  placeholder="Home address"
+                  className=""
+                  type="text"
+                  value={personal.address_home}
+                  onChange={onChangeInput}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="inputs">
+              <FloatingLabel
+                id="address_former"
+                name="address_former"
+                placeholder="Address former"
+                className=""
+                type="text"
+                value={personal.address_former}
+                onChange={onChangeInput}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="columns">
           <div className="column">
             <div className="inputs">
               <Select
@@ -272,10 +348,10 @@ function BioPersonal({
                 placeholder="Civil Status"
                 className="cx-create-select"
                 classNamePrefix="cx"
-                value={civil_status_value}
+                value={marital_status_value}
                 options={civil_status}
                 onChange={selected =>
-                  onpersonalChangeSelect('civil_status', selected)
+                  onpersonalChangeSelect('marital_status', selected)
                 }
               />
             </div>
@@ -321,39 +397,7 @@ function BioPersonal({
                 classNamePrefix="cx"
                 value={ethnic_tribe_value}
                 options={ethnic_tribes}
-                onChange={selected =>
-                  onpersonalChangeSelect('ethnic_tribe', selected)
-                }
-              />
-            </div>
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column">
-            <div className="inputs">
-              <Select
-                isClearable
-                placeholder="Educational Attainment"
-                className="cx-create-select"
-                classNamePrefix="cx"
-                value={educational_attainment_value}
-                options={educational_attainment}
-                onChange={selected =>
-                  onpersonalChangeSelect('educational_attainment', selected)
-                }
-              />
-            </div>
-          </div>
-          <div className="column">
-            <div className="inputs">
-              <FloatingLabel
-                id="school_name"
-                name="school_name"
-                placeholder="School name"
-                className=""
-                type="text"
-                value={personal.school_name}
-                onChange={onChangeInput}
+                onChange={selected => onpersonalChangeSelect('tribe', selected)}
               />
             </div>
           </div>
