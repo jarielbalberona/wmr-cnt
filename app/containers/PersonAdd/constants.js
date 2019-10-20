@@ -56,3 +56,4 @@ export const BATTLE_DIS_MIS_CHANGE_INPIUT =
   'wmr-cnt/PersonAdd/BATTLE_DIS_MIS_CHANGE_INPIUT';
 export const ADD_BATTLE_DIS_MIS = 'wmr-cnt/PersonAdd/ADD_BATTLE_DIS_MIS';
 export const LOAD_ADD_PERSON = 'wmr-cnt/PersonAdd/LOAD_ADD_PERSON';
+export const PERSON_DATA_UPDATE = 'wmr-cnt/PersonAdd/PERSON_DATA_UPDATE';

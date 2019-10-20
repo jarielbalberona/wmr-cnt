@@ -14,4 +14,9 @@ export default {
     const api = new API(token);
     return api.post('/rebels', form);
   },
+
+  update: (id, form, token) => {
+    const api = new API(token);
+    return api.put(`/rebels/${id}`, form);
+  },
 };

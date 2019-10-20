@@ -36,6 +36,7 @@ import {
   BATTLE_DIS_MIS_CHANGE_INPIUT,
   ADD_BATTLE_DIS_MIS,
   LOAD_ADD_PERSON,
+  PERSON_DATA_UPDATE,
 } from './constants';
 
 export function loadAddPerson() {
@@ -239,6 +240,13 @@ export function personalChangeSelect(property, value) {
 export function savePerson() {
   return {
     type: PERSON_DATA_SAVE,
+  };
+}
+
+export function updatePerson(id) {
+  return {
+    type: PERSON_DATA_UPDATE,
+    id,
   };
 }
 

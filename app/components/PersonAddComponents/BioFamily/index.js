@@ -65,7 +65,7 @@ function ParentsForm({
               placeholder="Age"
               className=""
               type="number"
-              value={data[parent].age}
+              value={data[parent].age ? data[parent].age : ''}
               onChange={e => onChange(parent, e)}
               disabled={is_deceased[parent]}
             />
@@ -200,7 +200,7 @@ function SiblingForm({ siblings, onAddSibling, onFamilySiblingChangeInput }) {
             placeholder="Age"
             className=""
             type="number"
-            value={sibling.age}
+            value={sibling.age ? sibling.age : ''}
             onChange={e => onFamilySiblingChangeInput(key, e)}
           />
         </div>

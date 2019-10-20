@@ -138,12 +138,13 @@ function BioPersonal({
             <Select
               isClearable
               className={`cx-create-select ${
-                errors.rebel_group && errors.rebel_group.message
+                errors && errors.rebel_group && errors.rebel_group.message
                   ? 'has-form-error'
                   : ''
               }`}
               placeholder={
-                (errors.rebel_group && errors.rebel_group.message) || 'Group'
+                (errors && errors.rebel_group && errors.rebel_group.message) ||
+                'Group'
               }
               classNamePrefix="cx"
               value={group_value}
@@ -262,7 +263,7 @@ function BioPersonal({
                 placeholder="Age"
                 className=""
                 type="number"
-                value={personal.age}
+                value={personal.age ? personal.age : ''}
                 onChange={onChangeInput}
               />
             </div>
