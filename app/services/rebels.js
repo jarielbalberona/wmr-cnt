@@ -19,4 +19,9 @@ export default {
     const api = new API(token);
     return api.put(`/rebels/${id}`, form);
   },
+
+  delete: (id, token) => {
+    const api = new API(token);
+    return api.put(`/rebels/delete/${id}`);
+  },
 };
