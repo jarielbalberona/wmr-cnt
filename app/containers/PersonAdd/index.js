@@ -61,6 +61,7 @@ import {
   personalChangeInput,
   personalChangeSelect,
   savePerson,
+  updatePerson,
   changeTextarea,
   familyChangeInput,
   addSibling,
@@ -309,6 +310,7 @@ function PersonAdd({ match }) {
     dispatch(changeData(property, data));
   };
   const onSave = () => dispatch(savePerson());
+  const onUpdate = id => () => dispatch(updatePerson(id));
 
   useEffect(() => {
     const { id } = match.params;
@@ -334,7 +336,7 @@ function PersonAdd({ match }) {
               <button
                 type="button"
                 className="button is-primary"
-                onClick={match.params.id ? () => console.log('Update') : onSave}
+                onClick={match.params.id ? onUpdate(match.params.id) : onSave}
               >
                 {match.params.id ? 'Update' : 'Save'}
               </button>

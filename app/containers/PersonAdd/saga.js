@@ -1,5 +1,5 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-
+import { push } from 'connected-react-router';
 import Rebel from 'services/rebels';
 import RebelGroups from 'services/rebel-groups';
 import Dialects from 'services/dialects';
@@ -25,7 +25,44 @@ import {
   GET_REBEL_GROUPS,
   PERSON_DATA_SAVE,
   GET_REBEL,
+  PERSON_DATA_UPDATE,
 } from './constants';
+
+export function* updatePerson({ id }) {
+  try {
+    const token = yield select(makeSelectAppToken());
+    const form = yield select(makeSelectForm());
+    let rg_id = '';
+    if (form && form.rebel_group._id) {
+      rg_id = form.rebel_group._id;
+    } else {
+      rg_id = form.rebel_group;
+    }
+
+    const new_form = {
+      ...form,
+      rebel_group: rg_id,
+    };
+
+    delete new_form._id;
+    delete new_form.id;
+    delete new_form.__v;
+    delete new_form.created;
+
+    const rebel = yield call(Rebel.update, id, new_form, token);
+    if (rebel.status >= 400) {
+      throw rebel;
+    }
+    yield put(savePersonSuccess());
+    yield put(appNotify('success', rebel.message));
+    yield put(push('/admin/person-add'));
+  } catch (err) {
+    yield put(appNotify('error', err.message));
+    yield put(savePersonError(err.errors));
+  } finally {
+    yield put(getRebelEnd());
+  }
+}
 
 export function* getRebel({ id }) {
   try {
@@ -112,6 +149,7 @@ export function* createDialect({ value }) {
 export default function*() {
   yield all([
     takeLatest(PERSON_DATA_SAVE, savePerson),
+    takeLatest(PERSON_DATA_UPDATE, updatePerson),
     takeLatest(GET_REBEL, getRebel),
     takeLatest(GET_REBEL_GROUPS, getRebelGroups),
     takeLatest(GET_DIALECTS, getDialects),

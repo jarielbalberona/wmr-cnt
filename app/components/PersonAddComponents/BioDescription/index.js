@@ -48,7 +48,7 @@ function BioDescription({ description, onChangeInput }) {
                 placeholder="Height"
                 className=""
                 type="number"
-                value={description.height}
+                value={description.height ? description.height : ''}
                 onChange={onChangeInput}
               />
             </div>
@@ -63,7 +63,7 @@ function BioDescription({ description, onChangeInput }) {
                 placeholder="Weight"
                 className=""
                 type="number"
-                value={description.weight}
+                value={description.weight ? description.weight : ''}
                 onChange={onChangeInput}
               />
             </div>
