@@ -277,6 +277,7 @@ function PersonList() {
   const onLoadPersonList = () => dispatch(loadPersonList());
   const onDeletePerson = id => () => dispatch(deletePerson(id));
   const onPrintPerson = id => () => alert(`todo print with id ${id}`);
+  const onDownloadPerson = id => () => alert(`todo download with id ${id}`);
 
   useEffect(() => {
     onLoadPersonList();
@@ -324,6 +325,11 @@ function PersonList() {
         // to the render a checkbox
         Cell: ({ row }) => (
           <div className="table-actions buttons">
+            <Link to={`/person-view/${row.original._id}`} className="button">
+              <span className="icon is-small">
+                <i className="fas fa-eye"></i>
+              </span>
+            </Link>
             <Link to={`/person-edit/${row.original._id}`} className="button">
               <span className="icon is-small">
                 <i className="fas fa-pen"></i>
@@ -336,6 +342,15 @@ function PersonList() {
             >
               <span className="icon is-small">
                 <i className="fas fa-print"></i>
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={onDownloadPerson(row.original._id)}
+              className="button"
+            >
+              <span className="icon is-small">
+                <i className="fas fa-download"></i>
               </span>
             </button>
             <button
