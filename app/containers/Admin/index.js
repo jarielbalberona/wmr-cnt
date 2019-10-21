@@ -40,22 +40,29 @@ const routes = [
     path: '/',
     exact: true,
     title: 'List',
-    desc: 'List page description.',
+    desc: 'List of added people.',
     main: PersonList,
   },
   {
     path: '/person-add',
     exact: true,
     title: 'Add Person',
-    desc: 'Add person page description.',
+    desc: 'Add new person record.',
     main: PersonAdd,
   },
   {
     path: '/person-edit/:id',
     exact: true,
-    title: 'Edit Person - Work on progress.',
-    desc: 'Edit person page description.',
+    title: 'Edit Person',
+    desc: "Update person's details.",
     main: PersonAdd,
+  },
+  {
+    path: '/person-view/:id',
+    exact: true,
+    title: 'View Person',
+    desc: "View person's full details.",
+    main: () => <h1>Work on progress, view person.</h1>,
   },
 ];
 
