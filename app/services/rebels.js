@@ -5,8 +5,23 @@ export default {
     const api = new API(token);
     return api.get('/rebels');
   },
+  getById: (id, token) => {
+    const api = new API(token);
+    return api.get(`/rebels/${id}`);
+  },
+
   add: (token, form) => {
     const api = new API(token);
     return api.post('/rebels', form);
+  },
+
+  update: (id, form, token) => {
+    const api = new API(token);
+    return api.put(`/rebels/${id}`, form);
+  },
+
+  delete: (id, token) => {
+    const api = new API(token);
+    return api.put(`/rebels/delete/${id}`);
   },
 };

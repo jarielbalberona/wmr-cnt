@@ -14,8 +14,8 @@ export function* signup() {
     if (auth.status >= 400 || !auth.success) {
       throw auth;
     }
-    yield put(push('/'));
     yield put(appNotify('success', auth.message));
+    yield put(push('/'));
   } catch (err) {
     yield put(signupError(err.errors));
     yield put(appNotify('error', 'Some error occurred.'));

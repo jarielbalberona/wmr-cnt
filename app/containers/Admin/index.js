@@ -20,7 +20,6 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
-import Dashboard from 'containers/Dashboard/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import PersonAdd from 'containers/PersonAdd/Loadable';
 import PersonList from 'containers/PersonList/Loadable';
@@ -40,27 +39,20 @@ const routes = [
   {
     path: '/',
     exact: true,
-    title: 'Dashboard',
-    desc: 'Dashboard page description.',
-    main: Dashboard,
-  },
-  {
-    path: '/person-list',
-    exact: false,
     title: 'List',
     desc: 'List page description.',
     main: PersonList,
   },
   {
     path: '/person-add',
-    exact: false,
+    exact: true,
     title: 'Add Person',
     desc: 'Add person page description.',
     main: PersonAdd,
   },
   {
-    path: '/person-edit',
-    exact: false,
+    path: '/person-edit/:id',
+    exact: true,
     title: 'Edit Person - Work on progress.',
     desc: 'Edit person page description.',
     main: PersonAdd,

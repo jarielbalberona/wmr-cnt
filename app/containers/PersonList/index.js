@@ -19,7 +19,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { loadPersonList } from './actions';
+import { loadPersonList, deletePerson} from './actions';
 import {
   makeSelectPersonList,
   makeSelectList,
@@ -164,7 +164,6 @@ function Table({ columns, data }) {
             </tr>
           ))}
         </thead>
-        <br />
         <tbody>
           {page.map(
             row =>
@@ -178,7 +177,6 @@ function Table({ columns, data }) {
           )}
         </tbody>
       </table>
-      <br />
       <nav className="pagination " role="navigation" aria-label="pagination">
         <button
           type="button"
@@ -277,7 +275,7 @@ function PersonList() {
   const dispatch = useDispatch();
 
   const onLoadPersonList = () => dispatch(loadPersonList());
-  const onDeletePerson = id => () => alert(`todo delete with id ${id}`);
+  const onDeletePerson = id => () => dispatch(deletePerson(id));
   const onPrintPerson = id => () => alert(`todo print with id ${id}`);
 
   useEffect(() => {
@@ -343,7 +341,7 @@ function PersonList() {
             <button
               type="button"
               onClick={onDeletePerson(row.original._id)}
-              className="button is-primary"
+              className="button"
             >
               <span className="icon is-small">
                 <i className="fas fa-trash"></i>
@@ -355,7 +353,7 @@ function PersonList() {
     ],
     [],
   );
-  console.log(list);
+
   return (
     <article>
       <Helmet>
