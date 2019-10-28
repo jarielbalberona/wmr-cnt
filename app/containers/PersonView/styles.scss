@@ -1,0 +1,33 @@
+@import '@styles';
+
+#PersonView {
+  .container {
+    .print-body {
+      margin: 0;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      .title {
+        margin: 0;
+        padding-bottom: .5rem;
+      }
+      .main-title {
+        margin: 0;
+        padding-bottom: .5rem;
+      }
+      .sub-title {
+        margin: 0;
+        padding-bottom: .5rem;
+      }
+      .sub-content {
+        margin: 0;
+        padding: 0;
+      }
+      .body-content {
+        padding-bottom: 1rem;
+      }
+      .status-class {
+        padding-bottom: 1rem;
+      }
+    }
+  }
+}
