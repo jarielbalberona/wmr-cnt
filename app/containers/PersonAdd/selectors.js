@@ -169,10 +169,10 @@ const makeSelectFormRecommendations = () =>
     personAddState => personAddState.form.recommendations,
   );
 
-const makeSelectFormIntroductions = () =>
+const makeSelectFormIntroduction = () =>
   createSelector(
     selectPersonAddDomain,
-    personAddState => personAddState.form.introductions,
+    personAddState => personAddState.form.introduction,
   );
 
 export {
@@ -200,7 +200,7 @@ export {
   makeSelectFormBattleFactors,
   makeSelectFormComments,
   makeSelectFormRecommendations,
-  makeSelectFormIntroductions,
+  makeSelectFormIntroduction,
   makeSelectRebelGroups,
   makeSelectReligions,
 };

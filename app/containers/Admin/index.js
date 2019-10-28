@@ -23,6 +23,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import PersonAdd from 'containers/PersonAdd/Loadable';
 import PersonList from 'containers/PersonList/Loadable';
+import PersonView from 'containers/PersonView/Loadable';
 
 import PageTitle from 'components/PageTitle';
 import Sidebar from 'components/Sidebar';
@@ -62,7 +63,7 @@ const routes = [
     exact: true,
     title: 'View Person',
     desc: "View person's full details.",
-    main: () => <h1>Work on progress, view person.</h1>,
+    main: PersonView,
   },
 ];
 
