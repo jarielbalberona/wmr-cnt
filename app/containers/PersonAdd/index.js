@@ -49,8 +49,6 @@ import {
   makeSelectFormUGMEntryInvolvement,
   makeSelectFormBattleFactors,
   makeSelectFormComments,
-  makeSelectFormRecommendations,
-  makeSelectFormIntroductions,
 } from './selectors';
 import {
   createNewDialect,
@@ -105,8 +103,6 @@ const stateSelector = createStructuredSelector({
   ugm_involvement: makeSelectFormUGMEntryInvolvement(),
   battle_factors: makeSelectFormBattleFactors(),
   comments: makeSelectFormComments(),
-  recommendations: makeSelectFormRecommendations(),
-  introductions: makeSelectFormIntroductions(),
 });
 
 function PersonAdd({ match }) {
@@ -136,8 +132,6 @@ function PersonAdd({ match }) {
     ugm_involvement,
     battle_factors,
     comments,
-    recommendations,
-    introductions,
   } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
@@ -621,32 +615,10 @@ function PersonAdd({ match }) {
               </TabPanel>
               <TabPanel>
                 <FormParagraphWithTitle
-                  title="Comments"
+                  title="Remarks"
                   value={comments}
                   rows="15"
                   form_title="comments"
-                  onChange={e =>
-                    onChangeData(e.currentTarget.name, e.currentTarget.value)
-                  }
-                />
-              </TabPanel>
-              <TabPanel>
-                <FormParagraphWithTitle
-                  title="Recommendations"
-                  value={recommendations}
-                  rows="15"
-                  form_title="recommendations"
-                  onChange={e =>
-                    onChangeData(e.currentTarget.name, e.currentTarget.value)
-                  }
-                />
-              </TabPanel>
-              <TabPanel>
-                <FormParagraphWithTitle
-                  title="Background / Introduction"
-                  value={introductions}
-                  rows="15"
-                  form_title="introductions"
                   onChange={e =>
                     onChangeData(e.currentTarget.name, e.currentTarget.value)
                   }

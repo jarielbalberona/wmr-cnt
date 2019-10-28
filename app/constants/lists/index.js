@@ -35,40 +35,10 @@ export const form_tabs = [
     title: 'IV. UGM Involvement',
   },
   {
-    title: 'V. Battle Factors',
+    title: 'V. PSR Factors',
   },
   {
-    title: 'VI. Comments',
-  },
-  {
-    title: 'VII. Recommendations',
-  },
-  {
-    title: 'VIII. Introduction',
-  },
-];
-
-export const form_tabsx = [
-  {
-    title: 'Bio',
-  },
-  {
-    title: 'Family Affiliation',
-  },
-  {
-    title: 'Education/ Employment',
-  },
-  {
-    title: 'Circumstances of Neutralization',
-  },
-  {
-    title: 'Background of Entity',
-  },
-  {
-    title: 'Significant Involvement',
-  },
-  {
-    title: 'Order of Battle Factors',
+    title: 'VI. Remarks',
   },
 ];
 

@@ -62,7 +62,7 @@ function EducationForm({
 }
 
 function EducationEmployment({
-  employment_before_ugms,
+  personal_employment,
   education,
   educational_attainment_options,
   onChangeEmp,
@@ -81,7 +81,7 @@ function EducationEmployment({
         />
         <div className="title is-size-6 input-title">Employment before UGM</div>
         <FormParagraphWithTitle
-          value={employment_before_ugms}
+          value={personal_employment}
           rows="8"
           form_title="employment_before_ugm"
           onChange={e => onChangeEmp('personal_history_statement', e)}

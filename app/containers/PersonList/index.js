@@ -276,8 +276,6 @@ function PersonList() {
 
   const onLoadPersonList = () => dispatch(loadPersonList());
   const onDeletePerson = id => () => dispatch(deletePerson(id));
-  const onPrintPerson = id => () => alert(`todo print with id ${id}`);
-  const onDownloadPerson = id => () => alert(`todo download with id ${id}`);
 
   useEffect(() => {
     onLoadPersonList();
@@ -337,24 +335,6 @@ function PersonList() {
             </Link>
             <button
               type="button"
-              onClick={onPrintPerson(row.original._id)}
-              className="button"
-            >
-              <span className="icon is-small">
-                <i className="fas fa-print"></i>
-              </span>
-            </button>
-            <button
-              type="button"
-              onClick={onDownloadPerson(row.original._id)}
-              className="button"
-            >
-              <span className="icon is-small">
-                <i className="fas fa-download"></i>
-              </span>
-            </button>
-            <button
-              type="button"
               onClick={onDeletePerson(row.original._id)}
               className="button"
             >
@@ -380,7 +360,7 @@ function PersonList() {
           {loading ? (
             <LoadingIndicator />
           ) : (
-            <Table columns={columns} data={list} />
+            <Table columns={columns} data={list || []} />
           )}
         </div>
       </section>
