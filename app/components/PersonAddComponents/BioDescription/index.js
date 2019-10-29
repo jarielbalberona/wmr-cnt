@@ -47,7 +47,7 @@ function BioDescription({ description, onChangeInput }) {
                 name="height"
                 placeholder="Height"
                 className=""
-                type="number"
+                type="text"
                 value={description.height ? description.height : ''}
                 onChange={onChangeInput}
               />
@@ -60,7 +60,7 @@ function BioDescription({ description, onChangeInput }) {
               <FloatingLabel
                 id="weight"
                 name="weight"
-                placeholder="Weight"
+                placeholder="Weight by kg"
                 className=""
                 type="number"
                 value={description.weight ? description.weight : ''}
@@ -84,12 +84,12 @@ function BioDescription({ description, onChangeInput }) {
           <div className="column">
             <div className="inputs">
               <FloatingLabel
-                id="identifying_marks"
-                name="identifying_marks"
-                placeholder="Identifying Marks"
+                id="identifying_mark"
+                name="identifying_mark"
+                placeholder="Identifying Mark"
                 className=""
                 type="text"
-                value={description.identifying_marks}
+                value={description.identifying_mark}
                 onChange={onChangeInput}
               />
             </div>

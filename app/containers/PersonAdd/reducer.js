@@ -194,7 +194,7 @@ const data = {
   },
   comments: 'Will order again.',
   recommendations: 'Quis commodo odio aenean sed adipiscing diam.',
-  introductions: 'Lorem ipsum dolor de color',
+  introduction: 'Lorem ipsum dolor de color',
 };
 
 const form_initial = {
@@ -286,7 +286,7 @@ const form_initial = {
   },
   comments: '',
   recommendations: '',
-  introductions: '',
+  introduction: '',
 };
 
 const errors_initial = {
