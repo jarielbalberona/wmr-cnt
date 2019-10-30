@@ -25,8 +25,8 @@ export const initialState = {
   loading: false,
   form_errors,
   form: {
-    email: 'jarielb96@gmail.com',
-    password: 'test1234',
+    email: '',
+    password: '',
   },
 };
 
