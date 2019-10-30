@@ -85,7 +85,7 @@ function Admin(props) {
   };
   return (
     <div id="Admin">
-      <Router basename={ADMIN}>
+      <Router forceRefresh basename={ADMIN}>
         <Sidebar
           noOverlay
           open={side_expanded}

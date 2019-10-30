@@ -57,26 +57,28 @@ function PersonView({ match }) {
       appNotify('error', 'Page error.')
     }
   }, [])
-  console.log(data)
-  if(!data) {
-    return (
-      <section id="PersonView">
-        <h1>No Data</h1>
-      </section>
-    )
-  }
 
   return (
     <article>
       <Helmet>
-        <title>{`${data.alias_nickname} - ${data.full_name}`}</title>
+        {
+          !data ?
+            <title>Loading...</title>
+            :
+            <title>{`${data.alias_nickname} - ${data.full_name}`}</title>
+        }
         <meta name="description" content="Description of Person View" />
       </Helmet>
       <section id="PersonView">
         <div className="container is-fluid">
-          {loading ? (
-            <LoadingIndicator />
-          ) : (
+          
+          {
+            // eslint-disable-next-line no-nested-ternary
+            loading ? (
+              <LoadingIndicator />
+            ) : ( !data ? (
+              <div>Loading...</div>
+            ) : (
             <>
               <ReactToPrint
                 pageStyle
@@ -92,7 +94,8 @@ function PersonView({ match }) {
                 <Paragraph title="VI. REMARKS:" content={data.comments} type="title" />
               </div>
             </>
-          )}
+            ))
+          }
         </div>
       </section>
     </article>
