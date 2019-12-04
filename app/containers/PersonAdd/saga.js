@@ -57,6 +57,9 @@ export function* updatePerson({ id }) {
     yield put(appNotify('success', rebel.message));
     yield put(push('/admin/person-add'));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
     yield put(savePersonError(err.errors));
   } finally {
@@ -73,6 +76,9 @@ export function* getRebel({ id }) {
     }
     yield put(getRebelSuccess(rebel.data));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(getRebelEnd());
@@ -90,6 +96,9 @@ export function* savePerson() {
     yield put(savePersonSuccess());
     yield put(appNotify('success', rebel.message));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
     yield put(savePersonError(err.errors));
   } finally {
@@ -106,6 +115,9 @@ export function* getRebelGroups() {
     }
     yield put(getRebelGroupsSuccess(rebel_groups.data));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(getRebelGroupsEnd());
@@ -121,6 +133,9 @@ export function* getDialects() {
     }
     yield put(getDialectsSuccess(dialects.data));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(getDialectsEnd());
@@ -137,6 +152,9 @@ export function* createDialect({ value }) {
     yield put(appNotify('success', response.message));
     yield put(createNewDialectSuccess(response.data));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(createNewDialectEnd());

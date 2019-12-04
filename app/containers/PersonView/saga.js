@@ -15,6 +15,9 @@ export function* getPerson({ id }) {
     }
     yield put(getPersonSuccess(rebel.data));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(getPersonEnd());

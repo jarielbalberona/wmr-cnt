@@ -2,18 +2,22 @@
 
 #PersonList {
   > .container {
-    margin-right: 4rem;
-    > div {
       padding: 2rem;
       border: 1px solid #eee;
       box-shadow: 0 0 2rem rgba(238, 238, 238, 0.5);
-      min-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      @include mobile {
+        padding: 0;
+      }
+    .wmr-table-container {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      min-height: 70vh;
     }
-    .table {
+    table {
       width: 100%;
+      @include mobile {
+        width: 70rem;
+      }
       thead {
         tr {
           th {
@@ -36,7 +40,7 @@
         }
       }
       .select {
-        margin-top: 0.6rem;
+        margin-top: 1.6rem;
         select {
           min-width: 7rem;
         }
@@ -52,7 +56,9 @@
     .pagination {
       .pagination-list {
         justify-content: space-between;
-        margin-right: 3rem;
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
         .is-flex {
           align-items: center;
           input {

@@ -1,20 +1,15 @@
 .form-page {
   margin-top: 2rem;
   .container {
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: calc(100vh - 25rem);
+    min-width: 100%;
     scroll-behavior: smooth;
     .columns {
       .column {
         margin: 0.5rem 1rem;
+        @include mobile {
+          margin: 0;
+        }
       }
     }
-  }
-}
-#FamAffRelatives,
-#Neutralization {
-  .container {
-    height: calc(100vh - 21rem);
   }
 }

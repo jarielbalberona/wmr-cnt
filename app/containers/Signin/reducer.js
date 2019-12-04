@@ -1,18 +1,10 @@
-/*
- * HomepageReducer
- *
- * The reducer takes care of our data. Using actions, we can
- * update our application state. To add a new action,
- * add it to the switch statement in the reducer function
- *
- */
-
 import produce from 'immer';
 import {
   CHANGE_INPUT,
   CHECK_AUTH,
   CHECK_END,
   CHECK_AUTH_ERROR,
+  LOGIN_ERROR,
 } from './constants';
 
 const form_errors = {
@@ -44,6 +36,14 @@ const homeReducer = produce((draft, action) => {
       break;
     case CHECK_END:
       draft.loading = false;
+      break;
+    case LOGIN_ERROR:
+      const { errors } = action;
+      const f_errors = {
+        ...draft.form_errors,
+        ...errors,
+      };
+      draft.form_errors = f_errors;
       break;
   }
 }, initialState);

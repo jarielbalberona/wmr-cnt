@@ -59,7 +59,7 @@ function PersonView({ match }) {
   }, [])
 
   return (
-    <article>
+    <section id="PersonView">
       <Helmet>
         {
           !data ?
@@ -69,16 +69,15 @@ function PersonView({ match }) {
         }
         <meta name="description" content="Description of Person View" />
       </Helmet>
-      <section id="PersonView">
-        <div className="container is-fluid">
+      <div className="container is-fluid">
           
-          {
-            // eslint-disable-next-line no-nested-ternary
-            loading ? (
-              <LoadingIndicator />
-            ) : ( !data ? (
-              <div>Loading...</div>
-            ) : (
+        {
+          // eslint-disable-next-line no-nested-ternary
+          loading ? (
+            <LoadingIndicator />
+          ) : ( !data ? (
+            <div>Loading...</div>
+          ) : (
             <>
               <ReactToPrint
                 pageStyle
@@ -94,11 +93,10 @@ function PersonView({ match }) {
                 <Paragraph title="VI. REMARKS:" content={data.comments} type="title" />
               </div>
             </>
-            ))
-          }
-        </div>
-      </section>
-    </article>
+          ))
+        }
+      </div>
+    </section>
   );
 }
 
