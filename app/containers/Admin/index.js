@@ -6,7 +6,7 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
   BrowserRouter as Router,
@@ -26,10 +26,8 @@ import PersonList from 'containers/PersonList/Loadable';
 import PersonView from 'containers/PersonView/Loadable';
 
 import PageTitle from 'components/PageTitle';
-import Sidebar from 'components/Sidebar';
 
 import { ADMIN } from 'constants/path';
-import { logOut } from 'containers/App/actions';
 import { makeSelectAdmin, makeSelectAdminSideMenu } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -72,31 +70,15 @@ const stateSelector = createStructuredSelector({
   side_expanded: makeSelectAdminSideMenu(),
 });
 
-function Admin(props) {
-  const { match, cookies } = props;
+function Admin() {
   useInjectReducer({ key: 'admin', reducer });
   useInjectSaga({ key: 'admin', saga });
 
   const { side_expanded } = useSelector(stateSelector);
-  const dispatch = useDispatch();
-  const onLogout = () => {
-    dispatch(logOut());
-    cookies.remove('token', { path: '/' });
-  };
+
   return (
     <div id="Admin">
       <Router forceRefresh basename={ADMIN}>
-        <Sidebar
-          noOverlay
-          open={side_expanded}
-          customBurgerIcon={false}
-          customCrossIcon={false}
-          pageWrapId="Admin-content"
-          outerContainerId="Admin"
-          match={match}
-          menuClassName={`bm-menu-wrap ${side_expanded ? 'expanded' : ''}`}
-          logout={onLogout}
-        />
         <div
           id="Admin-content"
           className={`bm-menu-wrap ${side_expanded ? 'expanded' : ''}`}

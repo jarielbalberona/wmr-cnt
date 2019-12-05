@@ -20,6 +20,9 @@ export function* listPerson() {
     }
     yield put(loadPersonListSuccess(rebel.data));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(loadPersonListEnd());
@@ -37,6 +40,9 @@ export function* deletePerson({ id }) {
     yield put(deletePersonSuccess());
     yield put(appNotify('success', rebel.message));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(appNotify('error', err.message));
   } finally {
     yield put(deletePersonEnd());

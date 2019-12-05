@@ -1,5 +1,5 @@
 /*
- * Signup
+ * signin
  *
  * This is the first thing users see of our App, at the '/' route
  *
@@ -16,66 +16,44 @@ import FloatingLabel from 'floating-label-react';
 
 // import brandLogo from '@images/wmr-cnt-logo.png';
 
-import { makeSelectSignupForm, makeSelectSignupFormErrors } from './selectors';
+import { makeSelectLoginForm, makeSelectLoginFormErrors } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { changeInput, signUp } from './actions';
+import { changeInput, login } from './actions';
 import './styles';
 
-const key = 'signup';
+const key = 'signin';
 
 const stateSelector = createStructuredSelector({
-  form: makeSelectSignupForm(),
-  errors: makeSelectSignupFormErrors(),
+  form: makeSelectLoginForm(),
+  errors: makeSelectLoginFormErrors(),
 });
 
-export default function Signup() {
+export default function Signin() {
   const dispatch = useDispatch();
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   const onChangeInput = evt =>
     dispatch(changeInput(evt.target.name, evt.target.value));
-  const onSignUp = () => dispatch(signUp());
+  const onLogin = () => dispatch(login());
 
   const { form, errors } = useSelector(stateSelector);
-  const { first_name, last_name, email, password } = form;
+  const { email, password } = form;
   useEffect(() => {
     // When initial state username is not null, submit the form to load repos
   }, []);
 
   return (
-    <section id="Signup" className="container">
+    <section id="Signin" className="container">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>WMR - CNT: Register</title>
-        <link rel="canonical" href="http://mysite.com/example" />
+        <title>WMR - CNT: Login</title>
+        <link rel="canonical" href="" />
       </Helmet>
       <div className="columns">
         <div className="column is-three-fifths-desktop is-offset-one-fifth-desktop is-four-fifths-mobile is-offset-1-mobile">
-          <div className="title is-4">Register</div>
-          <div className="inputs">
-            <FloatingLabel
-              id="first_name"
-              name="first_name"
-              placeholder={errors.first_name.message || 'First name'}
-              className={errors.first_name.message ? 'has-text-danger' : ''}
-              type="text"
-              value={first_name}
-              onChange={onChangeInput}
-            />
-          </div>
-          <div className="inputs">
-            <FloatingLabel
-              id="last_name"
-              name="last_name"
-              placeholder={errors.last_name.message || 'Last name'}
-              className={errors.last_name.message ? 'has-text-danger' : ''}
-              type="text"
-              value={last_name}
-              onChange={onChangeInput}
-            />
-          </div>
+          <div className="title is-4">Login</div>
           <div className="inputs">
             <FloatingLabel
               id="email"
@@ -102,7 +80,7 @@ export default function Signup() {
             <button
               type="button"
               className="button is-medium is-fullwidth is-primary"
-              onClick={onSignUp}
+              onClick={onLogin}
             >
               Ok
             </button>

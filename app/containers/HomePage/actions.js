@@ -19,8 +19,7 @@ import {
   CHANGE_INPUT,
   CHECK_AUTH,
   CHECK_AUTH_ERROR,
-  LOGIN,
-  LOGIN_ERROR,
+  CHECK_END,
 } from './constants';
 
 export function changeInput(name, value) {
@@ -37,16 +36,9 @@ export function checkAuth() {
   };
 }
 
-export function login() {
+export function checkAuthEnd() {
   return {
-    type: LOGIN,
-  };
-}
-
-export function loginError(errors) {
-  return {
-    type: LOGIN_ERROR,
-    errors,
+    type: CHECK_END,
   };
 }
 

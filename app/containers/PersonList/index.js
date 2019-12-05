@@ -28,7 +28,7 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 
-import './styles';
+import './styles.scss';
 
 // Define a default UI for filtering
 function DefaultColumnFilter({ column: { filterValue, setFilter } }) {
@@ -122,7 +122,6 @@ function Table({ columns, data }) {
   const {
     getTableProps,
     headerGroups,
-    rows,
     prepareRow,
     pageOptions,
     page,
@@ -146,7 +145,8 @@ function Table({ columns, data }) {
   );
 
   return (
-    <div>
+    <>
+    <div className="wmr-table-container">
       <table
         {...getTableProps()}
         className="table is-striped is-hoverable  is-fullwidth"
@@ -177,6 +177,7 @@ function Table({ columns, data }) {
           )}
         </tbody>
       </table>
+    </div>
       <nav className="pagination " role="navigation" aria-label="pagination">
         <button
           type="button"
@@ -227,13 +228,6 @@ function Table({ columns, data }) {
               ))}
             </select>
           </div>
-          <div className="">
-            <p>
-              {pageSize >= rows.length
-                ? `Showing ${rows.length} of ${rows.length}`
-                : `Showing ${pageSize} of ${rows.length}`}
-            </p>
-          </div>
           <div className="is-flex">
             <p> Go to page: </p>&nbsp;
             <input
@@ -257,7 +251,7 @@ function Table({ columns, data }) {
           </div>
         </div>
       </nav>
-    </div>
+    </>
   );
 }
 
@@ -323,12 +317,12 @@ function PersonList() {
         // to the render a checkbox
         Cell: ({ row }) => (
           <div className="table-actions buttons">
-            <Link to={`/person-view/${row.original._id}`} className="button">
+            <Link to={`/admin/person-view/${row.original._id}`} className="button">
               <span className="icon is-small">
                 <i className="fas fa-eye"></i>
               </span>
             </Link>
-            <Link to={`/person-edit/${row.original._id}`} className="button">
+            <Link to={`/admin/person-edit/${row.original._id}`} className="button">
               <span className="icon is-small">
                 <i className="fas fa-pen"></i>
               </span>
@@ -350,21 +344,19 @@ function PersonList() {
   );
 
   return (
-    <article>
+    <section id="PersonList">
       <Helmet>
         <title>PersonList</title>
         <meta name="description" content="Description of PersonList" />
       </Helmet>
-      <section id="PersonList">
-        <div className="container is-fluid">
-          {loading ? (
-            <LoadingIndicator />
-          ) : (
-            <Table columns={columns} data={list || []} />
-          )}
-        </div>
-      </section>
-    </article>
+      <div className="container">
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <Table columns={columns} data={list || []} />
+        )}
+      </div>
+    </section>
   );
 }
 

@@ -15,8 +15,11 @@ export function* signup() {
       throw auth;
     }
     yield put(appNotify('success', auth.message));
-    yield put(push('/'));
+    yield put(push('/login'));
   } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
     yield put(signupError(err.errors));
     yield put(appNotify('error', 'Some error occurred.'));
   }
