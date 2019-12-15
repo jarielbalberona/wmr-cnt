@@ -17,14 +17,16 @@ function Neutralization({ title, data }) {
         </div>
         <p className="status-class">
           <span className="title is-5 has-text-weight-semibold sub-title field-label">
-            A. Status/Classification:
+            A. Status/Classification:{' '}
           </span>
           {data.classification}
         </p>
+        <br />
         <Paragraph
           title="B. Details of Neutralization:"
           content={data.details}
         />
+        <br />
         <Paragraph
           title="C. Reason for Surrender:"
           content={data.surrender_reason}

@@ -94,13 +94,21 @@ const PSRFactors = ({ title, data }) => {
     <div id="PSRFactors">
       <div className="title is-5 has-text-weight-bold main-title">{title}</div>
       <Paragraph title="A. Composition:" content={data.composition} />
+      <br />
       <Disposition title="B. Disposition:" data={data.dispositions} />
+      <br />
       <Paragraph title="C. Strengths:" content={data.strengths} />
+      <br />
       <Paragraph title="D. Tactics:" content={data.tactics} />
+      <br />
       <Paragraph title="E. Training:" content={data.trainings} />
+      <br />
       <Paragraph title="F. Logistics:" content={data.logistics} />
+      <br />
       <Paragraph title="G. Effectiveness:" content={data.effectiveness} />
+      <br />
       <Paragraph title="H. Plans:" content={data.plans} />
+      <br />
       <Miscellaneous title="I. Miscellaneous:" data={data.miscellaneous} />
     </div>
   );

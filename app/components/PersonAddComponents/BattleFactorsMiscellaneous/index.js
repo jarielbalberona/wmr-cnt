@@ -12,6 +12,7 @@ function BattleFactorsMiscellaneous({
   miscellaneous,
   onAddBattleFactorsDisMis,
   onBattleFactorsDisMis,
+  onRemoveBattleFactorsDisMis,
 }) {
   const Miscellaneous = miscellaneous.map((miscell, key) => (
     // eslint-disable-next-line react/no-array-index-key
@@ -68,6 +69,21 @@ function BattleFactorsMiscellaneous({
               onChange={e => onBattleFactorsDisMis('miscellaneous', key, e)}
             />
           </div>
+        </div>
+        <div className="bf-misc-action is-pulled-right">
+          <button
+            type="button"
+            className="button is-primary"
+            onClick={() => {
+              // eslint-disable-next-line no-alert
+              if (window.confirm('Delete this record?')) {
+                // onRemoveRelative(key);
+                onRemoveBattleFactorsDisMis('miscellaneous', key);
+              }
+            }}
+          >
+            <i className="fas fa-times" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>

@@ -37,6 +37,10 @@ import {
   ADD_BATTLE_DIS_MIS,
   LOAD_ADD_PERSON,
   PERSON_DATA_UPDATE,
+  FAMILY_SIBLING_REMOVE,
+  RELATIVE_GS_REMOVE,
+  RELATIVE_LCM_REMOVE,
+  BATTLE_DIS_MIS_REMOVE,
 } from './constants';
 
 export function loadAddPerson() {
@@ -158,12 +162,41 @@ export function familySiblingChangeInput(key, name, value) {
   };
 }
 
+export function removeSibling(key) {
+  return {
+    type: FAMILY_SIBLING_REMOVE,
+    key,
+  };
+}
+
+export function removeRelativeGs(key) {
+  return {
+    type: RELATIVE_GS_REMOVE,
+    key,
+  };
+}
+
+export function removeRelativeLcm(key) {
+  return {
+    type: RELATIVE_LCM_REMOVE,
+    key,
+  };
+}
+
 export function relativeGsChangeInput(key, name, value) {
   return {
     type: RELATIVE_GS_CHANGE_INPUT,
     key,
     name,
     value,
+  };
+}
+
+export function removeBattleFactorsDisMis(parent, key) {
+  return {
+    type: BATTLE_DIS_MIS_REMOVE,
+    parent,
+    key,
   };
 }
 

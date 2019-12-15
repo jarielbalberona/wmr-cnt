@@ -39,6 +39,9 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0;
     box-shadow: none;
+    .cx__value-container {
+      padding-left: 0;
+    }
     .cx__indicators {
       .cx__indicator-separator {
         width: 0;

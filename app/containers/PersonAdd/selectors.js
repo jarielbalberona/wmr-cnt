@@ -174,6 +174,11 @@ const makeSelectFormIntroduction = () =>
     selectPersonAddDomain,
     personAddState => personAddState.form.introduction,
   );
+const makeSelectLoading = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.loading,
+  );
 
 export {
   selectPersonAddDomain,
@@ -203,4 +208,5 @@ export {
   makeSelectFormIntroduction,
   makeSelectRebelGroups,
   makeSelectReligions,
+  makeSelectLoading,
 };

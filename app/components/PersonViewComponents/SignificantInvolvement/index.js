@@ -16,14 +16,17 @@ function SignificantInvolvement({ title, data }) {
           {title}
         </div>
         <Paragraph title="A. Series Of Promotion:" content={data.promotion} />
+        <br />
         <Paragraph
           title="B. Demotion/Disciplinary Action:"
           content={data.demotion}
         />
+        <br />
         <Paragraph
           title="C. Involvement In Significant Violent Activities:"
           content={data.violent_activities}
         />
+        <br />
         <Paragraph
           title="D. Involvement In Non-Violent Activities:"
           content={data.nonviolent_activities}
