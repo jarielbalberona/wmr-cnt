@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ReactToPrint from 'react-to-print';
 
-import LoadingIndicator from 'components/LoadingIndicator';
 import BackgroundUGM from 'components/PersonViewComponents/BackgroundUGM';
 import Neutralization from 'components/PersonViewComponents/Neutralization';
 import Paragraph from 'components/PersonViewComponents/Paragraph';
@@ -73,9 +72,7 @@ function PersonView({ match }) {
           
         {
           // eslint-disable-next-line no-nested-ternary
-          loading ? (
-            <LoadingIndicator />
-          ) : ( !data ? (
+          !data || loading ? (
             <div>Loading...</div>
           ) : (
             <>
@@ -90,10 +87,11 @@ function PersonView({ match }) {
                 <BackgroundUGM title="III. BACKGROUND OF ENTRY INTO THE UGM:" data={data.ugm_entry_background} />
                 <SignificantInvolvement title="IV. SIGNIFICANT INVOLVEMENT/ACTIVITIES/ACHIEVEMENTS OF SUBJECT IN THE UGM:" data={data.ugm_involvement} />
                 <PSRFactors title="V ORDER OF PSR FACTORS:" data={data.battle_factors} />
+                <br />
                 <Paragraph title="VI. REMARKS:" content={data.comments} type="title" />
               </div>
             </>
-          ))
+          )
         }
       </div>
     </section>

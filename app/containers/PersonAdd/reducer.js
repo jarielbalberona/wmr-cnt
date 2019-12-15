@@ -16,12 +16,12 @@ import {
 import {
   CREATE_DIALECT_SUCCESS,
   GET_DIALECTS_SUCCESS,
+  GET_REBEL_GROUPS,
   GET_REBEL_GROUPS_SUCCESS,
+  GET_REBEL_GROUPS_END,
   PERSONAL_CHANGE_INPUT,
   PERSONAL_CHANGE_SELECT,
   PERSON_DATA_CHANGE,
-  PERSON_DATA_SAVE,
-  PERSON_DATA_SAVE_END,
   PERSON_DATA_SAVE_ERROR,
   PERSON_DATA_SAVE_SUCCESS,
   CHANGE_TEXTAREA,
@@ -36,166 +36,11 @@ import {
   BATTLE_DIS_MIS_CHANGE_INPIUT,
   ADD_BATTLE_DIS_MIS,
   LOAD_ADD_PERSON,
+  FAMILY_SIBLING_REMOVE,
+  RELATIVE_GS_REMOVE,
+  RELATIVE_LCM_REMOVE,
+  BATTLE_DIS_MIS_REMOVE,
 } from './constants';
-
-const data = {
-  personal_history_statement: {
-    personal_data: {
-      dialects: ['Bisaya, Tagalog'],
-      first_name: 'Xandel',
-      last_name: 'Areja',
-      middle_name: 'Wakwak',
-      birth_date: '02/16/1996',
-      age: 22,
-      birth_place: 'Bukidnon City',
-      gender: 'Male',
-      marital_status: 'Single',
-      address_home: 'TV5 Road, Camp Marina, Brgy Kalunasan',
-      address_former: 'Kilid Lahug',
-      tribe: 'Tribu Wakwak',
-      religion: 'Catholic',
-    },
-    physical_description: {
-      height: '153',
-      weight: 55,
-      complexion: 'Black',
-      identifying_marks: 'Gwapo',
-      eyes: 'Brown',
-      hair: 'Long black',
-      build: 'small',
-    },
-    family_background: {
-      father: {
-        alive: true,
-        full_name: 'Bentong Kah',
-        age: 46,
-        birth_date: '11/11/61',
-        birth_place: 'Bukidnon',
-        present_address: 'Bukidnon Mindaanao',
-        occupation: 'teacher',
-      },
-      mother: {
-        alive: true,
-        full_name: 'Bentong Kah XX',
-        age: 66,
-        birth_date: '11/11/61',
-        birth_place: 'Bukidnon',
-        present_address: 'Bukidnon Mindaanao',
-        occupation: 'teacher',
-      },
-      siblings: [
-        {
-          full_name: 'Mura Kah',
-          age: 25,
-          address: 'Bukid Bukidnon',
-        },
-        {
-          full_name: 'Mahal Kah',
-          age: 28,
-          address: 'Bukid Bukidnon',
-        },
-      ],
-    },
-    education: {
-      attainment: "Bachelor's degree",
-      description: 'Bukidnon State',
-    },
-    relatives: {
-      government_working: [
-        {
-          full_name: 'Wah Ehl',
-          description: 'Fixer CCAS',
-        },
-        {
-          full_name: 'Wahj Apn Ehl',
-          description: 'Brgy Tanod',
-        },
-      ],
-      lcm_org: [
-        {
-          full_name: 'Nah Ehl He',
-          description: 'Wa rah ghud',
-        },
-        {
-          full_name: 'Bruno Apn Ehl',
-          description: 'Yeah yeah',
-        },
-      ],
-    },
-    employment_before_ugm: 'Barber',
-  },
-  alias_nickname: 'Pabo',
-  rebel_group: '5d7cc388d6610f43b748589e',
-  group_type: 'Red',
-  group: 'Cancers',
-  neutralization: {
-    classification: 'Surrendered',
-    details:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    surrender_reason:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  ugm_entry_background: {
-    propaganda:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    personal_motivation:
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-  },
-  ugm_involvement: {
-    promotion:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    demotion:
-      'Magna eget est lorem ipsum dolor sit. Risus ultricies tristique nulla aliquet enim tortor.',
-    violent_activities: 'In eu mi bibendum neque egestas congue.',
-    nonviolent_activities:
-      'Tincidunt praesent semper feugiat nibh sed pulvinar proin.',
-  },
-  battle_factors: {
-    composition: 'This is the org chart',
-    dispositions: [
-      {
-        municipality: 'Oslob',
-        barangay: 'Napo',
-        posting_area: 'Bakahan',
-        identified_contact: 'Ang Baka',
-        supply_flow: 'Kuha og dahon sa sagbot',
-        caa_contacts: 'None',
-      },
-      {
-        municipality: 'Oslob',
-        barangay: 'Napo',
-        posting_area: 'Bakahan',
-        identified_contact: 'Ang Baka',
-        supply_flow: 'Kuha og dahon sa sagbot',
-        caa_contacts: 'None',
-      },
-    ],
-    strengths: 'Way kusog',
-    tactics: 'Camper',
-    trainings: 'Bootcamp',
-    logistics: 'Motor',
-    effectiveness: 'Dili effectiveness',
-    plans: 'Magcheat gamit og wallhack',
-    miscellaneous: [
-      {
-        name: 'Kanor',
-        unit: 'Unit 5',
-        description:
-          'Urna duis convallis convallis tellus id interdum velit laoreet.',
-        remarks: 'Marka Utso',
-      },
-      {
-        name: 'Maria',
-        unit: 'Unit 122',
-        description: 'Est ante in nibh mauris cursus mattis molestie.',
-        remarks: 'Marka Kaka',
-      },
-    ],
-  },
-  comments: 'Will order again.',
-  recommendations: 'Quis commodo odio aenean sed adipiscing diam.',
-  introduction: 'Lorem ipsum dolor de color',
-};
 
 const form_initial = {
   personal_history_statement: {
@@ -304,10 +149,9 @@ export const initialState = {
     dialects: [],
   },
   form_tabs,
-  loading: data,
+  loading: false,
   form: form_initial,
   errors: errors_initial,
-  sample_profile: data,
 };
 
 /* eslint-disable default-case, no-param-reassign, no-case-declarations */
@@ -325,8 +169,14 @@ const personAddReducer = produce((draft, action) => {
       new_options.push(option);
       draft.options.dialects = new_options;
       break;
+    case GET_REBEL_GROUPS:
+      draft.loading = true;
+      break;
     case GET_REBEL_GROUPS_SUCCESS:
       draft.options.rebel_groups = action.data;
+      break;
+    case GET_REBEL_GROUPS_END:
+      draft.loading = false;
       break;
     case GET_DIALECTS_SUCCESS:
       draft.options.dialects = action.data;
@@ -357,6 +207,35 @@ const personAddReducer = produce((draft, action) => {
         ...draft.form.personal_history_statement.family_background.siblings,
         {},
       ];
+      break;
+    case FAMILY_SIBLING_REMOVE:
+      const {
+        siblings,
+      } = draft.form.personal_history_statement.family_background;
+      if (action.key > -1) {
+        siblings.splice(action.key, 1);
+      }
+      draft.form.personal_history_statement.family_background.siblings = [
+        ...siblings,
+      ];
+      break;
+    case RELATIVE_GS_REMOVE:
+      const {
+        government_working,
+      } = draft.form.personal_history_statement.relatives;
+      if (action.key > -1) {
+        government_working.splice(action.key, 1);
+      }
+      draft.form.personal_history_statement.relatives.government_working = [
+        ...government_working,
+      ];
+      break;
+    case RELATIVE_LCM_REMOVE:
+      const { lcm_org } = draft.form.personal_history_statement.relatives;
+      if (action.key > -1) {
+        lcm_org.splice(action.key, 1);
+      }
+      draft.form.personal_history_statement.relatives.lcm_org = [...lcm_org];
       break;
     case ADD_RELATIVE_GS:
       draft.form.personal_history_statement.relatives.government_working = [
@@ -390,17 +269,18 @@ const personAddReducer = produce((draft, action) => {
       draft.form.battle_factors[action.obj][action.key][action.name] =
         action.value;
       break;
+    case BATTLE_DIS_MIS_REMOVE:
+      const parent = draft.form.battle_factors[action.parent];
+      if (action.key > -1) {
+        parent.splice(action.key, 1);
+      }
+      draft.form.battle_factors[action.parent] = [...parent];
+      break;
     case PERSON_DATA_CHANGE:
       draft.form[action.property] = action.value;
       break;
-    case PERSON_DATA_SAVE:
-      draft.loading = true;
-      break;
     case PERSON_DATA_SAVE_ERROR:
       draft.errors = action.errors;
-      break;
-    case PERSON_DATA_SAVE_END:
-      draft.loading = false;
       break;
     case PERSON_DATA_SAVE_SUCCESS:
       draft.form = form_initial;

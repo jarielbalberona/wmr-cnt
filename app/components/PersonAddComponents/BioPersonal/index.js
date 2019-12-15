@@ -143,7 +143,9 @@ function BioPersonal({
                   : ''
               }`}
               placeholder={
-                (errors && errors.rebel_group && errors.rebel_group.message) ||
+                (errors &&
+                  errors.rebel_group &&
+                  `Group ${errors.rebel_group.message.toLowerCase()}`) ||
                 'Group'
               }
               classNamePrefix="cx"
@@ -163,7 +165,8 @@ function BioPersonal({
                     : ''
                 }`}
                 placeholder={
-                  (errors.alias_nickname && errors.alias_nickname.message) ||
+                  (errors.alias_nickname &&
+                    `Alias / Nickname ${errors.alias_nickname.message.toLowerCase()}`) ||
                   'Alias / Nickname'
                 }
                 type="text"

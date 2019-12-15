@@ -53,6 +53,13 @@ const Navbar = ({ token, onLogout }) => {
             >
               Add Person
             </Link>
+            <Link
+              onClick={() => toggleMenu(false)}
+              className="navbar-item"
+              to="/admin/parameters"
+            >
+              Parameters
+            </Link>
           </div>
         ) : (
           ''

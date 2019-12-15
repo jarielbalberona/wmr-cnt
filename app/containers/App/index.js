@@ -24,6 +24,7 @@ import Signin from 'containers/Signin/Loadable';
 import PersonAdd from 'containers/PersonAdd/Loadable';
 import PersonList from 'containers/PersonList/Loadable';
 import PersonView from 'containers/PersonView/Loadable';
+import Parameters from 'containers/Parameters/Loadable';
 
 import { makeSelectAppToken } from './selectors';
 import { loadUserSession, logOut } from './actions';
@@ -70,6 +71,7 @@ function App({ cookies }) {
           <Route path="/admin/person-add" component={PersonAdd} />
           <Route path="/admin/person-view/:id" component={PersonView} />
           <Route path="/admin/person-edit/:id" component={PersonAdd} />
+          <Route path="/admin/parameters" component={Parameters} />
           <Route path="" component={NotFoundPage} />
         </Switch>
         <ToastContainer />

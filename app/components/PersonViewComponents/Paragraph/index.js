@@ -5,6 +5,7 @@
  */
 
 import React, { memo } from 'react';
+import './styles.scss';
 
 function Paragraph({ title, content, type }) {
   return (

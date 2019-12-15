@@ -57,3 +57,8 @@ export const BATTLE_DIS_MIS_CHANGE_INPIUT =
 export const ADD_BATTLE_DIS_MIS = 'wmr-cnt/PersonAdd/ADD_BATTLE_DIS_MIS';
 export const LOAD_ADD_PERSON = 'wmr-cnt/PersonAdd/LOAD_ADD_PERSON';
 export const PERSON_DATA_UPDATE = 'wmr-cnt/PersonAdd/PERSON_DATA_UPDATE';
+
+export const FAMILY_SIBLING_REMOVE = 'wmr-cnt/PersonAdd/FAMILY_SIBLING_REMOVE';
+export const RELATIVE_GS_REMOVE = 'wmr-cnt/PersonAdd/RELATIVE_GS_REMOVE';
+export const RELATIVE_LCM_REMOVE = 'wmr-cnt/PersonAdd/RELATIVE_LCM_REMOVE';
+export const BATTLE_DIS_MIS_REMOVE = 'wmr-cnt/PersonAdd/BATTLE_DIS_MIS_REMOVE';

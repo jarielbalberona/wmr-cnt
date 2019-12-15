@@ -25,43 +25,51 @@ function FormParagraph({
               Status/Classification
             </div>
             <div className="inputs">
-              <div className="field">
-                <input
-                  className="is-checkradio is-primary"
-                  id="Killed"
-                  type="radio"
-                  name="Killed"
-                  checked={classification === 'Killed'}
-                  onChange={onChangeInput}
-                />
-                <label htmlFor="Killed">Killed</label>
-                <input
-                  className="is-checkradio is-primary"
-                  id="Captured"
-                  type="radio"
-                  name="Captured"
-                  checked={classification === 'Captured'}
-                  onChange={onChangeInput}
-                />
-                <label htmlFor="Captured">Captured</label>
-                <input
-                  className="is-checkradio is-primary"
-                  id="Surrendered"
-                  type="radio"
-                  name="Surrendered"
-                  checked={classification === 'Surrendered'}
-                  onChange={onChangeInput}
-                />
-                <label htmlFor="Surrendered">Surrendered</label>
-                <input
-                  className="is-checkradio is-primary"
-                  id="Arrested"
-                  type="radio"
-                  name="Arrested"
-                  checked={classification === 'Arrested'}
-                  onChange={onChangeInput}
-                />
-                <label htmlFor="Arrested">Arrested</label>
+              <div className="field status-radio is-flex-desktop">
+                <div>
+                  <input
+                    className="is-checkradio is-primary"
+                    id="Killed"
+                    type="radio"
+                    name="Killed"
+                    checked={classification === 'Killed'}
+                    onChange={onChangeInput}
+                  />
+                  <label htmlFor="Killed">Killed</label>
+                </div>
+                <div>
+                  <input
+                    className="is-checkradio is-primary"
+                    id="Captured"
+                    type="radio"
+                    name="Captured"
+                    checked={classification === 'Captured'}
+                    onChange={onChangeInput}
+                  />
+                  <label htmlFor="Captured">Captured</label>
+                </div>
+                <div>
+                  <input
+                    className="is-checkradio is-primary"
+                    id="Surrendered"
+                    type="radio"
+                    name="Surrendered"
+                    checked={classification === 'Surrendered'}
+                    onChange={onChangeInput}
+                  />
+                  <label htmlFor="Surrendered">Surrendered</label>
+                </div>
+                <div>
+                  <input
+                    className="is-checkradio is-primary"
+                    id="Arrested"
+                    type="radio"
+                    name="Arrested"
+                    checked={classification === 'Arrested'}
+                    onChange={onChangeInput}
+                  />
+                  <label htmlFor="Arrested">Arrested</label>
+                </div>
               </div>
             </div>
           </div>

@@ -1,0 +1,18 @@
+@import '@styles';
+
+#Parameters {
+  > .container {
+    padding: 2rem;
+    border: 1px solid #eee;
+    box-shadow: 0 0 2rem rgba(238, 238, 238, 0.5);
+    .wmr-table-container {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      .table {
+        @include mobile {
+          width: 35rem;
+        }
+      }
+    }
+  }
+}

@@ -15,8 +15,6 @@ import { Link } from 'react-router-dom';
 import matchSorter from 'match-sorter';
 import FloatingLabel from 'floating-label-react';
 
-import LoadingIndicator from 'components/LoadingIndicator';
-
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { loadPersonList, deletePerson} from './actions';
@@ -265,11 +263,16 @@ function PersonList() {
   useInjectReducer({ key: 'personList', reducer });
   useInjectSaga({ key: 'personList', saga });
 
-  const { list, loading } = useSelector(stateSelector);
+  const { list } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
   const onLoadPersonList = () => dispatch(loadPersonList());
-  const onDeletePerson = id => () => dispatch(deletePerson(id));
+  const onDeletePerson = id => () => {
+    // eslint-disable-next-line no-alert
+    if (window.confirm("Delete this record?")) {
+      dispatch(deletePerson(id))
+    }
+  };
 
   useEffect(() => {
     onLoadPersonList();
@@ -350,11 +353,7 @@ function PersonList() {
         <meta name="description" content="Description of PersonList" />
       </Helmet>
       <div className="container">
-        {loading ? (
-          <LoadingIndicator />
-        ) : (
-          <Table columns={columns} data={list || []} />
-        )}
+        <Table columns={columns} data={list ? list.reverse() : []} />
       </div>
     </section>
   );

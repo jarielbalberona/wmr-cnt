@@ -175,7 +175,12 @@ function ParentsForm({
   );
 }
 
-function SiblingForm({ siblings, onAddSibling, onFamilySiblingChangeInput }) {
+function SiblingForm({
+  siblings,
+  onAddSibling,
+  onFamilySiblingChangeInput,
+  onRemoveSibling,
+}) {
   const Siblings = siblings.map((sibling, key) => (
     // eslint-disable-next-line react/no-array-index-key
     <div key={key} className="columns">
@@ -218,6 +223,20 @@ function SiblingForm({ siblings, onAddSibling, onFamilySiblingChangeInput }) {
           />
         </div>
       </div>
+      <div className="sibling-action is-pulled-right">
+        <button
+          type="button"
+          className="button is-primary"
+          onClick={() => {
+            // eslint-disable-next-line no-alert
+            if (window.confirm('Delete this record?')) {
+              onRemoveSibling(key)();
+            }
+          }}
+        >
+          <i className="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
   ));
   return (
@@ -243,6 +262,7 @@ function BioFamily({
   onChange,
   onAddSibling,
   onFamilySiblingChangeInput,
+  onRemoveSibling,
 }) {
   const [is_calendar_open, setCalendarOpen] = useState({
     mother: false,
@@ -281,6 +301,7 @@ function BioFamily({
           onAddSibling={onAddSibling}
           siblings={family.siblings}
           onFamilySiblingChangeInput={onFamilySiblingChangeInput}
+          onRemoveSibling={onRemoveSibling}
         />
       </div>
     </section>

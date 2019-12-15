@@ -12,6 +12,7 @@ function BattleFactorsDispositions({
   dispositions,
   onBattleFactorsDisMis,
   onAddBattleFactorsDisMis,
+  onRemoveBattleFactorsDisMis,
 }) {
   const Disposition = dispositions.map((disposition, key) => (
     // eslint-disable-next-line react/no-array-index-key
@@ -96,6 +97,21 @@ function BattleFactorsDispositions({
               onChange={e => onBattleFactorsDisMis('dispositions', key, e)}
             />
           </div>
+        </div>
+        <div className="bf-disposition-action is-pulled-right">
+          <button
+            type="button"
+            className="button is-primary"
+            onClick={() => {
+              // eslint-disable-next-line no-alert
+              if (window.confirm('Delete this record?')) {
+                // onRemoveRelative(key);
+                onRemoveBattleFactorsDisMis('dispositions', key);
+              }
+            }}
+          >
+            <i className="fas fa-times" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
       <hr />

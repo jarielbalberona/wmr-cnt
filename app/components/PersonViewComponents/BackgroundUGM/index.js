@@ -19,6 +19,7 @@ function BackgroundUGM({ title, data }) {
           title="Propaganda/Themes Used By The Recruiters:"
           content={data.propaganda}
         />
+        <br />
         <Paragraph
           title="Personal Reason/Motivation For Joining:"
           content={data.personal_motivation}
