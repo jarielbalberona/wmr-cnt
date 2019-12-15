@@ -9,7 +9,6 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -46,83 +45,70 @@ export default function Signup() {
   }, []);
 
   return (
-    <article>
+    <section id="Signup" className="container">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>WMR - CNT</title>
+        <title>WMR - CNT: Register</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <section id="Signup">
-        <div className="container signup">
-          <div className="container form">
-            <div className="container">
-              <div className="title is-3">Sign up</div>
-            </div>
-            <div className="container inputs-container">
-              <div className="inputs">
-                <div className="">
-                  <FloatingLabel
-                    id="first_name"
-                    name="first_name"
-                    placeholder={errors.first_name.message || 'First name'}
-                    className={
-                      errors.first_name.message ? 'has-text-danger' : ''
-                    }
-                    type="text"
-                    value={first_name}
-                    onChange={onChangeInput}
-                  />
-                </div>
-                <div className="">
-                  <FloatingLabel
-                    id="last_name"
-                    name="last_name"
-                    placeholder={errors.last_name.message || 'Last name'}
-                    className={
-                      errors.last_name.message ? 'has-text-danger' : ''
-                    }
-                    type="text"
-                    value={last_name}
-                    onChange={onChangeInput}
-                  />
-                </div>
-              </div>
-              <div className="inputs">
-                <div className="">
-                  <FloatingLabel
-                    id="email"
-                    name="email"
-                    placeholder={errors.email.message || 'Email'}
-                    className={errors.email.message ? 'has-text-danger' : ''}
-                    type="email"
-                    value={email}
-                    onChange={onChangeInput}
-                  />
-                </div>
-                <div className="">
-                  <FloatingLabel
-                    id="password"
-                    name="password"
-                    placeholder={errors.password.message || 'Password'}
-                    className={errors.password.message ? 'has-text-danger' : ''}
-                    type="password"
-                    value={password}
-                    onChange={onChangeInput}
-                  />
-                </div>
-              </div>
-              <button
-                type="button"
-                className="button is-medium is-fullwidth is-primary"
-                onClick={onSignUp}
-              >
-                Ok
-              </button>
-              <Link to="/">Sign in</Link>
-            </div>
+      <div className="columns">
+        <div className="column is-three-fifths-desktop is-offset-one-fifth-desktop is-four-fifths-mobile is-offset-1-mobile">
+          <div className="title is-4">Register</div>
+          <div className="inputs">
+            <FloatingLabel
+              id="first_name"
+              name="first_name"
+              placeholder={errors.first_name.message || 'First name'}
+              className={errors.first_name.message ? 'has-text-danger' : ''}
+              type="text"
+              value={first_name}
+              onChange={onChangeInput}
+            />
+          </div>
+          <div className="inputs">
+            <FloatingLabel
+              id="last_name"
+              name="last_name"
+              placeholder={errors.last_name.message || 'Last name'}
+              className={errors.last_name.message ? 'has-text-danger' : ''}
+              type="text"
+              value={last_name}
+              onChange={onChangeInput}
+            />
+          </div>
+          <div className="inputs">
+            <FloatingLabel
+              id="email"
+              name="email"
+              placeholder={errors.email.message || 'Email'}
+              className={errors.email.message ? 'has-text-danger' : ''}
+              type="email"
+              value={email}
+              onChange={onChangeInput}
+            />
+          </div>
+          <div className="inputs">
+            <FloatingLabel
+              id="password"
+              name="password"
+              placeholder={errors.password.message || 'Password'}
+              className={errors.password.message ? 'has-text-danger' : ''}
+              type="password"
+              value={password}
+              onChange={onChangeInput}
+            />
+          </div>
+          <div className="inputs">
+            <button
+              type="button"
+              className="button is-medium is-fullwidth is-primary"
+              onClick={onSignUp}
+            >
+              Ok
+            </button>
           </div>
         </div>
-      </section>
-    </article>
+      </div>
+    </section>
   );
 }

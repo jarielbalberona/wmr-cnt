@@ -11,8 +11,8 @@ import produce from 'immer';
 import {
   CHANGE_INPUT,
   CHECK_AUTH,
+  CHECK_END,
   CHECK_AUTH_ERROR,
-  LOGIN_ERROR,
 } from './constants';
 
 const form_errors = {
@@ -42,13 +42,8 @@ const homeReducer = produce((draft, action) => {
     case CHECK_AUTH_ERROR:
       draft.loading = false;
       break;
-    case LOGIN_ERROR:
-      const { errors } = action;
-      const f_errors = {
-        ...draft.form_errors,
-        ...errors,
-      };
-      draft.form_errors = f_errors;
+    case CHECK_END:
+      draft.loading = false;
       break;
   }
 }, initialState);

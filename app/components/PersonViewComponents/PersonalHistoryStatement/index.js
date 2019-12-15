@@ -31,13 +31,13 @@ const Sibling = ({ title, data }) => {
                 <span className="has-text-weight-semibold field-label">
                   Name:
                 </span>
-                {sibling.full_name || 'n/a'}
+                {sibling.full_name || ''}
               </p>
               <p>
                 <span className="has-text-weight-semibold field-label">
                   Age:
                 </span>
-                {sibling.age || 'n/a'}
+                {sibling.age || ''}
               </p>
             </div>
             <div className="column">
@@ -45,7 +45,7 @@ const Sibling = ({ title, data }) => {
                 <span className="has-text-weight-semibold field-label">
                   Address:
                 </span>
-                {sibling.address || 'n/a'}
+                {sibling.address || ''}
               </p>
             </div>
             <br />
@@ -65,19 +65,19 @@ const Parents = ({ title, data }) => (
       <div className="column">
         <p>
           <span className="has-text-weight-semibold field-label">Name:</span>
-          {data.full_name || 'n/a'}
+          {data.full_name || ''}
           {!data.alive ? ' (Deceased)' : ''}
         </p>
         <div className={`${!data.alive ? 'is-hidden' : ''}`}>
           <p>
             <span className="has-text-weight-semibold field-label">Age:</span>
-            {data.occuagepation || 'n/a'}
+            {data.occuagepation || ''}
           </p>
           <p>
             <span className="has-text-weight-semibold field-label">
               Occupation:
             </span>
-            {data.occupation || 'n/a'}
+            {data.occupation || ''}
           </p>
         </div>
       </div>
@@ -86,19 +86,19 @@ const Parents = ({ title, data }) => (
           <span className="has-text-weight-semibold field-label">
             Date of Birth:
           </span>
-          {data.birth_date || 'n/a'}
+          {data.birth_date || ''}
         </p>
         <p>
           <span className="has-text-weight-semibold field-label">
             Place of Birth:
           </span>
-          {data.birth_place || 'n/a'}
+          {data.birth_place || ''}
         </p>
         <p>
           <span className="has-text-weight-semibold field-label">
             Present Address:
           </span>
-          {data.present_address || 'n/a'}
+          {data.present_address || ''}
         </p>
       </div>
     </div>
@@ -135,23 +135,23 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
               <span className="has-text-weight-semibold field-label">
                 Date of Birth:
               </span>
-              {data.personal_data.birth_date || 'n/a'}
+              {data.personal_data.birth_date || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Place of Birth:
               </span>
-              {data.personal_data.birth_place || 'n/a'}
+              {data.personal_data.birth_place || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">Age:</span>
-              {data.personal_data.age || 'n/a'}
+              {data.personal_data.age || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Home Address:
               </span>
-              {data.personal_data.address_home || 'n/a'}
+              {data.personal_data.address_home || ''}
             </p>
           </div>
           <div className="column">
@@ -159,25 +159,25 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
               <span className="has-text-weight-semibold field-label">
                 Former Address:
               </span>
-              {data.personal_data.address_former || 'n/a'}
+              {data.personal_data.address_former || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Tribe:
               </span>
-              {data.personal_data.tribe || 'n/a'}
+              {data.personal_data.tribe || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Religion:
               </span>
-              {data.personal_data.religion || 'n/a'}
+              {data.personal_data.religion || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Marital Status:
               </span>
-              {data.personal_data.marital_status || 'n/a'}
+              {data.personal_data.marital_status || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
@@ -185,7 +185,7 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
               </span>
               {(data.personal_data.dialects &&
                 data.personal_data.dialects.join(', ')) ||
-                'n/a'}
+                ''}
             </p>
           </div>
         </div>
@@ -196,25 +196,25 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
               <span className="has-text-weight-semibold field-label">
                 Height:
               </span>
-              {data.physical_description.height || 'n/a'}
+              {data.physical_description.height || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Weight:
               </span>
-              {data.physical_description.weight || 'n/a'} kg
+              {data.physical_description.weight || ''} kg
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Complexion:
               </span>
-              {data.physical_description.complexion || 'n/a'}
+              {data.physical_description.complexion || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Identifying Mark:
               </span>
-              {data.physical_description.identifying_mark || 'n/a'}
+              {data.physical_description.identifying_mark || ''}
             </p>
           </div>
           <div className="column">
@@ -222,19 +222,19 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
               <span className="has-text-weight-semibold field-label">
                 Eyes:
               </span>
-              {data.physical_description.eyes || 'n/a'}
+              {data.physical_description.eyes || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Hair:
               </span>
-              {data.physical_description.hair || 'n/a'}
+              {data.physical_description.hair || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 Build:
               </span>
-              {data.physical_description.build || 'n/a'}
+              {data.physical_description.build || ''}
             </p>
           </div>
         </div>
@@ -243,6 +243,7 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
           <div className="column">
             <Parents title="Father" data={data.family_background.father} />
             <Parents title="Mother" data={data.family_background.mother} />
+            <br />
             <Sibling title="Sibling/s" data={data.family_background.siblings} />
           </div>
         </div>
@@ -253,22 +254,22 @@ const PersonalHistoryStatement = ({ title, data, alias }) => (
               <span className="has-text-weight-semibold field-label">
                 Attainment:
               </span>
-              {data.education.attainment || 'n/a'}
+              {data.education.attainment || ''}
             </p>
             <p>
               <span className="has-text-weight-semibold field-label">
                 School / Description:
               </span>
-              {data.education.description || 'n/a'}
+              {data.education.description || ''}
             </p>
           </div>
         </div>
         <div className="title is-5">
           E. Employment record before joining the UGM:
         </div>
-        <div className="columns body-content">
+        <div className="columns body-content paragraph">
           <div className="column">
-            <p>{data.employment_before_ugm || 'n/a'}</p>
+            <p>{data.employment_before_ugm || ''}</p>
           </div>
         </div>
         <div className="title is-5">

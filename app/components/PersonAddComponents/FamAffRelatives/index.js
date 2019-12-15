@@ -8,7 +8,7 @@ import React, { memo } from 'react';
 import FloatingLabel from 'floating-label-react';
 import './styles';
 
-function RelativeForm({ relatives, onChange }) {
+function RelativeForm({ relatives, onChange, onRemoveRelative }) {
   const relative_form = relatives.map((relative, key) => (
     // eslint-disable-next-line react/no-array-index-key
     <div key={key} className="columns">
@@ -38,6 +38,20 @@ function RelativeForm({ relatives, onChange }) {
           />
         </div>
       </div>
+      <div className="relatives-action is-pulled-right">
+        <button
+          type="button"
+          className="button is-primary"
+          onClick={() => {
+            // eslint-disable-next-line no-alert
+            if (window.confirm('Delete this record?')) {
+              onRemoveRelative(key);
+            }
+          }}
+        >
+          <i className="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
   ));
   return relative_form;
@@ -49,6 +63,8 @@ function FamAffRelatives({
   onAddRelativeGs,
   onRelativeGsChangeInput,
   onRelativeLcmChangeInput,
+  onRemoveRelativeGs,
+  onRemoveRelativeLcm,
 }) {
   return (
     <section id="FamAffRelatives" className="form-page">
@@ -69,7 +85,10 @@ function FamAffRelatives({
         <RelativeForm
           onChange={onRelativeGsChangeInput}
           relatives={relatives.government_working}
+          onRemoveRelative={onRemoveRelativeGs}
         />
+        <br />
+        <br />
         <div className="title is-size-6 input-title">
           Affiliated with Local Communist Movement Organization
         </div>
@@ -87,6 +106,7 @@ function FamAffRelatives({
         <RelativeForm
           onChange={onRelativeLcmChangeInput}
           relatives={relatives.lcm_org}
+          onRemoveRelative={onRemoveRelativeLcm}
         />
       </div>
     </section>

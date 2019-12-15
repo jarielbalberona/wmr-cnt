@@ -8,6 +8,10 @@ export default {
   },
   add: (token, form) => {
     const api = new API(token);
-    return api.post(`${baseUrl}/`, form);
+    return api.post(`${baseUrl}/add`, form);
+  },
+  delete: (token, id) => {
+    const api = new API(token);
+    return api.delete(`${baseUrl}/${id}`);
   },
 };

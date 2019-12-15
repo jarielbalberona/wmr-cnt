@@ -1,11 +1,25 @@
+
+#Signin, #Signup {
+  margin-top: 3rem;
+  .inputs-container {
+    margin-top: 0;
+    .inputs {
+      > div {
+        margin-top: 1rem;
+        width: 100%;
+      }
+      > div:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
 .inputs {
   padding-top: 0.1rem;
+  margin-top: 1rem;
   label {
     outline: none;
-
-    span {
-      color: hsl(0, 0%, 50%);
-    }
   }
   input {
     outline: none;
@@ -17,6 +31,7 @@
   }
 }
 
+
 .cx-create-select {
   padding-top: 0.4rem;
   .cx__control {
@@ -24,6 +39,9 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0;
     box-shadow: none;
+    .cx__value-container {
+      padding-left: 0;
+    }
     .cx__indicators {
       .cx__indicator-separator {
         width: 0;

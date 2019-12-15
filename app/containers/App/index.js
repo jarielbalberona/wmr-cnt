@@ -8,48 +8,30 @@
  */
 
 import React, { useEffect } from 'react';
-import { Switch, Redirect, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { withCookies } from 'react-cookie';
 import { createStructuredSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 
-import Admin from 'containers/Admin/Loadable';
+import Navbar from 'components/Navbar';
 
 import HomeLogin from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Signup from 'containers/Signup/Loadable';
-
-import { ADMIN } from 'constants/path';
+import Signin from 'containers/Signin/Loadable';
+import PersonAdd from 'containers/PersonAdd/Loadable';
+import PersonList from 'containers/PersonList/Loadable';
+import PersonView from 'containers/PersonView/Loadable';
+import Parameters from 'containers/Parameters/Loadable';
 
 import { makeSelectAppToken } from './selectors';
-import { loadUserSession } from './actions';
+import { loadUserSession, logOut } from './actions';
 
 const stateSelector = createStructuredSelector({
   token: makeSelectAppToken(),
 });
-
-function PrivateRoute({ authenticated, component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        // eslint-disable-next-line no-extra-boolean-cast
-        !!authenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              forceReloaad: true,
-              pathname: '/',
-            }}
-          />
-        )
-      }
-    />
-  );
-}
 
 function App({ cookies }) {
   const dispatch = useDispatch();
@@ -71,20 +53,30 @@ function App({ cookies }) {
       onLoadUserSession(token);
     }
   }, [token]);
+
+  const onLogout = () => {
+    dispatch(logOut());
+    cookies.remove('token', { path: '/' });
+  };
+
   return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={HomeLogin} />
-        <Route path="/signup" component={Signup} />
-        <PrivateRoute
-          path={ADMIN}
-          component={Admin}
-          authenticated={cookies.get('token')}
-        />
-        <Route path="" component={NotFoundPage} />
-      </Switch>
-      <ToastContainer />
-    </div>
+    <>
+      <Navbar token={token} onLogout={onLogout} />
+      <>
+        <Switch>
+          <Route exact path="/" component={HomeLogin} />
+          <Route path="/register" component={Signup} />
+          <Route path="/login" component={Signin} />
+          <Route path="/admin/person-list" component={PersonList} />
+          <Route path="/admin/person-add" component={PersonAdd} />
+          <Route path="/admin/person-view/:id" component={PersonView} />
+          <Route path="/admin/person-edit/:id" component={PersonAdd} />
+          <Route path="/admin/parameters" component={Parameters} />
+          <Route path="" component={NotFoundPage} />
+        </Switch>
+        <ToastContainer />
+      </>
+    </>
   );
 }
 

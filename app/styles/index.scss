@@ -12,6 +12,8 @@ $size-5: 1.15rem;
 $size-6: 1rem;
 $size-7: 0.75rem;
 
+$navbar-height: 4rem;
+
 @import '~bulma/sass/utilities/_all.sass';
 @import '~bulma/sass/base/_all.sass';
 @import '~bulma/sass/form/_all.sass';
@@ -29,6 +31,8 @@ $size-7: 0.75rem;
 @import '~bulma/sass/components/modal';
 @import '~bulma/sass/components/dropdown';
 @import '~bulma/sass/components/pagination';
+@import '~bulma/sass/components/navbar';
+@import '~bulma/sass/components/tabs';
 
 // bulma extensions
 @import '~bulma-switch';

@@ -49,6 +49,7 @@ import {
   makeSelectFormUGMEntryInvolvement,
   makeSelectFormBattleFactors,
   makeSelectFormComments,
+  makeSelectLoading,
 } from './selectors';
 import {
   createNewDialect,
@@ -71,6 +72,10 @@ import {
   battleFactorsDisMis,
   addBattleFactorsDisMis,
   loadAddPerson,
+  removeSibling,
+  removeRelativeGs,
+  removeRelativeLcm,
+  removeBattleFactorsDisMis,
 } from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -103,6 +108,7 @@ const stateSelector = createStructuredSelector({
   ugm_involvement: makeSelectFormUGMEntryInvolvement(),
   battle_factors: makeSelectFormBattleFactors(),
   comments: makeSelectFormComments(),
+  loading: makeSelectLoading(),
 });
 
 function PersonAdd({ match }) {
@@ -132,6 +138,7 @@ function PersonAdd({ match }) {
     ugm_involvement,
     battle_factors,
     comments,
+    loading,
   } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
@@ -167,6 +174,14 @@ function PersonAdd({ match }) {
         evt.currentTarget.value,
       ),
     );
+  };
+
+  const onRemoveRelativeGs = sibling_key => {
+    dispatch(removeRelativeGs(sibling_key));
+  };
+
+  const onRemoveRelativeLcm = sibling_key => {
+    dispatch(removeRelativeLcm(sibling_key));
   };
 
   const onBattleFactorsDisMis = (ob, sibling_key, evt) => {
@@ -305,6 +320,13 @@ function PersonAdd({ match }) {
   };
   const onSave = () => dispatch(savePerson());
   const onUpdate = id => () => dispatch(updatePerson(id));
+  const onRemoveSibling = sibling_key => () => {
+    dispatch(removeSibling(sibling_key));
+  };
+
+  const onRemoveBattleFactorsDisMis = (parent, sibling_key) => {
+    dispatch(removeBattleFactorsDisMis(parent, sibling_key));
+  };
 
   useEffect(() => {
     const { id } = match.params;
@@ -316,6 +338,14 @@ function PersonAdd({ match }) {
     onGetRebelGroups();
     onGetDialects();
   }, []);
+
+  if (loading) {
+    return (
+      <section id="PersonAdd">
+        <div className="container is-fluid">Loading...</div>
+      </section>
+    );
+  }
 
   return (
     <article>
@@ -387,6 +417,7 @@ function PersonAdd({ match }) {
                       onChange={onFamilyChangeInput}
                       onAddSibling={onAddSibling}
                       onFamilySiblingChangeInput={onFamilySiblingChangeInput}
+                      onRemoveSibling={onRemoveSibling}
                     />
                   </TabPanel>
                   <TabPanel>
@@ -403,6 +434,8 @@ function PersonAdd({ match }) {
                     <FamAffRelatives
                       onRelativeGsChangeInput={onRelativeGsChangeInput}
                       onRelativeLcmChangeInput={onRelativeLcmChangeInput}
+                      onRemoveRelativeGs={onRemoveRelativeGs}
+                      onRemoveRelativeLcm={onRemoveRelativeLcm}
                       relatives={personal_relatives}
                       onAddRelativeGs={onAddRelativeGs}
                       onAddRelativeLcm={onAddRelativeLcm}
@@ -546,6 +579,7 @@ function PersonAdd({ match }) {
                       onAddBattleFactorsDisMis={() =>
                         onAddBattleFactorsDisMis('dispositions')
                       }
+                      onRemoveBattleFactorsDisMis={onRemoveBattleFactorsDisMis}
                     />
                   </TabPanel>
                   <TabPanel>
@@ -609,6 +643,7 @@ function PersonAdd({ match }) {
                         onAddBattleFactorsDisMis('miscellaneous')
                       }
                       onBattleFactorsDisMis={onBattleFactorsDisMis}
+                      onRemoveBattleFactorsDisMis={onRemoveBattleFactorsDisMis}
                     />
                   </TabPanel>
                 </Tabs>
