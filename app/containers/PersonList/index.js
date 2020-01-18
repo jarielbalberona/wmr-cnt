@@ -6,7 +6,6 @@
  */
 
 import React, { useEffect } from 'react';
-// import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -17,6 +16,7 @@ import FloatingLabel from 'floating-label-react';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { criminal_cases as criminal_cases_list } from 'constants/lists';
 import { loadPersonList, deletePerson} from './actions';
 import {
   makeSelectPersonList,
@@ -47,17 +47,12 @@ function DefaultColumnFilter({ column: { filterValue, setFilter } }) {
 // This is a custom filter UI for selecting
 // a unique option from a list
 function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
+  column: { filterValue, setFilter },
 }) {
   // Calculate the options for filtering
   // using the preFilteredRows
-  const options = React.useMemo(() => {
-    const type_options = new Set();
-    preFilteredRows.forEach(row => {
-      type_options.add(row.values[id]);
-    });
-    return [...type_options.values()];
-  }, [id, preFilteredRows]);
+
+  const options = ["Red", "White"]
 
   // Render a multi-select box
   return (
@@ -70,6 +65,35 @@ function SelectColumnFilter({
       >
         <option value="">All</option>
         {options.map((option, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <option key={i} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+// This is a custom filter UI for selecting
+// a unique option from a list
+function SelectColumnCasesFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const criminal_cases = React.useMemo(() => criminal_cases_list.map(ccase => ccase.value), [id, preFilteredRows]);
+
+  // Render a multi-select box
+  return (
+    <div className="select">
+      <select
+        value={filterValue}
+        onChange={e => {
+          setFilter(e.target.value || undefined);
+        }}
+      >
+        <option value="">All</option>
+        {criminal_cases.map((option, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <option key={i} value={option}>
             {option}
@@ -239,11 +263,19 @@ function Table({ columns, data }) {
               }}
             />
           </div>
-          <div className="">
+          <div>
             <p>
               Page{' '}
               <strong>
                 {pageIndex + 1} of {pageOptions.length}
+              </strong>{' '}
+            </p>
+          </div>
+          <div>
+            <p>
+              Total: {' '}
+              <strong>
+                {page.length}
               </strong>{' '}
             </p>
           </div>
@@ -291,6 +323,12 @@ function PersonList() {
           {
             Header: 'Full Name',
             accessor: 'full_name',
+            filter: 'fuzzyText',
+          },
+          {
+            Header: 'Criminal Case',
+            accessor: 'criminal_cases',
+            Filter: SelectColumnCasesFilter,
             filter: 'fuzzyText',
           },
         ],

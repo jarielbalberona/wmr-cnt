@@ -22,6 +22,7 @@ import BioFamily from 'components/PersonAddComponents/BioFamily';
 import EducationEmployment from 'components/PersonAddComponents/EducationEmployment';
 import FormParagraphWithTitle from 'components/PersonAddComponents/FormParagraphWithTitle';
 import FamAffRelatives from 'components/PersonAddComponents/FamAffRelatives';
+import CriminalCase from 'components/PersonAddComponents/CriminalCase';
 import BattleFactorsDispositions from 'components/PersonAddComponents/BattleFactorsDispositions';
 import BattleFactorsMiscellaneous from 'components/PersonAddComponents/BattleFactorsMiscellaneous';
 
@@ -50,6 +51,9 @@ import {
   makeSelectFormBattleFactors,
   makeSelectFormComments,
   makeSelectLoading,
+  makeSelectFormPersonalCriminalCases,
+  makeSelectCriminalCases,
+  makeSelectRTCRegion,
 } from './selectors';
 import {
   createNewDialect,
@@ -76,6 +80,10 @@ import {
   removeRelativeGs,
   removeRelativeLcm,
   removeBattleFactorsDisMis,
+  resetPerson,
+  caseInputChange,
+  addCase,
+  removeCase,
 } from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -109,6 +117,9 @@ const stateSelector = createStructuredSelector({
   battle_factors: makeSelectFormBattleFactors(),
   comments: makeSelectFormComments(),
   loading: makeSelectLoading(),
+  cases: makeSelectFormPersonalCriminalCases(),
+  cases_options: makeSelectCriminalCases(),
+  rtc_region_options: makeSelectRTCRegion(),
 });
 
 function PersonAdd({ match }) {
@@ -139,6 +150,9 @@ function PersonAdd({ match }) {
     battle_factors,
     comments,
     loading,
+    cases,
+    cases_options,
+    rtc_region_options,
   } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
@@ -319,6 +333,7 @@ function PersonAdd({ match }) {
     dispatch(changeData(property, data));
   };
   const onSave = () => dispatch(savePerson());
+  const onReset = () => dispatch(resetPerson());
   const onUpdate = id => () => dispatch(updatePerson(id));
   const onRemoveSibling = sibling_key => () => {
     dispatch(removeSibling(sibling_key));
@@ -326,6 +341,18 @@ function PersonAdd({ match }) {
 
   const onRemoveBattleFactorsDisMis = (parent, sibling_key) => {
     dispatch(removeBattleFactorsDisMis(parent, sibling_key));
+  };
+
+  const onAddCase = () => {
+    dispatch(addCase());
+  };
+
+  const onRemoveCase = sibling_key => {
+    dispatch(removeCase(sibling_key));
+  };
+
+  const onCaseInputChange = (case_key, name, value) => {
+    dispatch(caseInputChange(case_key, name, value));
   };
 
   useEffect(() => {
@@ -357,13 +384,22 @@ function PersonAdd({ match }) {
         <div className="container is-fluid">
           <div>
             <div className="form-actions">
-              <button
-                type="button"
-                className="button is-primary"
-                onClick={match.params.id ? onUpdate(match.params.id) : onSave}
-              >
-                {match.params.id ? 'Update' : 'Save'}
-              </button>
+              <div className="buttons">
+                <button
+                  type="button"
+                  className="button is-primary"
+                  onClick={onReset}
+                >
+                  Reset
+                </button>
+                <button
+                  type="button"
+                  className="button is-primary"
+                  onClick={match.params.id ? onUpdate(match.params.id) : onSave}
+                >
+                  {match.params.id ? 'Update' : 'Save'}
+                </button>
+              </div>
             </div>
             <Tabs forceRenderTabPanel defaultIndex={0}>
               <TabList>
@@ -380,6 +416,7 @@ function PersonAdd({ match }) {
                     <Tab>Family Background</Tab>
                     <Tab>Education / Employment</Tab>
                     <Tab>Relatives</Tab>
+                    <Tab>Criminal Case</Tab>
                   </TabList>
                   <TabPanel>
                     <BioPersonal
@@ -439,6 +476,16 @@ function PersonAdd({ match }) {
                       relatives={personal_relatives}
                       onAddRelativeGs={onAddRelativeGs}
                       onAddRelativeLcm={onAddRelativeLcm}
+                    />
+                  </TabPanel>
+                  <TabPanel>
+                    <CriminalCase
+                      cases={cases}
+                      onAddCase={onAddCase}
+                      onCaseInputChange={onCaseInputChange}
+                      onRemoveCase={onRemoveCase}
+                      cases_options={cases_options}
+                      rtc_region_options={rtc_region_options}
                     />
                   </TabPanel>
                 </Tabs>

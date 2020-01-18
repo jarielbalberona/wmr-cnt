@@ -4,7 +4,8 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
+import moment from 'moment';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import FloatingLabel from 'floating-label-react';
@@ -30,6 +31,28 @@ function BioPersonal({
   onpersonalChangeSelect,
 }) {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
+  const [calendar_value_change, onChangeCalendarValue] = useState('');
+  const [age, onChangeAge] = useState('');
+
+  useEffect(() => {
+    if (personal.birth_date) {
+      onChangeCalendarValue(
+        moment().diff(moment(personal.birth_date), 'years') !== 0
+          ? moment().diff(moment(personal.birth_date), 'years')
+          : '0',
+      );
+    } else {
+      onChangeCalendarValue('');
+    }
+  }, [personal.birth_date]);
+
+  useEffect(() => {
+    if (personal.age) {
+      onChangeAge(personal.age);
+    } else {
+      onChangeAge('');
+    }
+  }, [personal.age]);
 
   const dialect_options = [];
   const rebel_group_options = [];
@@ -266,7 +289,7 @@ function BioPersonal({
                 placeholder="Age"
                 className=""
                 type="number"
-                value={personal.age ? personal.age : ''}
+                value={age || calendar_value_change}
                 onChange={onChangeInput}
               />
             </div>

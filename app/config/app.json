@@ -1,3 +1,4 @@
 {
-  "api_host": "http://52.221.254.221/api"
+  "api_hostx": "http://52.221.254.221/api",
+  "api_host": "http://0.0.0.0/api"
 }

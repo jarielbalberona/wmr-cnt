@@ -10,6 +10,8 @@ import {
   getRebelGroupsSuccess,
   getRebelGroupsEnd,
   getDialectsSuccess,
+  getRebelGroupSuccess,
+  getRebelGroupEnd,
 } from './actions';
 import {
   SAVE_GROUP,
@@ -25,6 +27,8 @@ import {
   GET_DIALECTS_END,
   DELETE_DIALECT,
   DELETE_DIALECT_END,
+  GET_REBEL_GROUP,
+  SAVE_GROUP_ORG,
 } from './constants';
 
 export function* getRebelGroups() {
@@ -141,6 +145,53 @@ export function* saveDialect({ form }) {
   }
 }
 
+export function* getGroup({ id }) {
+  try {
+    const token = yield select(makeSelectAppToken());
+    const group = yield call(RebelGroups.get, token, id);
+    if (group.status >= 400) {
+      throw group;
+    }
+    yield put(getRebelGroupSuccess(group.data));
+  } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
+    yield put(appNotify('error', err.message));
+  } finally {
+    yield put(getRebelGroupEnd());
+  }
+}
+
+export function* saveGroupOrg({ id, group_org_form }) {
+  try {
+    const token = yield select(makeSelectAppToken());
+    const new_form = {
+      ...group_org_form,
+    };
+
+    delete new_form._id;
+    delete new_form.__v;
+    delete new_form.created;
+    delete new_form.type;
+    delete new_form.name;
+    delete new_form.leader;
+
+    const group = yield call(RebelGroups.update, token, id, new_form);
+    if (group.status >= 400) {
+      throw group;
+    }
+
+    yield put(appNotify('success', group.message));
+    yield put(getRebelGroupSuccess(group.data));
+  } catch (err) {
+    if (err.status === 401) {
+      window.location.href = '/';
+    }
+    yield put(appNotify('error', err.message));
+  }
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -151,4 +202,6 @@ export default function*() {
   yield all([takeLatest(SAVE_DIALECT, saveDialect)]);
   yield all([takeLatest(GET_DIALECTS, getDialects)]);
   yield all([takeLatest(DELETE_DIALECT, deleteDialect)]);
+  yield all([takeLatest(GET_REBEL_GROUP, getGroup)]);
+  yield all([takeLatest(SAVE_GROUP_ORG, saveGroupOrg)]);
 }
