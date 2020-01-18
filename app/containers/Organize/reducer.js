@@ -5,28 +5,23 @@
  */
 
 import produce from 'immer';
-
-import {
-  LOAD_PERSON_LIST,
-  LOAD_PERSON_LIST_SUCCESS,
-  LOAD_PERSON_LIST_END,
-} from './constants';
+import { GET_PERSON, GET_PERSON_SUCCESS, GET_PERSON_END } from './constants';
 
 export const initialState = {
   loading: false,
-  person_list: [],
+  data: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const personListReducer = produce((draft, action) => {
   switch (action.type) {
-    case LOAD_PERSON_LIST:
+    case GET_PERSON:
       draft.loading = true;
       break;
-    case LOAD_PERSON_LIST_SUCCESS:
-      draft.person_list = action.list;
+    case GET_PERSON_SUCCESS:
+      draft.data = action.data;
       break;
-    case LOAD_PERSON_LIST_END:
+    case GET_PERSON_END:
       draft.loading = false;
       break;
   }

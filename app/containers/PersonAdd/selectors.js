@@ -63,6 +63,18 @@ const makeSelectRebelGroups = () =>
     personAddState => personAddState.options.rebel_groups,
   );
 
+const makeSelectCriminalCases = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.options.criminal_cases_options,
+  );
+
+const makeSelectRTCRegion = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState => personAddState.options.rtc_regions,
+  );
+
 const makeSelectFormTabs = () =>
   createSelector(
     selectPersonAddDomain,
@@ -124,6 +136,13 @@ const makeSelectFormPersonalRelatives = () =>
   createSelector(
     selectPersonAddDomain,
     personAddState => personAddState.form.personal_history_statement.relatives,
+  );
+
+const makeSelectFormPersonalCriminalCases = () =>
+  createSelector(
+    selectPersonAddDomain,
+    personAddState =>
+      personAddState.form.personal_history_statement.criminal_cases,
   );
 
 const makeSelectFormPersonalEmployment = () =>
@@ -198,6 +217,7 @@ export {
   makeSelectFormPersonalFamily,
   makeSelectFormPersonalEducation,
   makeSelectFormPersonalRelatives,
+  makeSelectFormPersonalCriminalCases,
   makeSelectFormPersonalEmployment,
   makeSelectFormNeutralization,
   makeSelectFormUGMEntryBackground,
@@ -209,4 +229,6 @@ export {
   makeSelectRebelGroups,
   makeSelectReligions,
   makeSelectLoading,
+  makeSelectCriminalCases,
+  makeSelectRTCRegion,
 };

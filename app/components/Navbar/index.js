@@ -60,6 +60,13 @@ const Navbar = ({ token, onLogout }) => {
             >
               Parameters
             </Link>
+            <Link
+              onClick={() => toggleMenu(false)}
+              className="navbar-item"
+              to="/admin/organize"
+            >
+              Organize
+            </Link>
           </div>
         ) : (
           ''

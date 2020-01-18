@@ -226,3 +226,101 @@ export const ethnic_tribes = [
     label: 'Suludon',
   },
 ];
+
+export const criminal_cases = [
+  {
+    value: 'Murder',
+    label: 'Murder',
+  },
+  {
+    value: 'Frustated Murder',
+    label: 'Frustated Murder',
+  },
+  {
+    value: 'Attempted Murder',
+    label: 'Attempted Murder',
+  },
+  {
+    value: 'Arson',
+    label: 'Arson',
+  },
+  {
+    value: 'Homicide',
+    label: 'Homicide',
+  },
+  {
+    value: 'Theft',
+    label: 'Theft',
+  },
+];
+
+export const rtc_regions = [
+  {
+    value: 'RTC ARMM',
+    label: 'RTC ARMM',
+  },
+  {
+    value: 'RTC CAR',
+    label: 'RTC CAR',
+  },
+  {
+    value: 'RTC NCR',
+    label: 'RTC NCR',
+  },
+  {
+    value: 'RTC 1',
+    label: 'RTC 1',
+  },
+  {
+    value: 'RTC 2',
+    label: 'RTC 2',
+  },
+  {
+    value: 'RTC 3',
+    label: 'RTC 3',
+  },
+  {
+    value: 'RTC 4A',
+    label: 'RTC 4A',
+  },
+  {
+    value: 'RTC 4B',
+    label: 'RTC 4B',
+  },
+  {
+    value: 'RTC 5',
+    label: 'RTC 5',
+  },
+  {
+    value: 'RTC 6',
+    label: 'RTC 6',
+  },
+  {
+    value: 'RTC 7',
+    label: 'RTC 7',
+  },
+  {
+    value: 'RTC 8',
+    label: 'RTC 8',
+  },
+  {
+    value: 'RTC 9',
+    label: 'RTC 9',
+  },
+  {
+    value: 'RTC 10',
+    label: 'RTC 10',
+  },
+  {
+    value: 'RTC 11',
+    label: 'RTC 11',
+  },
+  {
+    value: 'RTC 12',
+    label: 'RTC 12',
+  },
+  {
+    value: 'RTC 13',
+    label: 'RTC 13',
+  },
+];

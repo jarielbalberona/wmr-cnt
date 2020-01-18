@@ -25,6 +25,7 @@ import './styles';
 const key = 'home';
 
 // eslint-disable-next-line react/prop-types
+
 function HomePage() {
   const dispatch = useDispatch();
   useInjectReducer({ key, reducer });
@@ -47,7 +48,7 @@ function HomePage() {
           <img src={brandLogo} alt="wmr-cnt logo" />
           <figcaption className="has-text-centered">
             <p className="title is-1">WMR-CNT</p>
-            <p className="subtitle is-3">Profiling System</p>
+            <p className="subtitle is-2">Profiling System</p>
           </figcaption>
         </figure>
       </div>

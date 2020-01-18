@@ -25,6 +25,7 @@ import PersonAdd from 'containers/PersonAdd/Loadable';
 import PersonList from 'containers/PersonList/Loadable';
 import PersonView from 'containers/PersonView/Loadable';
 import Parameters from 'containers/Parameters/Loadable';
+import Organize from 'containers/Organize/Loadable';
 
 import { makeSelectAppToken } from './selectors';
 import { loadUserSession, logOut } from './actions';
@@ -72,6 +73,7 @@ function App({ cookies }) {
           <Route path="/admin/person-view/:id" component={PersonView} />
           <Route path="/admin/person-edit/:id" component={PersonAdd} />
           <Route path="/admin/parameters" component={Parameters} />
+          <Route path="/admin/organize" component={Organize} />
           <Route path="" component={NotFoundPage} />
         </Switch>
         <ToastContainer />

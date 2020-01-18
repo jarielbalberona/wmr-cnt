@@ -14,5 +14,20 @@
         }
       }
     }
+    .group-structure-actions {
+      display: flex;
+      justify-content: space-between;
+      #pltnsqd {
+        .dropdown-menu {
+          .dropdown-content {
+            .dropdown-item {
+              button {
+                justify-content: left;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

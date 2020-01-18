@@ -20,6 +20,16 @@ const makeSelectGroups = () =>
     selectParametersDomain,
     parametersState => parametersState.groups,
   );
+const makeSelectSelectedGroupOrg = () =>
+  createSelector(
+    selectParametersDomain,
+    parametersState => parametersState.group_org,
+  );
+const makeSelectSelectedGroupOrgForm = () =>
+  createSelector(
+    selectParametersDomain,
+    parametersState => parametersState.group_org_form,
+  );
 const makeSelectGroupForm = () =>
   createSelector(
     selectParametersDomain,
@@ -49,6 +59,8 @@ const makeSelectErrors = () =>
 export {
   selectParametersDomain,
   makeSelectGroups,
+  makeSelectSelectedGroupOrg,
+  makeSelectSelectedGroupOrgForm,
   makeSelectGroupForm,
   makeSelectDialects,
   makeSelectDialectForm,
