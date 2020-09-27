@@ -15,7 +15,6 @@ export default {
     return api.get(`${baseUrl}/${id}`);
   },
   update: (token, id, form) => {
-    console.log(form);
     const api = new API(token);
     return api.put(`${baseUrl}/${id}`, form);
   },

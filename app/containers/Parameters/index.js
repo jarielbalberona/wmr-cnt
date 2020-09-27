@@ -250,7 +250,6 @@ function Parameters() {
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Leader/Founder</th>
                         <th>Type</th>
                         <th>Delete</th>
                       </tr>
@@ -261,7 +260,6 @@ function Parameters() {
                         groups.map(group => (
                           <tr key={group._id}>
                             <td>{group.name}</td>
-                            <td>{group.leader}</td>
                             <td>{group.type}</td>
                             <td>
                               <button

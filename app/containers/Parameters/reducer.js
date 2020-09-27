@@ -32,36 +32,32 @@ import {
   CHANGE_INPUT_SQUAD_TEAM_NAME,
 } from './constants';
 
-// officers: {
-//   leader: '',
-//   vice_leader: '',
-// },
-
 const team_template = {
   name: '',
+  officers: {
+    leader: '',
+    vice_leader: '',
+  },
   members: [],
 };
 
-// officers: {
-//   leader: '',
-//   vice_leader: '',
-// },
-
 const squad_template = {
   name: '',
-
+  officers: {
+    leader: '',
+    vice_leader: '',
+  },
   teams: [],
 };
 
-// officers: {
-//   leader: '',
-//   vice_leader: '',
-//   political_instructor: '',
-//   vice_political_instructor: '',
-// },
-
 const platoon_template = {
   name: '',
+  officers: {
+    leader: '',
+    vice_leader: '',
+    political_instructor: '',
+    vice_political_instructor: '',
+  },
   squads: [],
 };
 

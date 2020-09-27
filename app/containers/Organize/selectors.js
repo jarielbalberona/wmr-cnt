@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the personView state domain
  */
 
-const selectPersonViewDomain = state => state.personView || initialState;
+const selectOrganizeDomain = state => state.organize || initialState;
 
 /**
  * Other specific selectors
@@ -15,15 +15,25 @@ const selectPersonViewDomain = state => state.personView || initialState;
  * Default selector used by personView
  */
 
-const makeSelectPerson = () =>
+const makeSelectOrganize = () =>
   createSelector(
-    selectPersonViewDomain,
-    personViewtate => personViewtate.data,
+    selectOrganizeDomain,
+    organizeState => organizeState,
   );
-const makeSelectPersonLoading = () =>
+const makeSelectOrganizeGroups = () =>
   createSelector(
-    selectPersonViewDomain,
-    personViewtate => personViewtate.loading,
+    selectOrganizeDomain,
+    organizeState => organizeState.groups,
+  );
+const makeSelectOrganizeLoading = () =>
+  createSelector(
+    selectOrganizeDomain,
+    organizeState => organizeState.loading,
   );
 
-export { selectPersonViewDomain, makeSelectPerson, makeSelectPersonLoading };
+export {
+  selectOrganizeDomain,
+  makeSelectOrganize,
+  makeSelectOrganizeGroups,
+  makeSelectOrganizeLoading,
+};

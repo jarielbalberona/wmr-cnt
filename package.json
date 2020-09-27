@@ -62,6 +62,7 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "dependencies": {
+    "@dabeng/react-orgchart": "0.0.6",
     "bulma": "^0.7.5",
     "bulma-checkradio": "^1.1.1",
     "bulma-switch": "^2.0.0",
