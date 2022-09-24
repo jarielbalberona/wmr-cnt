@@ -533,7 +533,7 @@ function Parameters() {
                         className="button is-medium is-fullwidth is-primary"
                         onClick={onSaveDialect}
                       >
-                        Save
+                        Save Dialect
                       </button>
                     </div>
                   </div>
