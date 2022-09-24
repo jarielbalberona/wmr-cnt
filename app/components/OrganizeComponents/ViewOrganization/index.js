@@ -9,7 +9,6 @@ import OrganizationChart from '@dabeng/react-orgchart';
 import '../styles.scss';
 
 function ViewOrganization({ group }) {
-  console.log(group);
   const ds = {
     id: '1',
     name: group.name,

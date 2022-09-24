@@ -76,7 +76,7 @@ function Teams({
                                 tm_key,
                                 evt.currentTarget.name,
                                 evt.currentTarget.value,
-                            )
+                              )
                         }
                         required
                       />
@@ -95,7 +95,7 @@ function Teams({
                               platoon_index,
                               squad_index,
                               tm_key,
-                          )
+                            )
                           : onDeleteSquadTeamGroup(squad_index, tm_key)
                       }
                     >

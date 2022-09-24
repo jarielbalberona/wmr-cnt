@@ -148,7 +148,7 @@ function Table({ columns, data }) {
     pageOptions,
     page,
     pageCount,
-    state: [{ pageIndex, pageSize }],
+    state: { pageIndex, pageSize },
     gotoPage,
     previousPage,
     nextPage,

@@ -44,7 +44,7 @@ function OrganizeOrganization({
                       group_form.staffs.intel !== ''
                         ? {
                             value: group_form.staffs.intel,
-                          label: group_form.staffs.intel,
+                            label: group_form.staffs.intel,
                           }
                         : null
                     }
@@ -67,7 +67,7 @@ function OrganizeOrganization({
                       group_form.staffs.ordnance !== ''
                         ? {
                             value: group_form.staffs.ordnance,
-                          label: group_form.staffs.ordnance,
+                            label: group_form.staffs.ordnance,
                           }
                         : null
                     }
@@ -90,7 +90,7 @@ function OrganizeOrganization({
                       group_form.staffs.medical !== ''
                         ? {
                             value: group_form.staffs.medical,
-                          label: group_form.staffs.medical,
+                            label: group_form.staffs.medical,
                           }
                         : null
                     }
@@ -115,7 +115,7 @@ function OrganizeOrganization({
                       group_form.staffs.finance !== ''
                         ? {
                             value: group_form.staffs.finance,
-                          label: group_form.staffs.finance,
+                            label: group_form.staffs.finance,
                           }
                         : null
                     }
@@ -138,7 +138,7 @@ function OrganizeOrganization({
                       group_form.staffs.liaison !== ''
                         ? {
                             value: group_form.staffs.liaison,
-                          label: group_form.staffs.liaison,
+                            label: group_form.staffs.liaison,
                           }
                         : null
                     }
@@ -161,7 +161,7 @@ function OrganizeOrganization({
                       group_form.staffs.education !== ''
                         ? {
                             value: group_form.staffs.education,
-                          label: group_form.staffs.education,
+                            label: group_form.staffs.education,
                           }
                         : null
                     }
@@ -201,7 +201,7 @@ function OrganizeOrganization({
                         platoon.officers.leader !== ''
                           ? {
                               value: platoon.officers.leader,
-                            label: platoon.officers.leader,
+                              label: platoon.officers.leader,
                             }
                           : null
                       }
@@ -225,7 +225,7 @@ function OrganizeOrganization({
                         platoon.officers.vice_leader !== ''
                           ? {
                               value: platoon.officers.vice_leader,
-                            label: platoon.officers.vice_leader,
+                              label: platoon.officers.vice_leader,
                             }
                           : null
                       }
@@ -249,7 +249,7 @@ function OrganizeOrganization({
                         platoon.officers.political_instructor !== ''
                           ? {
                               value: platoon.officers.political_instructor,
-                            label: platoon.officers.political_instructor,
+                              label: platoon.officers.political_instructor,
                             }
                           : null
                       }
@@ -273,7 +273,7 @@ function OrganizeOrganization({
                         platoon.officers.vice_political_instructor !== ''
                           ? {
                               value: platoon.officers.vice_political_instructor,
-                            label: platoon.officers.vice_political_instructor,
+                              label: platoon.officers.vice_political_instructor,
                             }
                           : null
                       }
@@ -307,7 +307,7 @@ function OrganizeOrganization({
                                   squad.officers.leader !== ''
                                     ? {
                                         value: squad.officers.leader,
-                                      label: squad.officers.leader,
+                                        label: squad.officers.leader,
                                       }
                                     : null
                                 }
@@ -334,7 +334,7 @@ function OrganizeOrganization({
                                   squad.officers.vice_leader !== ''
                                     ? {
                                         value: squad.officers.vice_leader,
-                                      label: squad.officers.vice_leader,
+                                        label: squad.officers.vice_leader,
                                       }
                                     : null
                                 }
@@ -378,9 +378,9 @@ function OrganizeOrganization({
                                             value={
                                               team.officers.leader !== ''
                                                 ? {
-                                                  value: team.officers.leader,
-                                                  label: team.officers.leader,
-                                                }
+                                                    value: team.officers.leader,
+                                                    label: team.officers.leader,
+                                                  }
                                                 : null
                                             }
                                             onChange={selected =>
@@ -408,11 +408,11 @@ function OrganizeOrganization({
                                             value={
                                               team.officers.vice_leader !== ''
                                                 ? {
-                                                  value:
+                                                    value:
                                                       team.officers.vice_leader,
-                                                  label:
+                                                    label:
                                                       team.officers.vice_leader,
-                                                }
+                                                  }
                                                 : null
                                             }
                                             onChange={selected =>
@@ -484,7 +484,7 @@ function OrganizeOrganization({
                         squad.officers.leader !== ''
                           ? {
                               value: squad.officers.leader,
-                            label: squad.officers.leader,
+                              label: squad.officers.leader,
                             }
                           : null
                       }
@@ -510,7 +510,7 @@ function OrganizeOrganization({
                         squad.officers.vice_leader !== ''
                           ? {
                               value: squad.officers.vice_leader,
-                            label: squad.officers.vice_leader,
+                              label: squad.officers.vice_leader,
                             }
                           : null
                       }
@@ -553,9 +553,9 @@ function OrganizeOrganization({
                                   value={
                                     team.officers.leader !== ''
                                       ? {
-                                        value: team.officers.leader,
-                                        label: team.officers.leader,
-                                      }
+                                          value: team.officers.leader,
+                                          label: team.officers.leader,
+                                        }
                                       : null
                                   }
                                   onChange={selected =>
@@ -580,9 +580,9 @@ function OrganizeOrganization({
                                   value={
                                     team.officers.vice_leader !== ''
                                       ? {
-                                        value: team.officers.vice_leader,
-                                        label: team.officers.vice_leader,
-                                      }
+                                          value: team.officers.vice_leader,
+                                          label: team.officers.vice_leader,
+                                        }
                                       : null
                                   }
                                   onChange={selected =>
@@ -631,16 +631,16 @@ function OrganizeOrganization({
       group_form.platoons.length === 0 &&
       group_form.squads &&
       group_form.squads.length === 0 ? (
-          <div className="column">
-            <div className="title is-4">No available Platoon or Squad.</div>
-            <div className="subtitle is-6">
+        <div className="column">
+          <div className="title is-4">No available Platoon or Squad.</div>
+          <div className="subtitle is-6">
             You may update this Gruop by going to Paramters -&gt; Add -&gt;
             Group Structure.
           </div>
-          </div>
-        ) : (
+        </div>
+      ) : (
         <></>
-        )}
+      )}
     </div>
   );
 }

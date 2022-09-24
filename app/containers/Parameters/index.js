@@ -307,17 +307,17 @@ function Parameters() {
                         <div className="title is-4">{group_org.name}</div>
                         {group_org.platoons.length === 0 &&
                         group_org.squads.length === 0 ? (
-                            <div className="column">
-                              <div className="title is-size-6 has-text-weight-light container-title">
+                          <div className="column">
+                            <div className="title is-size-6 has-text-weight-light container-title">
                               Platoon and/or squad are empty, consider adding.
-                              </div>
                             </div>
-                          ) : (
+                          </div>
+                        ) : (
                           <>
                             <Platoons platoons={group_org.platoons} />
                             <Squads squads={group_org.squads} />
                           </>
-                          )}
+                        )}
                       </div>
                     ) : (
                       <div className="column">
