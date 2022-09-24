@@ -11,6 +11,8 @@ import {
   ethnic_tribes,
   form_tabs,
   religions,
+  criminal_cases as criminal_cases_options,
+  rtc_regions,
 } from 'constants/lists';
 
 import {
@@ -40,6 +42,10 @@ import {
   RELATIVE_GS_REMOVE,
   RELATIVE_LCM_REMOVE,
   BATTLE_DIS_MIS_REMOVE,
+  PERSON_RESET,
+  CASE_INPUT_CHANGE,
+  ADD_CASE,
+  REMOVE_CASE,
 } from './constants';
 
 const form_initial = {
@@ -97,6 +103,7 @@ const form_initial = {
       government_working: [],
       lcm_org: [],
     },
+    criminal_cases: [],
     employment_before_ugm: '',
   },
   alias_nickname: '',
@@ -141,6 +148,8 @@ const errors_initial = {
 
 export const initialState = {
   options: {
+    criminal_cases_options,
+    rtc_regions,
     civil_status,
     educational_attainment,
     ethnic_tribes,
@@ -159,9 +168,11 @@ const personAddReducer = produce((draft, action) => {
   switch (action.type) {
     case LOAD_ADD_PERSON:
       draft.form = form_initial;
+      draft.errors = errors_initial;
       break;
     case GET_REBEL_SUCCESS:
       draft.form = action.data;
+      draft.errors = errors_initial;
       break;
     case CREATE_DIALECT_SUCCESS:
       const { option } = action;
@@ -217,6 +228,26 @@ const personAddReducer = produce((draft, action) => {
       }
       draft.form.personal_history_statement.family_background.siblings = [
         ...siblings,
+      ];
+      break;
+    case CASE_INPUT_CHANGE:
+      draft.form.personal_history_statement.criminal_cases[action.key][
+        action.name
+      ] = action.value;
+      break;
+    case ADD_CASE:
+      draft.form.personal_history_statement.criminal_cases = [
+        ...draft.form.personal_history_statement.criminal_cases,
+        {},
+      ];
+      break;
+    case REMOVE_CASE:
+      const { criminal_cases } = draft.form.personal_history_statement;
+      if (action.key > -1) {
+        criminal_cases.splice(action.key, 1);
+      }
+      draft.form.personal_history_statement.criminal_cases = [
+        ...criminal_cases,
       ];
       break;
     case RELATIVE_GS_REMOVE:
@@ -283,6 +314,12 @@ const personAddReducer = produce((draft, action) => {
       draft.errors = action.errors;
       break;
     case PERSON_DATA_SAVE_SUCCESS:
+      if (action.save_type === 'new') {
+        draft.form = form_initial;
+      }
+      draft.errors = errors_initial;
+      break;
+    case PERSON_RESET:
       draft.form = form_initial;
       draft.errors = errors_initial;
       break;

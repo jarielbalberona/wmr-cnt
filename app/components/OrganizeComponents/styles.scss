@@ -1,0 +1,23 @@
+#Platoons, #Squads, #Teams {
+  .box {
+    position: relative;
+  }
+  .title.container-title {
+    margin-bottom: .5rem;
+  }
+  .group-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  #Team {
+    display: flex;
+    .group-actions {
+      position: static;
+      button {
+        padding: 0;
+        padding-left: .3rem;
+      }
+    }
+  }
+}

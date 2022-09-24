@@ -62,3 +62,7 @@ export const FAMILY_SIBLING_REMOVE = 'wmr-cnt/PersonAdd/FAMILY_SIBLING_REMOVE';
 export const RELATIVE_GS_REMOVE = 'wmr-cnt/PersonAdd/RELATIVE_GS_REMOVE';
 export const RELATIVE_LCM_REMOVE = 'wmr-cnt/PersonAdd/RELATIVE_LCM_REMOVE';
 export const BATTLE_DIS_MIS_REMOVE = 'wmr-cnt/PersonAdd/BATTLE_DIS_MIS_REMOVE';
+export const PERSON_RESET = 'wmr-cnt/PersonAdd/PERSON_RESET';
+export const CASE_INPUT_CHANGE = 'wmr-cnt/PersonAdd/CASE_INPUT_CHANGE';
+export const ADD_CASE = 'wmr-cnt/PersonAdd/ADD_CASE';
+export const REMOVE_CASE = 'wmr-cnt/PersonAdd/REMOVE_CASE';

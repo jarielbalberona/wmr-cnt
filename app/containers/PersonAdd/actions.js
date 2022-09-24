@@ -41,6 +41,10 @@ import {
   RELATIVE_GS_REMOVE,
   RELATIVE_LCM_REMOVE,
   BATTLE_DIS_MIS_REMOVE,
+  PERSON_RESET,
+  ADD_CASE,
+  REMOVE_CASE,
+  CASE_INPUT_CHANGE,
 } from './constants';
 
 export function loadAddPerson() {
@@ -270,6 +274,28 @@ export function personalChangeSelect(property, value) {
   };
 }
 
+export function caseInputChange(key, name, value) {
+  return {
+    type: CASE_INPUT_CHANGE,
+    key,
+    name,
+    value,
+  };
+}
+
+export function addCase() {
+  return {
+    type: ADD_CASE,
+  };
+}
+
+export function removeCase(key) {
+  return {
+    type: REMOVE_CASE,
+    key,
+  };
+}
+
 export function savePerson() {
   return {
     type: PERSON_DATA_SAVE,
@@ -295,8 +321,15 @@ export function savePersonError(errors) {
   };
 }
 
-export function savePersonSuccess() {
+export function savePersonSuccess(type) {
   return {
     type: PERSON_DATA_SAVE_SUCCESS,
+    save_type: type,
+  };
+}
+
+export function resetPerson() {
+  return {
+    type: PERSON_RESET,
   };
 }

@@ -5,6 +5,7 @@
  */
 
 import produce from 'immer';
+
 import {
   LOAD_PERSON_LIST,
   LOAD_PERSON_LIST_SUCCESS,

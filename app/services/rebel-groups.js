@@ -10,6 +10,14 @@ export default {
     const api = new API(token);
     return api.post(`${baseUrl}/add`, form);
   },
+  get: (token, id) => {
+    const api = new API(token);
+    return api.get(`${baseUrl}/${id}`);
+  },
+  update: (token, id, form) => {
+    const api = new API(token);
+    return api.put(`${baseUrl}/${id}`, form);
+  },
   delete: (token, id) => {
     const api = new API(token);
     return api.delete(`${baseUrl}/${id}`);

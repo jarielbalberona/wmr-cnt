@@ -1,5 +1,4 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
 import Rebel from 'services/rebels';
 import RebelGroups from 'services/rebel-groups';
 import Dialects from 'services/dialects';
@@ -53,9 +52,8 @@ export function* updatePerson({ id }) {
     if (rebel.status >= 400) {
       throw rebel;
     }
-    yield put(savePersonSuccess());
+    yield put(savePersonSuccess('update'));
     yield put(appNotify('success', rebel.message));
-    yield put(push('/admin/person-add'));
   } catch (err) {
     if (err.status === 401) {
       window.location.href = '/';
@@ -93,7 +91,7 @@ export function* savePerson() {
     if (rebel.status >= 400) {
       throw rebel;
     }
-    yield put(savePersonSuccess());
+    yield put(savePersonSuccess('new'));
     yield put(appNotify('success', rebel.message));
   } catch (err) {
     if (err.status === 401) {

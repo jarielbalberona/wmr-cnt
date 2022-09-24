@@ -2,17 +2,17 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the personList state domain
+ * Direct selector to the personView state domain
  */
 
-const selectPersonViewDomain = state => state.personList || initialState;
+const selectPersonViewDomain = state => state.personView || initialState;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by PersonList
+ * Default selector used by personView
  */
 
 const makeSelectPerson = () =>

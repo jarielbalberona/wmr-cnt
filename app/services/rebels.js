@@ -10,6 +10,11 @@ export default {
     return api.get(`/rebels/${id}`);
   },
 
+  getByGroupId: (id, token) => {
+    const api = new API(token);
+    return api.get(`/rebels/group/${id}`);
+  },
+
   add: (token, form) => {
     const api = new API(token);
     return api.post('/rebels', form);

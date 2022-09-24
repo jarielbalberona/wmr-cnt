@@ -33,3 +33,34 @@ export const GET_DIALECTS_END = 'app/Parameters/GET_DIALECT_END';
 
 export const DELETE_DIALECT = 'app/Parameters/DELETE_DIALECT';
 export const DELETE_DIALECT_END = 'app/Parameters/DELETE_DIALECT_END';
+
+export const GET_REBEL_GROUP = 'app/Parameters/GET_REBEL_GROUP';
+export const GET_REBEL_GROUP_END = 'app/Parameters/GET_REBEL_GROUP_END';
+export const GET_REBEL_GROUP_SUCCESS = 'app/Parameters/GET_REBEL_GROUP_SUCCESS';
+export const GET_REBEL_GROUP_ERROR = 'app/Parameters/GET_REBEL_GROUP_ERROR';
+
+export const ADD_PLATOON_GROUP = 'app/Parameters/ADD_PLATOON_GROUP';
+export const ADD_SQUAD_GROUP = 'app/Parameters/ADD_SQUAD_GROUP';
+export const ADD_PLATOON_SQUAD_GROUP = 'app/Parameters/ADD_PLATOON_SQUAD_GROUP';
+export const ADD_PLATOON_SQUAD_TEAM_GROUP =
+  'app/Parameters/ADD_PLATOON_SQUAD_TEAM_GROUP';
+export const ADD_SQUAD_TEAM_GROUP = 'app/Parameters/ADD_SQUAD_TEAM_GROUP';
+
+export const DELETE_PLATOON_GROUP = 'app/Parameters/DELETE_PLATOON_GROUP';
+export const DELETE_SQUAD_GROUP = 'app/Parameters/DELETE_SQUAD_GROUP';
+export const DELETE_PLATOON_SQUAD_GROUP =
+  'app/Parameters/DELETE_PLATOON_SQUAD_GROUP';
+export const DELETE_PLATOON_SQUAD_TEAM_GROUP =
+  'app/Parameters/DELETE_PLATOON_SQUAD_TEAM_GROUP';
+export const DELETE_SQUAD_TEAM_GROUP = 'app/Parameters/DELETE_SQUAD_TEAM_GROUP';
+
+export const CHANGE_INPUT_PLATOON_SQUAD =
+  'app/Parameters/CHANGE_INPUT_PLATOON_SQUAD';
+export const CHANGE_INPUT_PLATOON_SQUAD_NAME =
+  'app/Parameters/CHANGE_INPUT_PLATOON_SQUAD_NAME';
+export const CHANGE_INPUT_PLATOON_SQUAD_TEAM_NAME =
+  'app/Parameters/CHANGE_INPUT_PLATOON_SQUAD_TEAM_NAME';
+export const CHANGE_INPUT_SQUAD_TEAM_NAME =
+  'app/Parameters/CHANGE_INPUT_SQUAD_TEAM_NAME';
+
+export const SAVE_GROUP_ORG = 'app/Parameters/SAVE_GROUP_ORG';

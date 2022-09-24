@@ -11,6 +11,21 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import FloatingLabel from 'floating-label-react';
 import Select from 'react-select';
+import Platoons from 'components/ParametersComponents/Platoons';
+import Squads from 'components/ParametersComponents/Squads';
+import GroupStructure from './Add/GroupStructure';
+
+import {
+  makeSelectGroups,
+  makeSelectSelectedGroupOrg,
+  makeSelectSelectedGroupOrgForm,
+  makeSelectGroupForm,
+  makeSelectDialects,
+  makeSelectDialectForm,
+  makeSelectPersonLoading,
+  makeSelectErrors,
+} from './selectors';
+
 import {
   changeInput,
   saveGroup,
@@ -19,15 +34,23 @@ import {
   saveDialect,
   getDialects,
   deleteDialect,
+  getRebelGroup,
+  addPlatoonGroup,
+  addSquadGroup,
+  addPlatoonSquadGroup,
+  addPlatoonSquadTeamGroup,
+  addSquadTeamGroup,
+  deletePlatoonGroup,
+  deleteSquadGroup,
+  deletePlatoonSquadGroup,
+  deletePlatoonSquadTeamGroup,
+  deleteSquadTeamGroup,
+  changeInputPlatoonSquad,
+  changeInputPlatoonSquadName,
+  changeInputPlatoonSquadTeamName,
+  changeInputSquadTeamName,
+  saveGroupOrg,
 } from './actions';
-import {
-  makeSelectGroups,
-  makeSelectGroupForm,
-  makeSelectDialects,
-  makeSelectDialectForm,
-  makeSelectPersonLoading,
-  makeSelectErrors,
-} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -35,6 +58,8 @@ import './styles';
 
 const stateSelector = createStructuredSelector({
   groups: makeSelectGroups(),
+  group_org: makeSelectSelectedGroupOrg(),
+  group_org_form: makeSelectSelectedGroupOrgForm(),
   group_form: makeSelectGroupForm(),
   dialects: makeSelectDialects(),
   dialect_form: makeSelectDialectForm(),
@@ -46,12 +71,20 @@ function Parameters() {
   useInjectReducer({ key: 'parameters', reducer });
   useInjectSaga({ key: 'parameters', saga });
 
-  const { groups, group_form, dialects, dialect_form, errors } = useSelector(
-    stateSelector,
-  );
+  const {
+    groups,
+    group_org,
+    group_org_form,
+    group_form,
+    dialects,
+    dialect_form,
+    errors,
+  } = useSelector(stateSelector);
   const dispatch = useDispatch();
   const [selected_tab, setSelectedTab] = useState({ parent: 0, child: 0 });
   const [selected_type, setSelectedType] = useState();
+  const [selected_group, setSelectedGroup] = useState();
+  const [dd_open, setDDOpen] = useState({ pltnsqd: false });
 
   useEffect(() => {
     dispatch(getRebelGroups());
@@ -67,6 +100,81 @@ function Parameters() {
 
   const onSaveGroup = () => dispatch(saveGroup(group_form));
   const onSaveDialect = () => dispatch(saveDialect(dialect_form));
+
+  const onAddPlatoonGroup = () => dispatch(addPlatoonGroup());
+  const onAddSquadGroup = () => dispatch(addSquadGroup());
+  const onAddPlatoonSquadGroup = key => dispatch(addPlatoonSquadGroup(key));
+  const onAddPlatoonSquadTeamGroup = (platoon_index, squad_index) =>
+    dispatch(addPlatoonSquadTeamGroup(platoon_index, squad_index));
+  const onAddSquadTeamGroup = key => dispatch(addSquadTeamGroup(key));
+
+  const onDeletePlatoonGroup = key => dispatch(deletePlatoonGroup(key));
+  const onDeleteSquadGroup = key => dispatch(deleteSquadGroup(key));
+  const onDeletePlatoonSquadGroup = (platoon_index, squad_index) =>
+    dispatch(deletePlatoonSquadGroup(platoon_index, squad_index));
+
+  const onDeletePlatoonSquadTeamGroup = (
+    platoon_index,
+    squad_index,
+    team_index,
+  ) =>
+    dispatch(
+      deletePlatoonSquadTeamGroup(platoon_index, squad_index, team_index),
+    );
+
+  const onDeleteSquadTeamGroup = (platoon_index, squad_index, team_index) =>
+    dispatch(deleteSquadTeamGroup(platoon_index, squad_index, team_index));
+
+  const onSelectGroup = selected => {
+    setSelectedGroup(selected);
+    dispatch(getRebelGroup(selected));
+  };
+
+  const onChangeInputPlatoonSquad = (gruop, index, name, value) =>
+    dispatch(changeInputPlatoonSquad(gruop, index, name, value));
+
+  const onChangeInputPlatoonSquadName = (
+    platoon_index,
+    squad_index,
+    name,
+    value,
+  ) =>
+    dispatch(
+      changeInputPlatoonSquadName(platoon_index, squad_index, name, value),
+    );
+
+  const onChangeInputPlatoonSquadTeamName = (
+    platoon_index,
+    squad_index,
+    team_index,
+    name,
+    value,
+  ) =>
+    dispatch(
+      changeInputPlatoonSquadTeamName(
+        platoon_index,
+        squad_index,
+        team_index,
+        name,
+        value,
+      ),
+    );
+
+  const onChangeInputSquadTeamName = (squad_index, team_index, name, value) =>
+    dispatch(changeInputSquadTeamName(squad_index, team_index, name, value));
+
+  const onSaveGroupOrg = () =>
+    dispatch(saveGroupOrg(group_org_form._id, group_org_form));
+
+  const rebel_group_options = [];
+  if (groups) {
+    groups.forEach(item => {
+      rebel_group_options.push({
+        value: item._id,
+        label: item.name,
+      });
+    });
+  }
 
   return (
     <section id="Parameters">
@@ -111,8 +219,20 @@ function Parameters() {
                 >
                   {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                   <a
+                    onClick={() =>
+                      setSelectedTab({ ...selected_tab, child: 1 })
+                    }
+                  >
+                    Group Structure
+                  </a>
+                </li>
+                <li
+                  className={`${selected_tab.child === 2 ? 'is-active' : ''}`}
+                >
+                  {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                  <a
                     onClick={() => {
-                      setSelectedTab({ ...selected_tab, child: 1 });
+                      setSelectedTab({ ...selected_tab, child: 2 });
                       dispatch(getDialects());
                     }}
                   >
@@ -130,7 +250,6 @@ function Parameters() {
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Leader/Founder</th>
                         <th>Type</th>
                         <th>Delete</th>
                       </tr>
@@ -141,7 +260,6 @@ function Parameters() {
                         groups.map(group => (
                           <tr key={group._id}>
                             <td>{group.name}</td>
-                            <td>{group.leader}</td>
                             <td>{group.type}</td>
                             <td>
                               <button
@@ -167,6 +285,52 @@ function Parameters() {
               <></>
             )}
             {selected_tab.child === 1 ? (
+              <>
+                <div className="">
+                  <div className="title">Group Structure</div>
+                  <div className="columns">
+                    <div className="column is-two-fifths">
+                      <Select
+                        placeholder="Group"
+                        className="cx-create-select"
+                        classNamePrefix="cx"
+                        value={selected_group}
+                        options={rebel_group_options}
+                        onChange={selected => onSelectGroup(selected)}
+                      />
+                    </div>
+                  </div>
+                  <br />
+                  <div className="columns">
+                    {group_org ? (
+                      <div className="column">
+                        <div className="title is-4">{group_org.name}</div>
+                        {group_org.platoons.length === 0 &&
+                        group_org.squads.length === 0 ? (
+                          <div className="column">
+                            <div className="title is-size-6 has-text-weight-light container-title">
+                              Platoon and/or squad are empty, consider adding.
+                            </div>
+                          </div>
+                        ) : (
+                          <>
+                            <Platoons platoons={group_org.platoons} />
+                            <Squads squads={group_org.squads} />
+                          </>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="column">
+                        <p>Select a group.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {selected_tab.child === 2 ? (
               <div className="">
                 <div className="title">Dialects</div>
                 <div className="table-container">
@@ -235,6 +399,18 @@ function Parameters() {
                       setSelectedTab({ ...selected_tab, child: 1 })
                     }
                   >
+                    Group Structure
+                  </a>
+                </li>
+                <li
+                  className={`${selected_tab.child === 2 ? 'is-active' : ''}`}
+                >
+                  {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                  <a
+                    onClick={() =>
+                      setSelectedTab({ ...selected_tab, child: 2 })
+                    }
+                  >
                     Dialect
                   </a>
                 </li>
@@ -263,17 +439,6 @@ function Parameters() {
                           'Name'
                         }
                         value={group_form.name}
-                        onChange={e => onChangeInput('group_form', e)}
-                      />
-                    </div>
-                    <div className="inputs">
-                      <FloatingLabel
-                        id="leader"
-                        name="leader"
-                        placeholder="Founder/Leader"
-                        className=""
-                        type="text"
-                        value={group_form.leader}
                         onChange={e => onChangeInput('group_form', e)}
                       />
                     </div>
@@ -309,6 +474,35 @@ function Parameters() {
               ''
             )}
             {selected_tab.child === 1 ? (
+              <GroupStructure
+                group_org={group_org_form}
+                selected_group={selected_group}
+                rebel_group_options={rebel_group_options}
+                dd_open={dd_open}
+                onSelectGroup={onSelectGroup}
+                setDDOpen={setDDOpen}
+                onAddPlatoonGroup={onAddPlatoonGroup}
+                onAddSquadGroup={onAddSquadGroup}
+                onAddPlatoonSquadGroup={onAddPlatoonSquadGroup}
+                onAddPlatoonSquadTeamGroup={onAddPlatoonSquadTeamGroup}
+                onAddSquadTeamGroup={onAddSquadTeamGroup}
+                onDeletePlatoonGroup={onDeletePlatoonGroup}
+                onDeleteSquadGroup={onDeleteSquadGroup}
+                onDeletePlatoonSquadGroup={onDeletePlatoonSquadGroup}
+                onDeletePlatoonSquadTeamGroup={onDeletePlatoonSquadTeamGroup}
+                onDeleteSquadTeamGroup={onDeleteSquadTeamGroup}
+                onChangeInputPlatoonSquad={onChangeInputPlatoonSquad}
+                onChangeInputPlatoonSquadName={onChangeInputPlatoonSquadName}
+                onChangeInputPlatoonSquadTeamName={
+                  onChangeInputPlatoonSquadTeamName
+                }
+                onChangeInputSquadTeamName={onChangeInputSquadTeamName}
+                onSaveGroupOrg={onSaveGroupOrg}
+              />
+            ) : (
+              <></>
+            )}
+            {selected_tab.child === 2 ? (
               <div className="">
                 <div className="title">Dialect</div>
                 <div className="columns">
